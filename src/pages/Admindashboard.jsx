@@ -22,12 +22,6 @@ function Admindashboard() {
   const [startDateFilter, setStartDateFilter] = useState(null);
   const [endDateFilter, setEndDateFilter] = useState(null);
 
-  // Invalidate cached queries on mount
-  useEffect(() => {
-    queryClient.invalidateQueries(["List leads"]);
-    queryClient.invalidateQueries(["List tasks"]);
-  }, [queryClient]);
-
   // Fetch Leads
   const {
     data: leads,
@@ -306,6 +300,7 @@ function Admindashboard() {
                   Weekly Leads
                 </h4>
                 <AreaChart
+                  leads={leads?.leads}
                   startDate={startDateFilter}
                   endDate={endDateFilter}
                 />
@@ -323,6 +318,7 @@ function Admindashboard() {
                 </h4>
                 <MonthlyLeadsChart
                   type="monthly"
+                  leads={leads?.leads}
                   startDate={startDateFilter}
                   endDate={endDateFilter}
                 />

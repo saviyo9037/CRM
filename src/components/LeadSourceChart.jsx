@@ -145,7 +145,7 @@
 // };
 
 // export default LeadSourceProgressChart;
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useSelector } from "react-redux";
 import { listleads } from "../services/leadsRouter";
@@ -155,33 +155,36 @@ import Spinner from "./Spinner";
 // 🎨 Bar colors (rotating palette)
 const COLORS = ["#10b981", "#3b82f6", "#f59e0b", "#ec4899", "#8b5cf6", "#ef4444"];
 
-export default function LeadSourceProgressChart({ startDate, endDate }) {
+export default function LeadSourceProgressChart({ startDate, endDate, leads: passedLeads }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedSource, setSelectedSource] = useState(null);
   const user = useSelector((state) => state.auth.user);
 
-  const fetchLeads = async () => {
-    const response = await listleads({
-      noLimit: true,
-      startDate: startDate ? startDate.toISOString() : undefined,
-      endDate: endDate ? endDate.toISOString() : undefined,
-    });
-
-    const leads = response.leads || [];
-    const uniqueSources = [
-      ...new Set(leads.map((lead) => lead.source?.title || "Unknown Source")),
-    ];
-    return { leads, uniqueSources };
-  };
-
   const { data, isLoading, error } = useQuery({
-    queryKey: ["lead-sources", user.role, startDate, endDate],
-    queryFn: fetchLeads,
+    queryKey: ["lead-sources", user?.role, startDate, endDate],
+    queryFn: async () => {
+      const response = await listleads({
+        noLimit: true,
+        startDate: startDate ? startDate.toISOString() : undefined,
+        endDate: endDate ? endDate.toISOString() : undefined,
+      });
+      const leads = response.leads || [];
+      const uniqueSources = [
+        ...new Set(leads.map((lead) => lead.source?.title || "Unknown Source")),
+      ];
+      return { leads, uniqueSources };
+    },
+    enabled: !passedLeads,
     staleTime: 5 * 60 * 1000,
   });
 
-  const leads = data?.leads || [];
-  const sources = data?.uniqueSources || [];
+  const leads = passedLeads || data?.leads || [];
+  const sources = useMemo(() => {
+    if (passedLeads) {
+      return [...new Set(passedLeads.map((lead) => lead.source?.title || "Unknown Source"))];
+    }
+    return data?.uniqueSources || [];
+  }, [passedLeads, data]);
   const totalLeads = leads.length;
 
   // 🧮 Count per source

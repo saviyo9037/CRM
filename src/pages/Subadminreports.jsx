@@ -20,10 +20,6 @@ import DateRangeDropdown from '../components/DateRangeDropdown';
 function Subadminreports() {
   const [sidebarVisible, setSidebarVisible] = useState(true);
   const [activereports, setactivereports] = useState('lead');
-  const [allLeads, setAllLeads] = useState([]); // Filtered leads
-  const [allTimeLeads, setAllTimeLeads] = useState([]); // All-time leads
-  const [isFetchingAll, setIsFetchingAll] = useState(true);
-  const [isFetchingAllTime, setIsFetchingAllTime] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
 
   const [startDate, setStartDate] = useState(null);
@@ -34,89 +30,28 @@ function Subadminreports() {
     setEndDate(end);
   };
 
-  const user = useSelector((state)=>state.auth.user)
+  const user = useSelector((state)=>state.auth.user);
 
-  // Fetch the first page of leads based on date range
-  const { data:
-    initialLeadsData,
-    isLoading,
-     isError } = useQuery({
-    queryKey: ['Filtered leads', startDate, endDate, 1],
+  // Fetch filtered leads in a single query
+  const { data: filteredLeadsData, isLoading, isError } = useQuery({
+    queryKey: ['Filtered leads', startDate, endDate],
     queryFn: () => listleads({
-      page: 1,
+      noLimit: true,
       startDate: startDate ? startDate.toISOString() : undefined,
       endDate: endDate ? endDate.toISOString() : undefined
     }),
   });
 
-  // Fetch the first page of all-time leads
-  const { data:
-     initialAllTimeLeadsData, isLoading: isLoadingAllTime, isError: isErrorAllTime } = useQuery({
-    queryKey: ['All time leads', 1],
-    queryFn: () => listleads({ page: 1 }), // No month filter
+  // Fetch all-time leads in a single query
+  const { data: allTimeLeadsData, isLoading: isLoadingAllTime, isError: isErrorAllTime } = useQuery({
+    queryKey: ['All time leads'],
+    queryFn: () => listleads({ noLimit: true }),
   });
 
-  // Fetch all pages of leads based on date range
-  useEffect(() => {
-    const fetchAllLeads = async () => {
-      if (!initialLeadsData || !initialLeadsData.leads) return;
-
-      setIsFetchingAll(true);
-      let allFetchedLeads = [...initialLeadsData.leads];
-      const totalPages = initialLeadsData.totalPages || 1;
-
-      for (let page = 2; page <= totalPages; page++) {
-        try {
-          const response = await listleads({
-            page,
-            startDate: startDate ? startDate.toISOString() : undefined,
-            endDate: endDate ? endDate.toISOString() : undefined
-          });
-          if (response.leads && Array.isArray(response.leads)) {
-            allFetchedLeads = [...allFetchedLeads, ...response.leads];
-          }
-        } catch (error) {
-          console.error(`Error fetching page ${page} for filtered leads:`, error);
-        }
-      }
-
-      setAllLeads(allFetchedLeads);
-      setIsFetchingAll(false);
-    };
-
-    if (!isLoading && !isError && initialLeadsData) {
-      fetchAllLeads();
-    }
-  }, [initialLeadsData, isLoading, isError, startDate, endDate]);
-
-  // Fetch all pages of all-time leads
-  useEffect(() => {
-    const fetchAllTimeLeads = async () => {
-      if (!initialAllTimeLeadsData || !initialAllTimeLeadsData.leads) return;
-
-      setIsFetchingAllTime(true);
-      let allFetchedLeads = [...initialAllTimeLeadsData.leads];
-      const totalPages = initialAllTimeLeadsData.totalPages || 1;
-
-      for (let page = 2; page <= totalPages; page++) {
-        try {
-          const response = await listleads({ page });
-          if (response.leads && Array.isArray(response.leads)) {
-            allFetchedLeads = [...allFetchedLeads, ...response.leads];
-          }
-        } catch (error) {
-          console.error(`Error fetching page ${page} for all-time leads:`, error);
-        }
-      }
-
-      setAllTimeLeads(allFetchedLeads);
-      setIsFetchingAllTime(false);
-    };
-
-    if (!isLoadingAllTime && !isErrorAllTime && initialAllTimeLeadsData) {
-      fetchAllTimeLeads();
-    }
-  }, [initialAllTimeLeadsData, isLoadingAllTime, isErrorAllTime]);
+  const allLeads = filteredLeadsData?.leads || [];
+  const allTimeLeads = allTimeLeadsData?.leads || [];
+  const isFetchingAll = isLoading;
+  const isFetchingAllTime = isLoadingAllTime;
 
   const { data: Staffsdata, isLoading: loading, isError: errors } = useQuery({
     queryKey: ['List Staffs'],

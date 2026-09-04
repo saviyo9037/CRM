@@ -304,11 +304,11 @@ import { liststaffs } from "../services/staffRouter";
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
-function MonthlyLeadsChart({ type = "monthly", startDate, endDate }) {
-  const [allLeads, setAllLeads] = useState([]);
-  const [isFetchingAll, setIsFetchingAll] = useState(true);
+function MonthlyLeadsChart({ type = "monthly", startDate, endDate, leads: passedLeads }) {
+  const [allLeads, setAllLeads] = useState(passedLeads || []);
+  const [isFetchingAll, setIsFetchingAll] = useState(!passedLeads);
 
-  // 🟦 Fetch Leads
+  // 🟦 Fetch Leads only if not already passed from parent
   const { data: initialLeadsData, isLoading, isError } = useQuery({
     queryKey: ["Monthly leads", startDate, endDate],
     queryFn: () =>
@@ -318,48 +318,35 @@ function MonthlyLeadsChart({ type = "monthly", startDate, endDate }) {
         startDate: startDate ? startDate.toISOString() : undefined,
         endDate: endDate ? endDate.toISOString() : undefined,
       }),
+    enabled: !passedLeads,
   });
 
   useEffect(() => {
-    const fetchAllLeads = async () => {
-      if (!initialLeadsData?.leads) {
-        setIsFetchingAll(false);
-        return;
-      }
-
-      setIsFetchingAll(true);
-      let leads = [...initialLeadsData.leads];
-      const totalPages = initialLeadsData.totalPages || 1;
-
-      for (let page = 2; page <= totalPages; page++) {
-        try {
-          const response = await listleads({
-            page,
-            startDate: startDate ? startDate.toISOString() : undefined,
-            endDate: endDate ? endDate.toISOString() : undefined,
-          });
-          if (response?.leads) leads = [...leads, ...response.leads];
-        } catch (err) {
-          console.error("Error fetching page:", err);
-        }
-      }
-
-      setAllLeads(leads);
+    if (passedLeads) {
+      setAllLeads(passedLeads);
       setIsFetchingAll(false);
-    };
+      return;
+    }
 
-    if (!isLoading && !isError) fetchAllLeads();
-  }, [initialLeadsData, isLoading, isError, startDate, endDate]);
+    if (initialLeadsData?.leads) {
+      setAllLeads(initialLeadsData.leads);
+      setIsFetchingAll(false);
+    } else if (!isLoading) {
+      setIsFetchingAll(false);
+    }
+  }, [passedLeads, initialLeadsData, isLoading]);
 
-  // 🧩 Source + Staff
+  // 🧩 Fetch Source & Staff only if relevant to current chart type
   const { data: Listsource } = useQuery({
     queryKey: ["List source"],
     queryFn: listleadsourcesettings,
+    enabled: type === "source",
   });
 
   const { data: Liststaff } = useQuery({
     queryKey: ["List staff"],
     queryFn: liststaffs,
+    enabled: type === "staffs",
   });
 
   // 🗓 Month Labels

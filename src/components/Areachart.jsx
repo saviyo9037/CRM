@@ -220,19 +220,23 @@ ChartJS.register(
   Legend
 );
 
-const AreaChart = ({ startDate, endDate }) => {
+const AreaChart = ({ startDate, endDate, leads: passedLeads }) => {
   const user = useSelector((state) => state.auth.user);
 
-  const { data: leads, isLoading } = useQuery({
-    queryKey: ["List leads", startDate, endDate, user.role],
+  const { data: queriedLeads, isLoading: isQueryLoading } = useQuery({
+    queryKey: ["List leads", user?.role, startDate, endDate],
     queryFn: () =>
       listleads({
         noLimit: true,
         startDate: startDate ? startDate.toISOString() : undefined,
         endDate: endDate ? endDate.toISOString() : undefined,
       }),
+    enabled: !passedLeads,
     refetchInterval: 60000,
   });
+
+  const leads = passedLeads ? { leads: passedLeads } : queriedLeads;
+  const isLoading = !passedLeads && isQueryLoading;
 
   // 🗓️ Generate dynamic day range
   const daysOfWeek = useMemo(() => {

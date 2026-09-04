@@ -12,19 +12,19 @@ import { Toaster } from 'react-hot-toast'
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
+      staleTime: 1000 * 60 * 3, // 3 minutes fresh cache
+      gcTime: 1000 * 60 * 15,    // 15 minutes garbage collection
       retry: 1,
       refetchOnWindowFocus: false,
-      // prevent the experimental prefetch error
       experimental_prefetchInRender: false,
     },
   },
 });
 
-const queryclient = new QueryClient()
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
     <Provider store={store}>
-      <QueryClientProvider client={queryclient}>
+      <QueryClientProvider client={queryClient}>
         <App />
 
         <Toaster position="top-right" reverseOrder={false} />

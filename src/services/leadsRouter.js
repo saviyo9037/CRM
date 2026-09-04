@@ -53,36 +53,45 @@ export const addleads = async (leadData) => {
 // };
 
 export const listleads = async (options) => {
-    const { page = 1, limit = 100000, priority, status, filterleads, assignedTo,
-       searchText, date, startDate, endDate,
-        sortBy,
-         noLimit = false, role, metadataUser } = options || {};
-  
-    const params = new URLSearchParams({ page });
+  const {
+    page = 1,
+    limit = 10,
+    priority,
+    status,
+    filterleads,
+    assignedTo,
+    searchText,
+    date,
+    startDate,
+    endDate,
+    sortBy,
+    noLimit = false,
+    role,
+    metadataUser,
+  } = options || {};
+
+  const params = new URLSearchParams({ page });
   if (noLimit) {
     params.append("noLimit", "true");
   } else {
-    params.append("limit", limit); // Add limit if noLimit is false
-  }  if (priority && priority !== "Priority") params.append("priority", priority);
-  if (status && status !== "Status") params.append("status", status); // ← filtering
+    params.append("limit", limit);
+  }
+  if (priority && priority !== "Priority") params.append("priority", priority);
+  if (status && status !== "Status") params.append("status", status);
   if (filterleads && filterleads !== "All") params.append("filterleads", filterleads);
   if (assignedTo && assignedTo !== "AssignedTo") params.append("assignedTo", assignedTo);
   if (searchText) params.append("searchText", searchText);
   if (date && date !== "Date") params.append("date", date);
   if (startDate) params.append("startDate", startDate);
   if (endDate) params.append("endDate", endDate);
+  if (sortBy && sortBy !== "Sort By") params.append("sortBy", sortBy);
 
-  const user = metadataUser || JSON.parse(sessionStorage.getItem('metadataUser') || '{}');
   const endpoint = role === 'Admin' ? 'list-admin' : 'list';
 
   const { data } = await axios.get(
     `${API_URL}/leads/${endpoint}?${params.toString()}`,
     getAuthorized()
   );
-
-  // CORRECT: Log the actual lead statuses, not the filter param
-  console.log("Leads statuses:", data?.length)
-  console.log("API Response:", data);
 
   return data;
 };
