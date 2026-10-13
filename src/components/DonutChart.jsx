@@ -315,7 +315,7 @@ const LeadStatusDonutChart = ({
 
   if (isError) {
     return (
-      <div className="p-6 text-center bg-red-50 text-red-700 rounded-xl border border-red-200">
+      <div className="p-6 text-center bg-red-950/30 text-red-400 rounded-xl border border-red-800/40">
         Error: {error?.message || "Failed to load leads."}
       </div>
     );
@@ -323,19 +323,20 @@ const LeadStatusDonutChart = ({
 
   if (isLoading && !externalLeads)
     return (
-      <div className="flex items-center justify-center h-[320px] bg-white rounded-2xl shadow-md">
+      <div className="flex items-center justify-center h-[320px] bg-[#141414] rounded-2xl border border-[#262626]">
         <Spinner />
       </div>
     );
 
   return (
-    <div className="bg-gradient-to-br from-white via-gray-50 to-gray-100 border border-gray-200 shadow-lg hover:shadow-xl rounded-3xl p-6 sm:p-8 transition-all duration-300">
+    <div className="bg-[#141414] border border-[#262626] shadow-xl rounded-3xl p-6 sm:p-8 transition-all duration-300">
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-xl sm:text-2xl font-semibold text-gray-800">
+        <h2 className="text-xl sm:text-2xl font-bold text-white flex items-center gap-2">
+          <span className="w-2.5 h-2.5 rounded-full bg-[#FF8A00]"></span>
           {title}
         </h2>
-        <div className="bg-indigo-50 text-indigo-700 px-3 py-1.5 text-sm rounded-full font-medium">
+        <div className="bg-[#FF8A00]/10 border border-[#FF8A00]/30 text-[#FF8A00] px-3.5 py-1.5 text-sm rounded-full font-bold">
           Total: {totalLeads}
         </div>
       </div>
@@ -352,22 +353,22 @@ const LeadStatusDonutChart = ({
               <div
                 key={status}
                 onClick={() => handleStatusClick(status)}
-                className="group cursor-pointer p-2 rounded-xl hover:bg-white/60 border border-transparent hover:border-gray-200 transition-all duration-200"
+                className="group cursor-pointer p-2.5 rounded-xl hover:bg-[#1E1E1E] border border-transparent hover:border-[#2E2E2E] transition-all duration-200"
               >
-                <div className="flex justify-between items-center mb-1">
-                  <span className="flex items-center gap-2 text-gray-800 font-medium capitalize">
+                <div className="flex justify-between items-center mb-1.5">
+                  <span className="flex items-center gap-2 text-white font-medium capitalize">
                     <span
-                      className="w-3 h-3 rounded-full inline-block"
+                      className="w-3 h-3 rounded-full inline-block shadow-sm"
                       style={{ backgroundColor: color }}
                     ></span>
                     {status}
                   </span>
-                  <span className="text-gray-600 text-sm">
-                    {count} ({percent}%)
+                  <span className="text-gray-400 text-sm font-semibold">
+                    {count} <span className="text-gray-500">({percent}%)</span>
                   </span>
                 </div>
 
-                <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+                <div className="w-full bg-[#202020] rounded-full h-3 overflow-hidden border border-[#2A2A2A]">
                   <div
                     className="h-3 rounded-full transition-all duration-500 group-hover:scale-[1.02]"
                     style={{
@@ -381,14 +382,14 @@ const LeadStatusDonutChart = ({
           })}
         </div>
       ) : (
-        <p className="text-center text-gray-400 text-sm py-8">
+        <p className="text-center text-gray-500 text-sm py-8">
           No leads available for the selected period.
         </p>
       )}
 
       {/* Footer */}
       {totalLeads > 0 && (
-        <div className="mt-6 pt-3 border-t border-gray-200 text-center text-xs text-gray-500">
+        <div className="mt-6 pt-3 border-t border-[#262626] text-center text-xs text-gray-500">
           Updated {moment().format("MMM D, YYYY • hh:mm A")}
         </div>
       )}

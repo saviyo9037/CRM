@@ -389,20 +389,20 @@ function MonthlyLeadsChart({ type = "monthly", startDate, endDate, leads: passed
       {
         label: "New Leads",
         data: months.map((m) => newLeads[m.key]),
-        backgroundColor: "rgba(37, 99, 235, 0.7)",
-        borderColor: "#2563EB",
+        backgroundColor: "rgba(255, 138, 0, 0.8)",
+        borderColor: "#FF8A00",
         borderWidth: 1.5,
         borderRadius: 6,
-        hoverBackgroundColor: "rgba(37, 99, 235, 0.9)",
+        hoverBackgroundColor: "rgba(255, 138, 0, 1)",
       },
       {
         label: "Closed Leads",
         data: months.map((m) => closedLeads[m.key]),
-        backgroundColor: "rgba(251, 191, 36, 0.7)",
-        borderColor: "#F59E0B",
+        backgroundColor: "rgba(255, 255, 255, 0.2)",
+        borderColor: "#FFFFFF",
         borderWidth: 1.5,
         borderRadius: 6,
-        hoverBackgroundColor: "rgba(251, 191, 36, 0.9)",
+        hoverBackgroundColor: "rgba(255, 255, 255, 0.4)",
       },
     ];
   } else if (type === "source") {
@@ -426,14 +426,14 @@ function MonthlyLeadsChart({ type = "monthly", startDate, endDate, leads: passed
         label: "Leads by Source",
         data: Object.values(sources),
         backgroundColor: [
-          "#4dc9f6",
-          "#f67019",
-          "#f53794",
-          "#537bc4",
-          "#acc236",
-          "#166a8f",
-          "#00a950",
-          "#8549ba",
+          "#FF8A00",
+          "#FFA333",
+          "#E67A00",
+          "#CC6C00",
+          "#B35E00",
+          "#995000",
+          "#804200",
+          "#FFB355",
         ],
         borderRadius: 8,
         hoverBorderWidth: 2,
@@ -460,14 +460,14 @@ function MonthlyLeadsChart({ type = "monthly", startDate, endDate, leads: passed
         label: "Closed Leads by Staff",
         data: Object.values(staffCounts),
         backgroundColor: [
-          "#4dc9f6",
-          "#f67019",
-          "#f53794",
-          "#537bc4",
-          "#acc236",
-          "#166a8f",
-          "#00a950",
-          "#8549ba",
+          "#FF8A00",
+          "#FFA333",
+          "#E67A00",
+          "#CC6C00",
+          "#B35E00",
+          "#995000",
+          "#804200",
+          "#FFB355",
         ],
         borderRadius: 8,
       },
@@ -484,14 +484,14 @@ function MonthlyLeadsChart({ type = "monthly", startDate, endDate, leads: passed
       y: {
         beginAtZero: true,
         ticks: {
-          color: "#374151",
+          color: "#A1A1AA",
           stepSize: 1,
           font: { size: 12, family: "Inter" },
         },
-        grid: { color: "#e5e7eb" },
+        grid: { color: "#222222" },
       },
       x: {
-        ticks: { color: "#4b5563", font: { size: 12, family: "Inter" } },
+        ticks: { color: "#A1A1AA", font: { size: 12, family: "Inter" } },
         grid: { display: false },
       },
     },
@@ -499,14 +499,18 @@ function MonthlyLeadsChart({ type = "monthly", startDate, endDate, leads: passed
       legend: {
         position: "top",
         labels: {
-          color: "#111827",
+          color: "#FFFFFF",
           font: { family: "Inter", size: 13 },
           usePointStyle: true,
           boxWidth: 10,
         },
       },
       tooltip: {
-        backgroundColor: "#111827",
+        backgroundColor: "#181818",
+        borderColor: "#2E2E2E",
+        borderWidth: 1,
+        titleColor: "#FFFFFF",
+        bodyColor: "#E4E4E7",
         padding: 10,
         cornerRadius: 6,
         titleFont: { size: 14 },
@@ -516,17 +520,17 @@ function MonthlyLeadsChart({ type = "monthly", startDate, endDate, leads: passed
   };
 
   return (
-    <div className="bg-gradient-to-br from-white via-gray-50 to-gray-100 rounded-3xl border border-gray-200 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
+    <div className="bg-[#141414] rounded-2xl border border-[#242424] shadow-xl overflow-hidden">
       {/* Header */}
-      <div className="px-6 pt-5 pb-3 border-b border-gray-200 bg-white/70 backdrop-blur-sm flex justify-between items-center">
-        <h2 className="text-lg sm:text-xl font-semibold text-gray-800">
+      <div className="px-6 pt-5 pb-3 border-b border-[#222222] bg-[#141414] flex justify-between items-center">
+        <h2 className="text-lg sm:text-xl font-bold text-white flex items-center gap-2">
           {type === "source"
             ? "📊 Leads by Source"
             : type === "staffs"
             ? "👥 Leads Closed by Staff"
             : "📅 Monthly Leads Overview"}
         </h2>
-        <p className="text-xs text-gray-500">
+        <p className="text-xs text-gray-400">
           {moment(startDate || moment().subtract(5, "months")).format("MMM YYYY")} -{" "}
           {moment(endDate || moment()).format("MMM YYYY")}
         </p>
@@ -535,7 +539,7 @@ function MonthlyLeadsChart({ type = "monthly", startDate, endDate, leads: passed
       {/* Chart */}
       <div className="relative w-full h-[340px] sm:h-[420px] md:h-[460px] lg:h-[520px] p-6">
         {isLoading || isFetchingAll ? (
-          <div className="flex justify-center items-center h-full text-gray-500 text-sm">
+          <div className="flex justify-center items-center h-full text-gray-400 text-sm">
             Loading chart...
           </div>
         ) : (

@@ -36,12 +36,15 @@ const DailyLeadsOverviewChart = ({ startDate, endDate }) => {
 
   return (
     <motion.div
-      className="bg-white p-4 sm:p-6 rounded-2xl shadow-lg hover:shadow-xl transition overflow-hidden min-h-[200px]"
+      className="bg-[#141414] border border-[#262626] p-4 sm:p-6 rounded-2xl shadow-xl transition overflow-hidden min-h-[200px]"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay: 0.1 }}
     >
-      <h4 className="text-lg sm:text-xl font-semibold text-gray-800 mb-3 sm:mb-4">Daily Leads Overview</h4>
+      <h4 className="text-lg sm:text-xl font-bold text-white mb-3 sm:mb-4 flex items-center gap-2">
+        <span className="w-2.5 h-2.5 rounded-full bg-[#FF8A00]"></span>
+        Daily Leads Overview
+      </h4>
       <div className="w-full h-auto">
         <LeadStatusDonutChart leads={dailyLeads?.leads} isLoading={dailyLeadsLoading} title="Daily Leads Overview" />
       </div>

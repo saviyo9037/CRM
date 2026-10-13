@@ -117,7 +117,7 @@ function Admindashboard() {
   // Render
   // ==============================
   return (
-    <div className="flex h-screen w-screen bg-gray-100 overflow-x-hidden">
+    <div className="flex h-screen w-screen bg-[#0A0A0A] overflow-x-hidden text-white">
       {/* Sidebar */}
       <div className="fixed inset-y-0 left-0 z-40">
         <motion.div
@@ -133,20 +133,20 @@ function Admindashboard() {
       <motion.div
         animate={{ marginLeft: sidebarVisible ? 256 : 0 }}
         transition={{ duration: 0.3 }}
-        className="flex-1 flex flex-col h-screen"
+        className="flex-1 flex flex-col h-screen bg-[#0A0A0A]"
       >
         {isDataLoading && <Spinner />}
 
         {/* Header */}
-        <div className="flex items-center justify-between p-4 sm:p-6 lg:p-8 bg-gray-100 border-b border-gray-300">
+        <div className="flex items-center justify-between p-4 sm:p-6 lg:p-8 bg-[#0A0A0A] border-b border-[#1F1F1F]">
           <div className="flex items-center">
             <button
-              className="mr-2 sm:mr-4 text-blue-600 hover:text-blue-800 transition"
+              className="mr-3 sm:mr-4 text-[#FF8A00] hover:text-[#FFA333] transition"
               onClick={() => setSidebarVisible(!sidebarVisible)}
             >
               <FaBars className="text-lg sm:text-xl lg:text-2xl" />
             </button>
-            <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900">
+            <h3 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-white tracking-tight">
               Dashboard
             </h3>
           </div>
@@ -159,30 +159,30 @@ function Admindashboard() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-6 sm:mb-8">
             {/* Lead Summary */}
             <motion.div
-              className="bg-white p-4 sm:p-6 rounded-2xl shadow-lg hover:shadow-xl transition duration-300 hover:-translate-y-2 flex flex-col justify-between"
+              className="bg-[#141414] border border-[#242424] p-4 sm:p-6 rounded-2xl shadow-xl hover:shadow-[0_0_25px_rgba(255,138,0,0.15)] transition duration-300 hover:-translate-y-1 flex flex-col justify-between"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4 }}
             >
               <div className="flex items-center gap-2 sm:gap-3">
-                <div className="bg-blue-100 p-2 rounded-full">
-                  <FaChartBar className="text-blue-500 text-base sm:text-xl" />
+                <div className="bg-[#FF8A00]/15 border border-[#FF8A00]/30 p-2.5 rounded-xl">
+                  <FaChartBar className="text-[#FF8A00] text-base sm:text-xl" />
                 </div>
-                <h4 className="text-sm sm:text-md font-medium text-gray-600">
+                <h4 className="text-sm sm:text-md font-medium text-gray-400">
                   Lead
                 </h4>
               </div>
-              <div className="flex items-center gap-2 mt-3 sm:mt-4">
-                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-black">
+              <div className="flex items-baseline gap-2 mt-3 sm:mt-4">
+                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white">
                   {closedLeads.length}
                 </h1>
-                <p className="text-xs sm:text-sm font-semibold text-gray-500">
+                <p className="text-xs sm:text-sm font-semibold text-gray-400">
                   Closed
                 </p>
               </div>
-              <p className="text-xs text-gray-400 mt-1">
+              <p className="text-xs text-gray-500 mt-1">
                 Total{" "}
-                <span className="text-blue-500">
+                <span className="text-[#FF8A00] font-semibold">
                   {leads?.leads?.length || 0}
                 </span>{" "}
                 Leads
@@ -191,55 +191,58 @@ function Admindashboard() {
 
             {/* FollowUp Summary */}
             <motion.div
-              className="bg-white p-4 sm:p-6 rounded-2xl shadow-lg hover:shadow-xl transition duration-300 hover:-translate-y-2 flex flex-col justify-between"
+              className="bg-[#141414] border border-[#242424] p-4 sm:p-6 rounded-2xl shadow-xl hover:shadow-[0_0_25px_rgba(255,138,0,0.15)] transition duration-300 hover:-translate-y-1 flex flex-col justify-between"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.1 }}
             >
               <div className="flex items-center gap-2 sm:gap-3">
-                <div className="bg-blue-100 p-2 rounded-full">
-                  <FaUser className="text-blue-500 text-base sm:text-xl" />
+                <div className="bg-[#FF8A00]/15 border border-[#FF8A00]/30 p-2.5 rounded-xl">
+                  <FaUser className="text-[#FF8A00] text-base sm:text-xl" />
                 </div>
-                <h4 className="text-sm sm:text-md font-medium text-gray-600">
+                <h4 className="text-sm sm:text-md font-medium text-gray-400">
                   FollowUps
                 </h4>
               </div>
-              <div className="flex items-center gap-2 mt-3 sm:mt-4">
-                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-black">
+              <div className="flex items-baseline gap-2 mt-3 sm:mt-4">
+                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white">
                   {totalFollowups.length}
                 </h1>
-                <p className="text-xs sm:text-sm font-semibold text-gray-500">
+                <p className="text-xs sm:text-sm font-semibold text-gray-400">
                   Open
                 </p>
               </div>
+              <p className="text-xs text-gray-500 mt-1">
+                Active follow-ups in queue
+              </p>
             </motion.div>
 
             {/* Tasks Summary */}
             <motion.div
-              className="bg-white p-4 sm:p-6 rounded-2xl shadow-lg hover:shadow-xl transition duration-300 hover:-translate-y-2 flex flex-col justify-between"
+              className="bg-[#141414] border border-[#242424] p-4 sm:p-6 rounded-2xl shadow-xl hover:shadow-[0_0_25px_rgba(255,138,0,0.15)] transition duration-300 hover:-translate-y-1 flex flex-col justify-between"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.2 }}
             >
               <div className="flex items-center gap-2 sm:gap-3">
-                <div className="bg-blue-100 p-2 rounded-full">
-                  <FaTasks className="text-blue-500 text-base sm:text-xl" />
+                <div className="bg-[#FF8A00]/15 border border-[#FF8A00]/30 p-2.5 rounded-xl">
+                  <FaTasks className="text-[#FF8A00] text-base sm:text-xl" />
                 </div>
-                <h4 className="text-sm sm:text-md font-medium text-gray-600">
+                <h4 className="text-sm sm:text-md font-medium text-gray-400">
                   Tasks
                 </h4>
               </div>
-              <div className="flex items-center gap-2 mt-3 sm:mt-4">
-                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-black">
+              <div className="flex items-baseline gap-2 mt-3 sm:mt-4">
+                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white">
                   {completedTask.length}
                 </h1>
-                <p className="text-xs sm:text-sm font-semibold text-gray-500">
+                <p className="text-xs sm:text-sm font-semibold text-gray-400">
                   Completed
                 </p>
               </div>
-              <p className="text-xs text-gray-400 mt-1">
+              <p className="text-xs text-gray-500 mt-1">
                 Total{" "}
-                <span className="text-blue-500">
+                <span className="text-[#FF8A00] font-semibold">
                   {tasks?.task?.length || 0}
                 </span>{" "}
                 Tasks
@@ -248,35 +251,39 @@ function Admindashboard() {
 
             {/* Calls Summary (Placeholder) */}
             <motion.div
-              className="bg-white p-4 sm:p-6 rounded-2xl shadow-lg hover:shadow-xl transition duration-300 hover:-translate-y-2 flex flex-col justify-between"
+              className="bg-[#141414] border border-[#242424] p-4 sm:p-6 rounded-2xl shadow-xl hover:shadow-[0_0_25px_rgba(255,138,0,0.15)] transition duration-300 hover:-translate-y-1 flex flex-col justify-between"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.3 }}
             >
               <div className="flex items-center gap-2 sm:gap-3">
-                <div className="bg-blue-100 p-2 rounded-full">
-                  <FaPhoneAlt className="text-blue-500 text-base sm:text-xl" />
+                <div className="bg-[#FF8A00]/15 border border-[#FF8A00]/30 p-2.5 rounded-xl">
+                  <FaPhoneAlt className="text-[#FF8A00] text-base sm:text-xl" />
                 </div>
-                <h4 className="text-sm sm:text-md font-medium text-gray-600">
+                <h4 className="text-sm sm:text-md font-medium text-gray-400">
                   Calls
                 </h4>
               </div>
-              <div className="flex items-center gap-2 mt-3 sm:mt-4">
-                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-black">
+              <div className="flex items-baseline gap-2 mt-3 sm:mt-4">
+                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white">
                   0
                 </h1>
-                <p className="text-xs sm:text-sm font-semibold text-gray-500">
+                <p className="text-xs sm:text-sm font-semibold text-gray-400">
                   Closed
                 </p>
               </div>
+              <p className="text-xs text-gray-500 mt-1">
+                Call log activity
+              </p>
             </motion.div>
           </div>
 
           {/* Charts Wrapper with Date Range on Top */}
-          <div className="bg-white rounded-2xl shadow-lg p-4 sm:p-6 lg:p-8">
+          <div className="bg-[#141414] border border-[#242424] rounded-2xl shadow-xl p-4 sm:p-6 lg:p-8">
             {/* Top bar inside charts section */}
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
-              <h4 className="text-lg sm:text-xl font-semibold text-gray-800">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6 pb-4 border-b border-[#222]">
+              <h4 className="text-lg sm:text-xl font-bold text-white flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-[#FF8A00]"></span>
                 Leads & Tasks Overview
               </h4>
               <DateRangeDropdown
@@ -291,13 +298,13 @@ function Admindashboard() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-2">
               {/* Weekly Leads */}
               <motion.div
-                className="bg-gray-50 p-4 sm:p-6 rounded-2xl shadow-sm hover:shadow-md transition overflow-hidden min-h-[220px]"
+                className="bg-[#101010] border border-[#222] p-4 sm:p-6 rounded-2xl shadow-md hover:border-[#FF8A00]/30 transition overflow-hidden min-h-[220px]"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4 }}
               >
-                <h4 className="text-lg sm:text-xl font-semibold text-gray-800 mb-3 sm:mb-4">
-                  Weekly Leads
+                <h4 className="text-lg sm:text-xl font-bold text-white mb-3 sm:mb-4 flex items-center gap-2">
+                  <span className="text-[#FF8A00]">📈</span> Weekly Leads
                 </h4>
                 <AreaChart
                   leads={leads?.leads}
@@ -308,13 +315,13 @@ function Admindashboard() {
 
               {/* Monthly Leads */}
               <motion.div
-                className="bg-gray-50 p-4 sm:p-6 rounded-2xl shadow-sm hover:shadow-md transition overflow-hidden min-h-[220px]"
+                className="bg-[#101010] border border-[#222] p-4 sm:p-6 rounded-2xl shadow-md hover:border-[#FF8A00]/30 transition overflow-hidden min-h-[220px]"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4 }}
               >
-                <h4 className="text-lg sm:text-xl font-semibold text-gray-800 mb-3 sm:mb-4">
-                  Monthly Leads
+                <h4 className="text-lg sm:text-xl font-bold text-white mb-3 sm:mb-4 flex items-center gap-2">
+                  <span className="text-[#FF8A00]">📅</span> Monthly Leads
                 </h4>
                 <MonthlyLeadsChart
                   type="monthly"
@@ -326,13 +333,13 @@ function Admindashboard() {
 
               {/* Lead Source Chart */}
               <motion.div
-                className="bg-gray-50 p-4 sm:p-6 rounded-2xl shadow-sm hover:shadow-md transition overflow-hidden min-h-[220px]"
+                className="bg-[#101010] border border-[#222] p-4 sm:p-6 rounded-2xl shadow-md hover:border-[#FF8A00]/30 transition overflow-hidden min-h-[220px]"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: 0.1 }}
               >
-                <h4 className="text-lg sm:text-xl font-semibold text-gray-800 mb-3 sm:mb-4">
-                  Lead Source Chart
+                <h4 className="text-lg sm:text-xl font-bold text-white mb-3 sm:mb-4 flex items-center gap-2">
+                  <span className="text-[#FF8A00]">🎯</span> Lead Source Chart
                 </h4>
                 <LeadSourceProgressChart
                   leads={leads?.leads}
@@ -343,13 +350,13 @@ function Admindashboard() {
 
               {/* Lead Status Chart */}
               <motion.div
-                className="bg-gray-50 p-4 sm:p-6 rounded-2xl shadow-sm hover:shadow-md transition overflow-hidden min-h-[220px]"
+                className="bg-[#101010] border border-[#222] p-4 sm:p-6 rounded-2xl shadow-md hover:border-[#FF8A00]/30 transition overflow-hidden min-h-[220px]"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: 0.1 }}
               >
-                <h4 className="text-lg sm:text-xl font-semibold text-gray-800 mb-3 sm:mb-4">
-                  Lead Status Chart
+                <h4 className="text-lg sm:text-xl font-bold text-white mb-3 sm:mb-4 flex items-center gap-2">
+                  <span className="text-[#FF8A00]">📊</span> Lead Status Chart
                 </h4>
                 <LeadStatusPieChart
                   leads={leads?.leads}

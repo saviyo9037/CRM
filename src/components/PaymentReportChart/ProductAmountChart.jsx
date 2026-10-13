@@ -189,11 +189,11 @@ function ProgressChartBar({ value, max }) {
     percentage === 100
       ? "bg-green-500"
       : percentage > 0
-      ? "bg-gradient-to-r from-blue-500 to-cyan-400"
-      : "bg-gray-300";
+      ? "bg-gradient-to-r from-[#FF8A00] to-[#E67A00]"
+      : "bg-gray-700";
 
   return (
-    <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden shadow-inner">
+    <div className="w-full bg-[#202020] border border-[#2A2A2A] rounded-full h-3 overflow-hidden shadow-inner">
       <div
         className={`${color} h-3 rounded-full transition-all duration-500 ease-out`}
         style={{ width: `${percentage}%` }}
@@ -260,42 +260,39 @@ export default function ProductProgressChart({ startDate, endDate }) {
   // ✅ Render
   return (
     <div className="p-5 sm:p-6">
-      <div className="bg-gradient-to-br from-white via-gray-50 to-gray-100 rounded-3xl border border-gray-200 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col">
+      <div className="bg-[#141414] rounded-3xl border border-[#262626] shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden flex flex-col">
         {/* Header */}
-        <div className="px-5 py-4 border-b border-gray-200 bg-white/70 backdrop-blur-sm flex flex-col sm:flex-row justify-between items-start sm:items-center">
-          <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-800">
-            📦 Product Payment Progress
+        <div className="px-5 py-4 border-b border-[#262626] bg-[#181818] flex flex-col sm:flex-row justify-between items-start sm:items-center">
+          <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-white flex items-center gap-2">
+            <span className="w-2.5 h-2.5 rounded-full bg-[#FF8A00]"></span>
+            Product Payment Progress
           </h2>
           <span
-            className={`mt-2 sm:mt-0 px-4 py-1.5 text-sm font-semibold rounded-full ${
-              overallPercent === 100
-                ? "bg-green-100 text-green-700"
-                : "bg-blue-100 text-blue-700"
-            }`}
+            className="mt-2 sm:mt-0 px-4 py-1.5 text-sm font-bold rounded-full bg-[#FF8A00]/10 border border-[#FF8A00]/30 text-[#FF8A00]"
           >
             Overall Completion: {overallPercent}%
           </span>
         </div>
 
         {/* Summary Bar */}
-        <div className="px-5 sm:px-6 py-4 bg-indigo-50 border-b border-indigo-200">
+        <div className="px-5 sm:px-6 py-4 bg-[#181818] border-b border-[#262626]">
           <div className="flex justify-between items-center mb-2">
-            <span className="text-base sm:text-lg font-semibold text-indigo-700">
+            <span className="text-base sm:text-lg font-bold text-white">
               Total Payments Collected
             </span>
-            <span className="text-base sm:text-lg font-bold text-indigo-800">
+            <span className="text-base sm:text-lg font-bold text-[#FF8A00]">
               {overallPercent}%
             </span>
           </div>
           <ProgressChartBar value={overallPaid} max={overallTotal} />
-          <p className="text-xs text-right text-gray-600 mt-2">
+          <p className="text-xs text-right text-gray-400 mt-2">
             ₹{formatCurrency(overallPaid)} collected / ₹{formatCurrency(overallTotal)} total
           </p>
         </div>
 
         {/* Product List */}
-        <div className="flex-1 overflow-y-auto px-5 sm:px-6 py-5 space-y-4 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
-          <h3 className="text-gray-700 font-semibold text-sm uppercase tracking-wide border-b pb-2">
+        <div className="flex-1 overflow-y-auto px-5 sm:px-6 py-5 space-y-4">
+          <h3 className="text-gray-400 font-semibold text-xs uppercase tracking-wider border-b border-[#262626] pb-2">
             Product-wise Breakdown
           </h3>
 
@@ -310,18 +307,18 @@ export default function ProductProgressChart({ startDate, endDate }) {
               const remaining = item.amount - item.paidAmount;
               const statusColor =
                 paidPercent === 100
-                  ? "text-green-600"
+                  ? "text-green-400"
                   : paidPercent > 0
-                  ? "text-blue-600"
+                  ? "text-[#FF8A00]"
                   : "text-gray-500";
 
               return (
                 <div
                   key={item._id}
-                  className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white/80 hover:bg-white shadow-sm hover:shadow-md transition-all p-3 rounded-xl border border-gray-100"
+                  className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-[#181818] hover:bg-[#1E1E1E] shadow-sm hover:shadow-md transition-all p-3 rounded-xl border border-[#2A2A2A]"
                 >
                   <div className="flex-1">
-                    <p className="font-medium text-gray-800">{item.title}</p>
+                    <p className="font-semibold text-white">{item.title}</p>
                     <p className={`text-xs font-semibold ${statusColor}`}>
                       {paidPercent === 100
                         ? "Paid in Full"
@@ -336,8 +333,8 @@ export default function ProductProgressChart({ startDate, endDate }) {
                   </div>
 
                   <div className="text-right">
-                    <p className="font-semibold text-gray-700 text-sm">{paidPercent}%</p>
-                    <p className="text-xs text-gray-500">
+                    <p className="font-bold text-[#FF8A00] text-sm">{paidPercent}%</p>
+                    <p className="text-xs text-gray-400">
                       ₹{formatCurrency(remaining)} due
                     </p>
                   </div>
@@ -348,7 +345,7 @@ export default function ProductProgressChart({ startDate, endDate }) {
         </div>
 
         {/* Footer */}
-        <div className="bg-gray-50 text-gray-500 text-xs sm:text-sm py-2 text-center border-t border-gray-200">
+        <div className="bg-[#181818] text-gray-500 text-xs sm:text-sm py-2 text-center border-t border-[#262626]">
           Updated with latest product payment records
         </div>
       </div>

@@ -118,13 +118,13 @@ function Stafflist() {
   };
 
   return (
-    <div className="flex min-h-screen w-full bg-gradient-to-b from-gray-50 to-gray-100 overflow-x-hidden">
+    <div className="flex min-h-screen w-full bg-[#0A0A0A] text-white overflow-x-hidden">
       {/* Sidebar */}
       <div className="fixed inset-y-0 left-0 z-40">
         <motion.div
           animate={{ x: sidebarVisible ? 0 : -260 }}
           transition={{ duration: 0.3 }}
-          className="w-64 h-full shadow-2xl"
+          className="w-64 h-full bg-[#0A0A0A] border-r border-[#262626]"
         >
           <Sidebar />
         </motion.div>
@@ -134,15 +134,15 @@ function Stafflist() {
       <motion.div
         animate={{ marginLeft: sidebarVisible ? 256 : 0 }}
         transition={{ duration: 0.3 }}
-        className="flex-1 min-h-screen overflow-y-auto p-6"
+        className="flex-1 min-h-screen overflow-y-auto p-6 bg-[#0A0A0A]"
       >
         {deletestaffs.isPending && <Spinner />}
 
         <div className="flex flex-col max-w-7xl mx-auto">
           {/* HEADER */}
-          <h3 className="text-3xl font-bold text-gray-900 mb-8 flex items-center">
+          <h3 className="text-3xl font-bold text-white mb-8 flex items-center">
             <button
-              className="mr-4 text-indigo-600 hover:text-indigo-800"
+              className="mr-4 text-[#FF8A00] hover:text-[#E67A00] p-2 rounded-lg hover:bg-[#181818] transition"
               onClick={() => setsidebarVisible(!sidebarVisible)}
             >
               <FaBars className="text-2xl" />
@@ -160,14 +160,14 @@ function Stafflist() {
             <select
               value={selectedRole}
               onChange={(e) => setselectedRole(e.target.value)}
-              className="bg-indigo-600 text-white px-5 py-2.5 rounded-full shadow-md hover:bg-indigo-700"
+              className="bg-[#181818] border border-[#2A2A2A] text-white px-5 py-2.5 rounded-xl shadow-md hover:border-[#FF8A00]/50 outline-none font-semibold transition"
             >
-              <option value="Sub-Admin">Sub-Admin</option>
-              <option value="Agent">Agent</option>
+              <option value="Sub-Admin" className="bg-[#181818]">Sub-Admin</option>
+              <option value="Agent" className="bg-[#181818]">Agent</option>
             </select>
 
             <button
-              className="flex items-center gap-2 bg-gradient-to-r from-indigo-600 to-indigo-500 text-white px-6 py-2.5 rounded-full shadow-md hover:shadow-lg"
+              className="flex items-center gap-2 bg-[#FF8A00] hover:bg-[#E67A00] text-black font-bold px-6 py-2.5 rounded-xl shadow-lg shadow-[#FF8A00]/25 transition"
               onClick={() => dispatch(togglestaffmodal())}
             >
               <FaUserPlus /> Add Staff
@@ -182,7 +182,7 @@ function Stafflist() {
               filteredStaff.map((staff, index) => (
                 <motion.div
                   key={staff._id}
-                  className="bg-white rounded-2xl shadow-xl p-6 hover:shadow-2xl border border-gray-100"
+                  className="bg-[#141414] rounded-2xl shadow-xl p-6 border border-[#262626] hover:border-[#FF8A00]/50 transition duration-300"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
@@ -191,41 +191,41 @@ function Stafflist() {
                   <div className="flex justify-end gap-2">
                     <button
                       onClick={() => dispatch(toggleStaffdatamodal(staff._id))}
-                      className="p-2 text-blue-600 hover:bg-blue-100 rounded-full"
+                      className="p-2 text-[#FF8A00] hover:bg-[#1E1E1E] rounded-xl transition"
                     >
-                      <FaInfoCircle className="text-xl" />
+                      <FaInfoCircle className="text-lg" />
                     </button>
                     <button
                       onClick={() => dispatch(togglestaffeditmodal(staff))}
-                      className="p-2 text-indigo-600 hover:bg-indigo-100 rounded-full"
+                      className="p-2 text-yellow-400 hover:bg-[#1E1E1E] rounded-xl transition"
                     >
-                      <FaEdit className="text-xl" />
+                      <FaEdit className="text-lg" />
                     </button>
                     <button
                       onClick={() => handleconfirm(staff)}
-                      className="p-2 text-red-600 hover:bg-red-100 rounded-full"
+                      className="p-2 text-red-400 hover:bg-[#1E1E1E] rounded-xl transition"
                     >
-                      <FaTrash className="text-xl" />
+                      <FaTrash className="text-lg" />
                     </button>
                   </div>
 
                   {/* PROFILE */}
                   <div className="flex items-center space-x-5 mt-4">
-                    <div className="text-indigo-600">
+                    <div className="text-[#FF8A00]">
                       {staff.profileImage ? (
                         <img
                           src={staff.profileImage}
                           alt=""
-                          className="w-24 h-24 rounded-full border-4 border-indigo-100 object-cover"
+                          className="w-20 h-20 rounded-full border-2 border-[#FF8A00] object-cover"
                         />
                       ) : (
-                        <FaUserCircle className="w-24 h-24" />
+                        <FaUserCircle className="w-20 h-20 text-[#FF8A00]" />
                       )}
                     </div>
 
                     <div>
-                      <h4 className="text-xl font-semibold">{staff.name}</h4>
-                      <p className="text-gray-600 text-sm">{staff.role}</p>
+                      <h4 className="text-xl font-bold text-white">{staff.name}</h4>
+                      <p className="text-gray-400 text-sm capitalize">{staff.role}</p>
                     </div>
                   </div>
 
@@ -234,7 +234,7 @@ function Stafflist() {
                     {staff.role === "Sub-Admin" && (
                       <button
                         onClick={() => dispatch(toggleAssignteamsmodal(staff))}
-                        className="px-4 py-2.5 rounded-xl bg-indigo-600 text-white hover:bg-indigo-700"
+                        className="px-4 py-2.5 rounded-xl bg-[#FF8A00] text-black font-bold hover:bg-[#E67A00] transition shadow-md"
                       >
                         Assign Teams
                       </button>
@@ -243,7 +243,7 @@ function Stafflist() {
                       onClick={() =>
                         dispatch(toggleAssignleadsmodal(staff._id))
                       }
-                      className="px-4 py-2.5 rounded-xl border border-indigo-600 text-indigo-600 hover:bg-indigo-600 hover:text-white"
+                      className="px-4 py-2.5 rounded-xl border border-[#FF8A00] text-[#FF8A00] hover:bg-[#FF8A00] hover:text-black font-bold transition"
                     >
                       Assign Leads
                     </button>
@@ -251,7 +251,7 @@ function Stafflist() {
                 </motion.div>
               ))
             ) : (
-              <p className="text-center text-gray-600 col-span-full">
+              <p className="text-center text-gray-400 col-span-full">
                 No staff available
               </p>
             )}
@@ -288,13 +288,13 @@ function Stafflist() {
         {/* SUCCESS MESSAGE */}
         {statussucceess && (
           <motion.div
-            className="fixed inset-0 flex items-center justify-center"
+            className="fixed inset-0 flex items-center justify-center p-4 z-50"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
           >
-            <div className="absolute inset-0 bg-black/40" />
+            <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
             <motion.div
-              className="bg-green-100 text-green-900 px-10 py-5 rounded-xl shadow-xl font-semibold"
+              className="relative z-10 bg-[#141414] border border-emerald-500/50 text-emerald-400 px-8 py-5 rounded-2xl shadow-2xl font-semibold text-base"
               initial={{ scale: 0.9 }}
               animate={{ scale: 1 }}
             >
@@ -305,27 +305,25 @@ function Stafflist() {
 
         {showReassignModal && (
           <motion.div
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50"
+            className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
           >
             <motion.div
-              className="bg-white rounded-2xl p-8 w-full max-w-md shadow-2xl"
+              className="bg-[#141414] border border-[#262626] rounded-2xl p-6 sm:p-8 w-full max-w-md shadow-2xl text-white"
               initial={{ scale: 0.9 }}
               animate={{ scale: 1 }}
             >
               {/* Header */}
               <div className="flex items-center gap-3 mb-5">
                 <div
-                  className={`w-12 h-12 flex items-center justify-center rounded-full text-white shadow-lg ${
-                    staffRole === "Sub-Admin" ? "bg-orange-500" : "bg-red-600"
-                  }`}
+                  className="w-12 h-12 flex items-center justify-center rounded-2xl text-white shadow-lg bg-red-600"
                 >
                   <FaTrash className="text-xl" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold">Delete {staffRole}</h3>
-                  <p className="text-gray-600 text-sm">
+                  <h3 className="text-xl font-bold text-white">Delete {staffRole}</h3>
+                  <p className="text-gray-400 text-sm">
                     This action is irreversible.
                   </p>
                 </div>
@@ -333,13 +331,9 @@ function Stafflist() {
 
               {/* Impact Section */}
               <div
-                className={`p-4 rounded-xl text-sm mb-5 ${
-                  staffRole === "Sub-Admin"
-                    ? "bg-orange-50 text-orange-700"
-                    : "bg-red-50 text-red-700"
-                }`}
+                className="p-4 rounded-xl text-sm mb-5 bg-[#1C1C1C] border border-[#2E2E2E] text-gray-300"
               >
-                <p className="font-semibold mb-1">This will:</p>
+                <p className="font-semibold text-white mb-1">This will:</p>
                 {staffRole === "Sub-Admin" ? (
                   <ul className="list-disc ml-5 space-y-1">
                     <li>Reassign ALL agents under this Sub-Admin</li>
@@ -354,12 +348,12 @@ function Stafflist() {
 
               {/* Reassign Dropdown */}
               <div className="mb-5">
-                <label className="block font-medium mb-1">Reassign to:</label>
+                <label className="block font-medium mb-1 text-gray-300 text-sm">Reassign to:</label>
                 <select
                   onChange={(e) => setnewUserId(e.target.value)}
-                  className="w-full p-3 rounded-lg border border-gray-300 bg-gray-50 focus:ring-2 focus:ring-indigo-500"
+                  className="w-full p-3 rounded-xl border border-[#2A2A2A] bg-[#181818] text-white focus:border-[#FF8A00] outline-none text-sm font-medium"
                 >
-                  <option value="">Select new {staffRole}</option>
+                  <option value="" className="bg-[#181818]">Select new {staffRole}</option>
 
                   {(staffRole === "Sub-Admin"
                     ? fetchstaffs.data?.filter(
@@ -370,7 +364,7 @@ function Stafflist() {
                         (s) => s.role === "Agent" && s._id !== selectedStaffId
                       )
                   )?.map((u) => (
-                    <option key={u._id} value={u._id}>
+                    <option key={u._id} value={u._id} className="bg-[#181818]">
                       {u.name}
                     </option>
                   ))}
@@ -379,22 +373,22 @@ function Stafflist() {
 
               {/* Type-to-confirm */}
               <div className="mb-5">
-                <label className="block font-medium mb-1">
-                  Type <b>DELETE</b> to confirm:
+                <label className="block font-medium mb-1 text-gray-300 text-sm">
+                  Type <b className="text-red-400">DELETE</b> to confirm:
                 </label>
                 <input
                   type="text"
-                  className="w-full p-3 rounded-lg border border-gray-300 bg-gray-50 focus:ring-2 focus:ring-red-500"
+                  className="w-full p-3 rounded-xl border border-[#2A2A2A] bg-[#181818] text-white focus:border-red-500 outline-none text-sm placeholder-gray-500"
                   placeholder="Type DELETE"
                   onChange={(e) => setTypedDelete(e.target.value)}
                 />
               </div>
 
               {/* Buttons */}
-              <div className="flex justify-between mt-6">
+              <div className="flex justify-between mt-6 gap-3">
                 <button
                   onClick={closeconfirm}
-                  className="px-5 py-2.5 rounded-xl bg-gray-200 hover:bg-gray-300"
+                  className="px-5 py-2.5 rounded-xl bg-[#242424] hover:bg-[#303030] text-gray-200 font-semibold transition text-sm"
                 >
                   Cancel
                 </button>
@@ -406,10 +400,10 @@ function Stafflist() {
                     typedDelete !== "DELETE" ||
                     deletestaffs.isPending
                   }
-                  className={`px-5 py-2.5 rounded-xl text-white flex items-center gap-2 ${
+                  className={`px-5 py-2.5 rounded-xl text-white font-bold flex items-center gap-2 transition text-sm ${
                     !newUserId || typedDelete !== "DELETE"
-                      ? "bg-red-300 cursor-not-allowed"
-                      : "bg-red-600 hover:bg-red-700"
+                      ? "bg-red-950/50 text-red-700 cursor-not-allowed border border-red-900/40"
+                      : "bg-red-600 hover:bg-red-700 shadow-md"
                   }`}
                 >
                   {deletestaffs.isPending ? <Spinner /> : <FaTrash />}
@@ -429,12 +423,12 @@ function Stafflist() {
 /* Simple Wrapper for Modals */
 const ModalWrapper = ({ children }) => (
   <motion.div
-    className="fixed inset-0 z-50 flex items-center justify-center p-6"
+    className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6"
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
     exit={{ opacity: 0 }}
   >
-    <div className="absolute inset-0 bg-black/60" />
+    <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" />
     <div className="relative z-10 w-full max-w-lg">{children}</div>
   </motion.div>
 );

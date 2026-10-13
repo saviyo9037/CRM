@@ -11,13 +11,16 @@ const CalendarComponent = ({ onDateChange, selectedDate }) => {
   };
 
   return (
-    <div className="p-4 bg-white rounded-lg shadow-md">
-      <h5 className="text-lg font-semibold mb-2">Select a Date</h5>
+    <div className="p-4 bg-[#141414] border border-[#262626] rounded-xl shadow-lg text-white">
+      <h5 className="text-sm font-semibold mb-2 text-white flex items-center gap-2">
+        <span className="w-2 h-2 rounded-full bg-[#FF8A00]"></span>
+        Select a Date
+      </h5>
       <DatePicker
         selected={date}
         onChange={handleChange}
         inline
-        className="w-full"
+        className="w-full text-white"
       />
     </div>
   );

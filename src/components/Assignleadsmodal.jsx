@@ -81,30 +81,30 @@ function Assignleadsmodal() {
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.9 }}
         transition={{ duration: 0.4 }}
-        className="bg-white p-4 sm:p-6 md:p-8 rounded-2xl shadow-2xl w-full max-w-md sm:max-w-3xl md:max-w-6xl text-center relative max-h-[90vh] overflow-hidden border border-gray-300"
+        className="bg-[#141414] border border-[#282828] text-white p-4 sm:p-6 md:p-8 rounded-2xl shadow-2xl w-full max-w-md sm:max-w-3xl md:max-w-6xl text-center relative max-h-[90vh] overflow-hidden"
       >
         {assigningleads.isPending && <Spinner />}
 
         <button
-          className="absolute top-3 right-3 sm:top-4 sm:right-6 text-xl sm:text-2xl md:text-3xl font-bold text-gray-400 hover:text-red-500 transition"
+          className="absolute top-3 right-3 sm:top-4 sm:right-6 text-2xl md:text-3xl font-bold text-gray-400 hover:text-[#FF8A00] transition"
           onClick={() => dispatch(toggleAssignleadsmodal(null))}
         >
           &times;
         </button>
 
-        <h3 className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-800 mb-4 sm:mb-6 tracking-tight">
-          Assign Leads
+        <h3 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-white mb-4 sm:mb-6 tracking-tight flex items-center justify-center gap-2">
+          <span className="text-[#FF8A00]">👥</span> Assign Leads
         </h3>
 
         {/* Filters */}
-        <div className="flex flex-wrap gap-2 sm:gap-4 justify-end mb-3 sm:mb-4">
+        <div className="flex flex-wrap gap-2 sm:gap-4 justify-end mb-4">
           <div>
             <input
               key="search-input"
               type="text"
               value={searchText}
               onChange={(e) => setsearchText(e.target.value)}
-              className="px-4 py-2 sm:px-5 sm:py-2.5 text-sm sm:text-base rounded-xl border border-gray-300 bg-white shadow-sm text-gray-700 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all duration-200 w-full sm:w-auto relative pr-10"
+              className="px-4 py-2 sm:px-5 sm:py-2 text-sm rounded-xl border border-[#2E2E2E] bg-[#181818] shadow-sm text-white placeholder-gray-500 focus:ring-1 focus:ring-[#FF8A00] focus:border-[#FF8A00] outline-none transition w-full sm:w-auto"
               placeholder="Search..."
             />
           </div>
@@ -113,19 +113,23 @@ function Assignleadsmodal() {
             <select
               value={datefilter}
               onChange={(e) => setdatefilter(e.target.value)}
-              className="min-w-[140px] px-4 py-2 sm:px-5 sm:py-2.5 text-sm sm:text-base rounded-xl border border-gray-300 bg-white shadow-sm text-gray-700 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all duration-200 sm:w-auto relative pr-10"
+              className="min-w-[140px] px-4 py-2 sm:px-5 sm:py-2 text-sm rounded-xl border border-[#2E2E2E] bg-[#181818] shadow-sm text-white focus:ring-1 focus:ring-[#FF8A00] focus:border-[#FF8A00] outline-none transition sm:w-auto"
             >
-              <option value="Date">Date</option>
-              <option value="today">Today</option>
-              <option value="yesterday">Yesterday</option>
-              <option value="custom">Search from date</option>
-              <option value="range">Search from range of date</option>
+              <option value="Date" className="bg-[#181818]">Date</option>
+              <option value="today" className="bg-[#181818]">Today</option>
+              <option value="yesterday" className="bg-[#181818]">Yesterday</option>
+              <option value="custom" className="bg-[#181818]">Search from date</option>
+              <option value="range" className="bg-[#181818]">Search from range of date</option>
             </select>
           </div>
 
           {datefilter === 'custom' && (
             <div>
-              <input type="date" onChange={(e) => setselectdatefilter(new Date(e.target.value))} />
+              <input
+                type="date"
+                onChange={(e) => setselectdatefilter(new Date(e.target.value))}
+                className="px-3 py-2 text-sm rounded-xl border border-[#2E2E2E] bg-[#181818] text-white focus:ring-1 focus:ring-[#FF8A00] outline-none"
+              />
             </div>
           )}
 
@@ -136,66 +140,67 @@ function Assignleadsmodal() {
                 onChange={(e) =>
                   setdaterangefilter({ ...daterangefilter, start: new Date(e.target.value) })
                 }
+                className="px-3 py-2 text-sm rounded-xl border border-[#2E2E2E] bg-[#181818] text-white focus:ring-1 focus:ring-[#FF8A00] outline-none"
               />
               <input
                 type="date"
                 onChange={(e) =>
                   setdaterangefilter({ ...daterangefilter, end: new Date(e.target.value) })
                 }
+                className="px-3 py-2 text-sm rounded-xl border border-[#2E2E2E] bg-[#181818] text-white focus:ring-1 focus:ring-[#FF8A00] outline-none"
               />
             </div>
           )}
 
           <div>
             <select
-              className="px-4 py-2 sm:px-5 sm:py-2.5 text-sm sm:text-base rounded-xl border border-gray-300 bg-white shadow-sm text-gray-700 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all duration-200 w-full sm:w-auto relative pr-10"
+              className="px-4 py-2 sm:px-5 sm:py-2 text-sm rounded-xl border border-[#2E2E2E] bg-[#181818] shadow-sm text-white focus:ring-1 focus:ring-[#FF8A00] focus:border-[#FF8A00] outline-none transition w-full sm:w-auto"
               value={filterleads}
               onChange={(e) => setfilterleads(e.target.value)}
             >
-              <option>All</option>
-              <option value="Assigned">Assigned</option>
-              <option value="Unassigned">Unassigned</option>
+              <option className="bg-[#181818]">All</option>
+              <option value="Assigned" className="bg-[#181818]">Assigned</option>
+              <option value="Unassigned" className="bg-[#181818]">Unassigned</option>
             </select>
           </div>
         </div>
 
         {/* Table */}
-        <div className="overflow-auto max-h-[60vh] sm:max-h-[65vh] rounded-xl border border-gray-200">
+        <div className="overflow-auto max-h-[60vh] sm:max-h-[65vh] rounded-xl border border-[#262626]">
           {isLoading ? (
             <Spinner />
           ) : fetchleads?.leads?.length > 0 ? (
             <>
               <div className="overflow-x-auto">
-                <table className="w-full text-xs sm:text-sm text-left text-gray-700 min-w-[600px]">
-                  <thead className="text-xs uppercase bg-gradient-to-r from-[#00B5A6] to-[#1E6DB0] text-white sticky top-0 z-10 shadow">
+                <table className="w-full text-xs sm:text-sm text-left text-white min-w-[600px]">
+                  <thead className="text-xs uppercase bg-gradient-to-r from-[#FF8A00] to-[#E67A00] text-black sticky top-0 z-10 shadow font-bold">
                     <tr>
-                      <th className="px-3 sm:px-6 py-2 sm:py-4 text-xs sm:text-sm">#</th>
-                      <th className="px-3 sm:px-6 py-2 sm:py-4 text-xs sm:text-sm">Name</th>
-                      <th className="px-3 sm:px-6 py-2 sm:py-4 text-xs sm:text-sm">Phone</th>
-                      <th className="px-3 sm:px-6 py-2 sm:py-4 text-xs sm:text-sm">Interest</th>
-                      <th className="px-3 sm:px-6 py-2 sm:py-4 text-xs sm:text-sm">Location</th>
-                      <th className="px-3 sm:px-6 py-2 sm:py-4 text-xs sm:text-sm text-center">
+                      <th className="px-3 sm:px-6 py-2.5 sm:py-3.5 text-xs sm:text-sm text-black">#</th>
+                      <th className="px-3 sm:px-6 py-2.5 sm:py-3.5 text-xs sm:text-sm text-black">Name</th>
+                      <th className="px-3 sm:px-6 py-2.5 sm:py-3.5 text-xs sm:text-sm text-black">Phone</th>
+                      <th className="px-3 sm:px-6 py-2.5 sm:py-3.5 text-xs sm:text-sm text-black">Interest</th>
+                      <th className="px-3 sm:px-6 py-2.5 sm:py-3.5 text-xs sm:text-sm text-black">Location</th>
+                      <th className="px-3 sm:px-6 py-2.5 sm:py-3.5 text-xs sm:text-sm text-center text-black">
                         Assign
                       </th>
                     </tr>
                   </thead>
 
-                  <tbody className="divide-y divide-gray-200">
+                  <tbody className="divide-y divide-[#222222]">
                     {fetchleads?.leads?.map((lead, index) => (
-                      <tr key={lead._id} className={`${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}`}>
-                        {/* FIXED GLOBAL INDEX HERE */}
-                        <td className="px-3 sm:px-6 py-3 sm:py-5 font-semibold text-gray-800 text-xs sm:text-sm">
+                      <tr key={lead._id} className={`${index % 2 === 0 ? 'bg-[#121212]' : 'bg-[#161616]'} hover:bg-[#1E1E1E] transition`}>
+                        <td className="px-3 sm:px-6 py-3 sm:py-4 font-semibold text-[#FF8A00] text-xs sm:text-sm">
                           {(currentPage - 1) * leadsPerPage + (index + 1)}
                         </td>
 
-                        <td className="px-3 sm:px-6 py-3 sm:py-5 font-medium text-xs sm:text-sm">
+                        <td className="px-3 sm:px-6 py-3 sm:py-4 font-medium text-xs sm:text-sm text-white">
                           {lead.name}
                         </td>
-                        <td className="px-3 sm:px-6 py-3 sm:py-5 text-xs sm:text-sm">
+                        <td className="px-3 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm text-gray-300">
                           {lead.mobile}
                         </td>
-<td className="px-3 sm:px-6 py-3 sm:py-5 text-xs sm:text-sm">{lead.interestedproduct || "N/A"}</td>
-                        <td className="px-3 sm:px-6 py-3 sm:py-5 text-xs sm:text-sm">
+                        <td className="px-3 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm text-gray-300">{lead.interestedproduct || "N/A"}</td>
+                        <td className="px-3 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm text-gray-400">
                           {lead.location || 'N/A'}
                         </td>
 

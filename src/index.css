@@ -1,6 +1,264 @@
 @import 'tailwindcss';
-/* @plugin "daisyui"; */
 
+/* ==========================================================================
+   DARK ONYX & ELECTRIC ORANGE DESIGN SYSTEM
+   Background: #0A0A0A | Highlights: #FF8A00 | Main Text: #FFFFFF
+   ========================================================================== */
+
+:root {
+  --bg-primary: #0A0A0A;
+  --bg-secondary: #121212;
+  --bg-card: #161616;
+  --bg-modal: #141414;
+  --bg-input: #1A1A1A;
+  --accent-orange: #FF8A00;
+  --accent-orange-hover: #E67A00;
+  --accent-orange-light: rgba(255, 138, 0, 0.15);
+  --text-main: #FFFFFF;
+  --text-muted: #A1A1AA;
+  --border-dark: #262626;
+  --border-focus: #FF8A00;
+}
+
+/* 1. Global Base */
+html, body, #root {
+  background-color: #0A0A0A !important;
+  color: #FFFFFF !important;
+  min-height: 100vh;
+}
+
+/* 2. Global Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0A0A0A;
+}
+::-webkit-scrollbar-thumb {
+  background: #2E2E2E;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #FF8A00;
+}
+
+/* 3. Surface & Card Overrides */
+.bg-white {
+  background-color: #141414 !important;
+  color: #FFFFFF !important;
+}
+.bg-gray-50, .bg-gray-100 {
+  background-color: #0A0A0A !important;
+  color: #FFFFFF !important;
+}
+.bg-gray-200 {
+  background-color: #1C1C1C !important;
+}
+.bg-gray-300 {
+  background-color: #262626 !important;
+}
+
+/* 4. Text Overrides */
+.text-gray-900, .text-gray-800, .text-black {
+  color: #FFFFFF !important;
+}
+.text-gray-700, .text-gray-600, .text-gray-500 {
+  color: #A1A1AA !important;
+}
+.text-gray-400 {
+  color: #71717A !important;
+}
+
+/* 5. Border Overrides */
+.border-gray-100, .border-gray-200, .border-gray-300, .border-gray-400 {
+  border-color: #262626 !important;
+}
+
+/* 6. Brand Color / Highlight Overrides (Teal/Blue -> Orange #FF8A00) */
+.text-\[\#1E6DB0\],
+.text-\[\#00B5A6\],
+.text-blue-500,
+.text-blue-600,
+.text-teal-500,
+.text-teal-600 {
+  color: #FF8A00 !important;
+}
+
+.bg-\[\#00B5A6\],
+.bg-\[\#1E6DB0\],
+.bg-blue-600,
+.bg-teal-500,
+.bg-teal-600 {
+  background-color: #FF8A00 !important;
+  color: #000000 !important;
+}
+
+.bg-blue-100,
+.bg-teal-100,
+.bg-blue-50,
+.bg-teal-50 {
+  background-color: rgba(255, 138, 0, 0.12) !important;
+  color: #FF8A00 !important;
+}
+
+.hover\:bg-\[\#1E6DB0\]:hover,
+.hover\:bg-blue-700:hover,
+.hover\:bg-teal-600:hover {
+  background-color: #E67A00 !important;
+}
+
+.border-\[\#00B5A6\],
+.border-\[\#1E6DB0\],
+.border-blue-500 {
+  border-color: #FF8A00 !important;
+}
+
+.focus\:ring-\[\#1E6DB0\]:focus,
+.focus\:ring-blue-500:focus,
+.focus\:ring-teal-500:focus {
+  --tw-ring-color: #FF8A00 !important;
+  border-color: #FF8A00 !important;
+}
+
+/* Gradients */
+.from-\[\#00B5A6\],
+.from-teal-500 {
+  --tw-gradient-from: #FF8A00 var(--tw-gradient-from-position) !important;
+}
+.to-\[\#1E6DB0\],
+.to-blue-600 {
+  --tw-gradient-to: #E67A00 var(--tw-gradient-to-position) !important;
+}
+
+/* 7. Modal & Dialog Component Overrides */
+/* All backdrop overlays */
+.fixed.inset-0.bg-black\/50,
+.fixed.inset-0.bg-black\/60,
+.fixed.inset-0.bg-black\/40,
+.fixed.inset-0.bg-black.opacity-50 {
+  background-color: rgba(0, 0, 0, 0.85) !important;
+  backdrop-filter: blur(6px) !important;
+}
+
+/* Modal containers */
+.fixed.inset-0 .bg-white,
+div[role="dialog"],
+.modal-box,
+.bg-white.rounded-2xl,
+.bg-white.rounded-xl,
+.bg-white.rounded-lg.shadow-2xl,
+.bg-white.w-full.max-w-4xl,
+.bg-white.w-full.max-w-2xl,
+.bg-white.w-full.max-w-3xl,
+.bg-white.w-full.max-w-xl {
+  background-color: #141414 !important;
+  border: 1px solid #282828 !important;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.9), 0 0 25px rgba(255, 138, 0, 0.08) !important;
+  color: #FFFFFF !important;
+}
+
+/* Modal decorative panels */
+.bg-gradient-to-br.from-teal-500.to-blue-600,
+.bg-gradient-to-br.from-\[\#00B5A6\].to-\[\#1E6DB0\] {
+  background: linear-gradient(135deg, #FF8A00 0%, #D97300 100%) !important;
+  color: #000000 !important;
+}
+.bg-gradient-to-br.from-teal-500.to-blue-600 *,
+.bg-gradient-to-br.from-\[\#00B5A6\].to-\[\#1E6DB0\] * {
+  color: #000000 !important;
+}
+
+/* 8. Form Controls: Inputs, Selects, Textareas */
+input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]),
+textarea,
+select {
+  background-color: #181818 !important;
+  color: #FFFFFF !important;
+  border: 1px solid #2B2B2B !important;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: #FF8A00 !important;
+  box-shadow: 0 0 0 2px rgba(255, 138, 0, 0.25) !important;
+  outline: none !important;
+}
+
+input::placeholder, textarea::placeholder {
+  color: #71717A !important;
+}
+
+select option {
+  background-color: #181818 !important;
+  color: #FFFFFF !important;
+}
+
+/* 9. Tables */
+table {
+  color: #FFFFFF !important;
+  background-color: #121212 !important;
+}
+thead tr {
+  background-color: #181818 !important;
+  border-bottom: 2px solid #282828 !important;
+}
+thead th {
+  color: #FF8A00 !important;
+  font-weight: 600 !important;
+}
+tbody tr {
+  border-bottom: 1px solid #1F1F1F !important;
+  background-color: #121212 !important;
+}
+tbody tr:hover {
+  background-color: #1A1A1A !important;
+}
+
+/* 10. Sidebar Specific */
+aside {
+  background-color: #0A0A0A !important;
+  border-right: 1px solid #1C1C1C !important;
+}
+aside .border-white\/10 {
+  border-color: #1F1F1F !important;
+}
+aside a.active,
+aside .bg-gradient-to-r.from-\[\#00B5A6\].to-\[\#1E6DB0\] {
+  background: linear-gradient(90deg, #FF8A00 0%, #E67A00 100%) !important;
+  color: #000000 !important;
+  font-weight: 700 !important;
+  box-shadow: 0 4px 15px rgba(255, 138, 0, 0.25) !important;
+}
+aside a.active * {
+  color: #000000 !important;
+}
+
+/* 11. Custom Phone Input */
+.PhoneInputCountryIcon {
+  width: 20px !important;
+  height: 15px !important;
+}
+.PhoneInputCountryIcon img {
+  width: 100% !important;
+  height: 100% !important;
+}
+.PhoneInputCountry {
+  display: flex;
+  align-items: center;
+}
+.PhoneInputInput {
+  background-color: #181818 !important;
+  color: #FFFFFF !important;
+  border-color: #2B2B2B !important;
+}
+.PhoneInputCountrySelect {
+  background-color: #181818 !important;
+  color: #FFFFFF !important;
+}
+
+/* 12. Animations */
 @keyframes fade-in {
   from {
     opacity: 0;
@@ -15,19 +273,3 @@
 .animate-fade-in {
   animation: fade-in 0.5s ease-out;
 }
-
-.PhoneInputCountryIcon {
-  width: 20px !important;
-  height: 15px !important;
-}
-
-.PhoneInputCountryIcon img {
-  width: 100% !important;
-  height: 100% !important;
-}
-
-.PhoneInputCountry {
-  display: flex;
-  align-items: center;
-}
-

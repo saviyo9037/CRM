@@ -55,10 +55,10 @@ const PaymentDetails = ({ startDate, endDate }) => {
 
   if (isLoading)
     return (
-      <div className="flex justify-center items-center h-60 bg-gray-50 rounded-2xl">
+      <div className="flex justify-center items-center h-60 bg-[#141414] border border-[#262626] rounded-2xl">
         <div className="animate-pulse flex flex-col items-center">
-          <FaRupeeSign className="text-4xl text-gray-400 mb-3" />
-          <p className="text-lg font-medium text-gray-500">
+          <FaRupeeSign className="text-4xl text-[#FF8A00] mb-3" />
+          <p className="text-lg font-medium text-gray-400">
             Loading Payments...
           </p>
         </div>
@@ -67,48 +67,49 @@ const PaymentDetails = ({ startDate, endDate }) => {
 
   if (error)
     return (
-      <div className="flex justify-center items-center h-60 bg-red-50 rounded-2xl border border-red-200">
+      <div className="flex justify-center items-center h-60 bg-red-950/20 rounded-2xl border border-red-800/40">
         <div className="text-center">
           <FaExclamationCircle className="text-4xl text-red-500 mx-auto mb-3" />
-          <p className="text-lg font-semibold text-red-600">
+          <p className="text-lg font-semibold text-red-400">
             Error Loading Payments
           </p>
-          <p className="text-sm text-gray-600 mt-1">Please try again later.</p>
+          <p className="text-sm text-gray-500 mt-1">Please try again later.</p>
         </div>
       </div>
     );
 
   return (
-    <div className="bg-white shadow-xl rounded-2xl p-6 mt-8 border border-gray-200/80">
-      <h1 className="text-3xl font-bold text-gray-800 mb-6">
+    <div className="bg-[#141414] shadow-xl rounded-2xl p-6 mt-8 border border-[#262626]">
+      <h1 className="text-2xl sm:text-3xl font-bold text-white mb-6 flex items-center gap-3">
+        <span className="w-2.5 h-2.5 rounded-full bg-[#FF8A00]"></span>
         Customer Payment Overview
       </h1>
 
-      <div className="overflow-x-auto rounded-lg border border-gray-200">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
+      <div className="overflow-x-auto rounded-xl border border-[#262626]">
+        <table className="min-w-full divide-y divide-[#262626]">
+          <thead className="bg-gradient-to-r from-[#FF8A00] to-[#E67A00]">
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider flex items-center">
+              <th className="px-6 py-3.5 text-left text-xs font-bold text-black uppercase tracking-wider flex items-center">
                 <FaUser className="mr-2" /> Customer Name
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3.5 text-left text-xs font-bold text-black uppercase tracking-wider">
                 <FaCalendarAlt className="inline mr-2" /> Joining Date
               </th>
-              <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3.5 text-right text-xs font-bold text-black uppercase tracking-wider">
                 Total Amount
               </th>
-              <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3.5 text-right text-xs font-bold text-black uppercase tracking-wider">
                 Total Paid
               </th>
-              <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3.5 text-right text-xs font-bold text-black uppercase tracking-wider">
                 Due Amount
               </th>
-              <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3.5 text-center text-xs font-bold text-black uppercase tracking-wider">
                 Status
               </th>
             </tr>
           </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
+          <tbody className="divide-y divide-[#262626]">
             {payments.length > 0 ? (
               payments.map((payment) => {
                 const customer = payment.customer || {};
@@ -118,48 +119,48 @@ const PaymentDetails = ({ startDate, endDate }) => {
                 let statusLabel, statusColor, StatusIcon;
                 if ((payment.totalPaid || 0) >= (payment.totalAmount || 0)) {
                   statusLabel = "Paid";
-                  statusColor = "bg-green-100 text-green-800";
+                  statusColor = "bg-green-500/10 border border-green-500/30 text-green-400";
                   StatusIcon = <FaCheckCircle />;
                 } else {
                   statusLabel = "Pending";
-                  statusColor = "bg-red-100 text-red-800";
+                  statusColor = "bg-red-500/10 border border-red-500/30 text-red-400";
                   StatusIcon = <FaExclamationCircle />;
                 }
 
                 return (
                   <tr
                     key={payment._id}
-                    className="hover:bg-gray-50/50 transition-colors duration-150"
+                    className="bg-[#141414] even:bg-[#181818] hover:bg-[#202020] transition-colors duration-150"
                   >
                     <td
-                      className="px-6 py-4 text-sm font-medium text-blue-600 cursor-pointer hover:underline"
+                      className="px-6 py-4 text-sm font-semibold text-[#FF8A00] cursor-pointer hover:underline"
                       onClick={() => handleCustomerClick(customer)}
                     >
                       {customer.name || "N/A"}
                     </td>
-                    <td className="px-6 py-4 text-sm text-gray-600">
+                    <td className="px-6 py-4 text-sm text-gray-300">
                       {customer.createdAt
                         ? new Date(customer.createdAt).toLocaleDateString(
                             "en-GB"
                           )
                         : "N/A"}
                     </td>
-                    <td className="px-6 py-4 text-sm text-gray-600 text-right">
+                    <td className="px-6 py-4 text-sm text-gray-200 text-right font-medium">
                       {formatCurrency(payment.totalAmount)}
                     </td>
-                    <td className="px-6 py-4 text-sm text-green-600 font-semibold text-right">
+                    <td className="px-6 py-4 text-sm text-green-400 font-bold text-right">
                       {formatCurrency(payment.totalPaid)}
                     </td>
                     <td
-                      className={`px-6 py-4 text-sm font-semibold text-right ${
-                        dueAmount > 0 ? "text-red-600" : "text-gray-600"
+                      className={`px-6 py-4 text-sm font-bold text-right ${
+                        dueAmount > 0 ? "text-red-400" : "text-gray-400"
                       }`}
                     >
                       {formatCurrency(dueAmount)}
                     </td>
                     <td className="px-6 py-4 text-center">
                       <span
-                        className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${statusColor}`}
+                        className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold ${statusColor}`}
                       >
                         <span className="mr-1.5">{StatusIcon}</span>
                         {statusLabel}
@@ -170,9 +171,9 @@ const PaymentDetails = ({ startDate, endDate }) => {
               })
             ) : (
               <tr>
-                <td colSpan="6" className="text-center py-10">
-                  <FaExclamationCircle className="text-3xl text-gray-400 mx-auto mb-2" />
-                  <p className="text-sm text-gray-500">
+                <td colSpan="6" className="text-center py-10 bg-[#141414]">
+                  <FaExclamationCircle className="text-3xl text-gray-500 mx-auto mb-2" />
+                  <p className="text-sm text-gray-400">
                     No payment data available.
                   </p>
                 </td>
@@ -184,25 +185,26 @@ const PaymentDetails = ({ startDate, endDate }) => {
 
       {/* ✅ Transaction Modal */}
       {selectedCustomer && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-          <div className="bg-white rounded-2xl shadow-lg p-6 w-full max-w-2xl relative">
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-md flex justify-center items-center z-50 p-4">
+          <div className="bg-[#141414] border border-[#262626] rounded-2xl shadow-2xl p-6 w-full max-w-2xl relative text-white">
             <button
-              className="absolute top-3 right-3 text-gray-500 hover:text-gray-800"
+              className="absolute top-4 right-4 text-gray-400 hover:text-[#FF8A00] transition"
               onClick={closeModal}
             >
               <FaTimes size={20} />
             </button>
 
-            <h2 className="text-2xl font-bold text-gray-800 mb-4">
+            <h2 className="text-xl sm:text-2xl font-bold text-white mb-4 flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#FF8A00]"></span>
               Transactions for {selectedCustomer.name}
             </h2>
 
             {loadingTransactions ? (
-              <p className="text-gray-500">Loading transactions...</p>
+              <p className="text-gray-400 py-4 text-center">Loading transactions...</p>
             ) : transactions.length > 0 ? (
-              <div className="overflow-x-auto rounded-lg border">
+              <div className="overflow-x-auto rounded-xl border border-[#262626]">
                 <table className="min-w-full text-sm">
-                  <thead className="bg-gray-100 text-gray-700">
+                  <thead className="bg-gradient-to-r from-[#FF8A00] to-[#E67A00] text-black font-bold">
                     <tr>
                       <th className="p-3 text-left">#</th>
                       <th className="p-3 text-left">Date</th>
@@ -210,23 +212,23 @@ const PaymentDetails = ({ startDate, endDate }) => {
                       <th className="p-3 text-left">Mode</th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody className="divide-y divide-[#262626]">
                     {transactions.map((tx, index) => (
-                      <tr key={tx._id} className="border-t hover:bg-gray-50">
-                        <td className="p-3">{index + 1}</td>
-                        <td className="p-3">
+                      <tr key={tx._id} className="bg-[#141414] hover:bg-[#1E1E1E]">
+                        <td className="p-3 text-gray-400">{index + 1}</td>
+                        <td className="p-3 text-gray-300">
                           {new Date(tx.transactionDate).toLocaleDateString(
                             "en-GB"
                           )}
                         </td>
-                        <td className="p-3 font-semibold text-green-600">
+                        <td className="p-3 font-bold text-green-400">
                           {formatCurrency(tx.paidAmount)}
                         </td>
-                        <td className="p-3 capitalize flex items-center gap-2">
+                        <td className="p-3 capitalize flex items-center gap-2 text-gray-300">
                           {tx.paymentMode === "cash" ? (
-                            <FaMoneyBillWave className="text-green-500" />
+                            <FaMoneyBillWave className="text-green-400" />
                           ) : (
-                            <FaCreditCard className="text-blue-500" />
+                            <FaCreditCard className="text-[#FF8A00]" />
                           )}
                           {tx.paymentMode}
                         </td>
@@ -236,7 +238,7 @@ const PaymentDetails = ({ startDate, endDate }) => {
                 </table>
               </div>
             ) : (
-              <p className="text-gray-500 text-center">
+              <p className="text-gray-400 text-center py-6">
                 No transactions found.
               </p>
             )}

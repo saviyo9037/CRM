@@ -206,12 +206,12 @@ export default function LeadSourceProgressChart({ startDate, endDate, leads: pas
     .sort((a, b) => b.count - a.count);
 
   return (
-    <div className="p-6 sm:p-8 bg-gradient-to-br from-white via-gray-50 to-gray-100 border border-gray-200 rounded-3xl shadow-lg hover:shadow-xl transition-all duration-300 max-w-4xl mx-auto">
+    <div className="p-6 sm:p-8 bg-[#141414] border border-[#242424] rounded-2xl shadow-xl max-w-4xl mx-auto text-white">
       {/* Header */}
-      <h2 className="text-2xl font-semibold text-gray-800 text-center mb-3">
-        🎯 Lead Source Distribution
+      <h2 className="text-2xl font-bold text-white text-center mb-2 flex items-center justify-center gap-2">
+        <span className="text-[#FF8A00]">🎯</span> Lead Source Distribution
       </h2>
-      <p className="text-center text-sm text-gray-500 mb-6">
+      <p className="text-center text-sm text-gray-400 mb-6">
         {user.role === "Admin" ? "Admin view of all leads" : "Your assigned leads"}
       </p>
 
@@ -222,10 +222,10 @@ export default function LeadSourceProgressChart({ startDate, endDate, leads: pas
             setSelectedSource(null);
             setIsModalOpen(true);
           }}
-          className="inline-flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-blue-600 to-green-500 text-white font-semibold rounded-full shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer"
+          className="inline-flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-[#FF8A00] to-[#E67A00] text-black font-extrabold rounded-full shadow-[0_0_20px_rgba(255,138,0,0.35)] hover:brightness-110 hover:scale-105 transition-all duration-300 cursor-pointer"
         >
           <span className="text-lg">{totalLeads.toLocaleString()}</span>
-          <span className="text-sm opacity-90">Total Leads</span>
+          <span className="text-sm">Total Leads</span>
         </div>
       </div>
 
@@ -243,14 +243,14 @@ export default function LeadSourceProgressChart({ startDate, endDate, leads: pas
       )}
 
       {!isLoading && !error && totalLeads === 0 && (
-        <p className="text-gray-500 text-center text-sm py-10">
+        <p className="text-gray-400 text-center text-sm py-10">
           No leads found for this date range.
         </p>
       )}
 
       {/* Chart section */}
       {!isLoading && !error && totalLeads > 0 && (
-        <div className="space-y-5 max-h-[450px] overflow-y-auto pr-1 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
+        <div className="space-y-4 max-h-[450px] overflow-y-auto pr-1 scrollbar-thin">
           {chartData.map((item, index) => (
             <div
               key={index}
@@ -258,28 +258,28 @@ export default function LeadSourceProgressChart({ startDate, endDate, leads: pas
                 setSelectedSource(item.name);
                 setIsModalOpen(true);
               }}
-              className="group cursor-pointer transition-all duration-200"
+              className="group cursor-pointer transition-all duration-200 bg-[#181818] p-3 rounded-xl border border-[#242424] hover:border-[#FF8A00]/40"
             >
               {/* Title and count */}
-              <div className="flex justify-between items-center mb-1">
-                <span className="font-medium text-gray-800 truncate max-w-[220px]">
+              <div className="flex justify-between items-center mb-2">
+                <span className="font-semibold text-white truncate max-w-[220px]">
                   {item.name}
                 </span>
-                <span className="text-gray-600 text-sm">
+                <span className="text-gray-300 text-sm font-medium">
                   {item.count}{" "}
-                  <small className="text-xs text-gray-400">
+                  <small className="text-xs text-[#FF8A00] font-bold">
                     ({item.percent}%)
                   </small>
                 </span>
               </div>
 
               {/* Progress bar */}
-              <div className="w-full bg-gray-200 rounded-full h-6 relative overflow-hidden">
+              <div className="w-full bg-[#262626] rounded-full h-4 relative overflow-hidden">
                 <div
-                  className="h-6 rounded-full flex items-center justify-end pr-2 text-white text-xs font-semibold transition-all duration-700 group-hover:scale-[1.01]"
+                  className="h-4 rounded-full flex items-center justify-end pr-2 text-black text-xs font-bold transition-all duration-700 group-hover:brightness-110"
                   style={{
                     width: `${item.percent}%`,
-                    background: `linear-gradient(90deg, ${item.color}, ${item.color}CC)`,
+                    background: item.color || "#FF8A00",
                   }}
                 >
                   {item.percent > 8 ? `${item.percent}%` : ""}

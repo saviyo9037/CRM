@@ -38,13 +38,13 @@ function Paymentreports() {
 
     return (
       <motion.div
-        className="fixed inset-0 bg-black/60 backdrop-blur-sm flex justify-center items-center z-[999]"
+        className="fixed inset-0 bg-black/80 backdrop-blur-md flex justify-center items-center z-[999]"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         onClick={() => setFullscreenChart(null)}
       >
         <motion.div
-          className="bg-white p-6 rounded-xl w-[95%] h-[95%] shadow-xl"
+          className="bg-[#141414] p-6 rounded-2xl w-[95%] h-[95%] shadow-2xl border border-[#262626] overflow-auto"
           initial={{ scale: 0.8 }}
           animate={{ scale: 1 }}
           onClick={(e) => e.stopPropagation()}
@@ -56,12 +56,12 @@ function Paymentreports() {
   };
 
   return (
-    <div className="flex h-screen w-screen overflow-hidden bg-gray-50">
+    <div className="flex h-screen w-screen overflow-hidden bg-[#0A0A0A]">
       {/* Sidebar */}
       <motion.div
         animate={{ x: sidebarVisible ? 0 : -256 }}
         transition={{ duration: 0.3 }}
-        className="fixed top-0 left-0 h-full w-64 z-40 bg-white shadow-md"
+        className="fixed top-0 left-0 h-full w-64 z-40 bg-[#0A0A0A] border-r border-[#262626]"
       >
         <Sidebar />
       </motion.div>
@@ -70,14 +70,14 @@ function Paymentreports() {
       <motion.div
         animate={{ marginLeft: sidebarVisible ? 256 : 0 }}
         transition={{ duration: 0.3 }}
-        className="flex-1 flex flex-col"
+        className="flex-1 flex flex-col bg-[#0A0A0A]"
       >
         {/* Header */}
-        <div className="relative flex justify-between items-start bg-white border-b border-gray-200">
+        <div className="relative flex justify-between items-start bg-[#0A0A0A] border-b border-[#262626]">
           <div className="p-4 sm:p-6 lg:p-8 flex-1 flex items-center justify-between">
-            <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 flex items-center">
+            <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white flex items-center">
               <button
-                className="mr-3 text-blue-600 hover:text-blue-800 transition p-2 rounded-lg hover:bg-blue-50"
+                className="mr-3 text-[#FF8A00] hover:text-[#E67A00] transition p-2 rounded-lg hover:bg-[#181818]"
                 onClick={() => setSidebarVisible(!sidebarVisible)}
               >
                 <FaBars className="text-xl" />
@@ -98,9 +98,9 @@ function Paymentreports() {
         </div>
 
         {/* Content Section */}
-        <div className="flex-1 overflow-y-auto p-6 bg-gray-50">
+        <div className="flex-1 overflow-y-auto p-6 bg-[#0A0A0A]">
           <motion.div
-            className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 min-h-full"
+            className="bg-[#141414] rounded-2xl p-6 shadow-xl border border-[#262626] min-h-full"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
           >
@@ -114,7 +114,7 @@ function Paymentreports() {
                     <MonthlyPaymentChart startDate={startDate} endDate={endDate} />
                   )
                 }
-                className="bg-white p-4 rounded-xl shadow-sm border border-gray-200 cursor-pointer"
+                className="bg-[#181818] p-4 rounded-xl shadow-lg border border-[#262626] hover:border-[#FF8A00]/40 transition cursor-pointer"
               >
                 <MonthlyPaymentChart startDate={startDate} endDate={endDate} />
               </motion.div>
@@ -126,7 +126,7 @@ function Paymentreports() {
                     <YearlyReportChart startDate={startDate} endDate={endDate} />
                   )
                 }
-                className="bg-white p-4 rounded-xl shadow-sm border border-gray-200 cursor-pointer"
+                className="bg-[#181818] p-4 rounded-xl shadow-lg border border-[#262626] hover:border-[#FF8A00]/40 transition cursor-pointer"
               >
                 <YearlyReportChart startDate={startDate} endDate={endDate} />
               </motion.div>
@@ -138,7 +138,7 @@ function Paymentreports() {
                     <PaymentDonutCHart startDate={startDate} endDate={endDate} />
                   )
                 }
-                className="bg-white p-4 rounded-xl shadow-sm border border-gray-200 cursor-pointer"
+                className="bg-[#181818] p-4 rounded-xl shadow-lg border border-[#262626] hover:border-[#FF8A00]/40 transition cursor-pointer"
               >
                 <PaymentDonutCHart startDate={startDate} endDate={endDate} />
               </motion.div>
@@ -150,7 +150,7 @@ function Paymentreports() {
                     <ProductProgressChart startDate={startDate} endDate={endDate} />
                   )
                 }
-                className="bg-white p-4 rounded-xl shadow-sm border border-gray-200 cursor-pointer"
+                className="bg-[#181818] p-4 rounded-xl shadow-lg border border-[#262626] hover:border-[#FF8A00]/40 transition cursor-pointer"
               >
                 <ProductProgressChart startDate={startDate} endDate={endDate} />
               </motion.div>

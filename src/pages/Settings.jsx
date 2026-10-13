@@ -286,12 +286,12 @@ function Settings() {
   };
 
   return (
-    <div className="flex min-h-screen w-full bg-gray-100 overflow-x-hidden">
+    <div className="flex min-h-screen w-full bg-[#0A0A0A] text-white overflow-x-hidden">
       <div className="fixed inset-y-0 left-0 z-40">
         <motion.div
           animate={{ x: sidebarVisible ? 0 : -260 }}
           transition={{ duration: 0.3 }}
-          className="w-64 h-full fixed top-0 left-0 z-50"
+          className="w-64 h-full fixed top-0 left-0 z-50 bg-[#0A0A0A] border-r border-[#262626]"
         >
           <Sidebar />
         </motion.div>
@@ -300,7 +300,7 @@ function Settings() {
       <motion.div
         animate={{ marginLeft: sidebarVisible ? 256 : 0 }}
         transition={{ duration: 0.3 }}
-        className="flex-1 flex flex-col p-4 sm:p-6 lg:p-8"
+        className="flex-1 flex flex-col p-4 sm:p-6 lg:p-8 bg-[#0A0A0A]"
       >
         {/* Loading Spinners */}
         {(updatingactivecustomerstatus.isPending ||
@@ -314,13 +314,13 @@ function Settings() {
           updatingactiveproduct.isPending ||
           deletingproduct.isPending) && <Spinner />}
 
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 sm:mb-6">
-          <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 flex items-center mb-4 sm:mb-0">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
+          <h3 className="text-2xl sm:text-3xl font-bold text-white flex items-center mb-4 sm:mb-0 tracking-wide">
             <button
-              className="mr-4 text-blue-600 hover:text-blue-800 transition"
+              className="mr-4 text-[#FF8A00] hover:text-[#E67A00] transition cursor-pointer p-1"
               onClick={() => setsidebarVisible(!sidebarVisible)}
             >
-              <FaBars className="mr-3 text-blue-600 text-lg sm:text-xl" />
+              <FaBars className="mr-3 text-[#FF8A00] text-lg sm:text-xl" />
             </button>
             Settings
           </h3>
@@ -329,17 +329,16 @@ function Settings() {
           </div>
         </div>
 
-
-        <div className="flex flex-1 flex-col sm:flex-row overflow-hidden">
+        <div className="flex flex-1 flex-col sm:flex-row overflow-hidden gap-6">
           {/* Vertical Tab Buttons */}
-          <div className="flex flex-row flex-wrap sm:flex-col gap-8 sm:gap-10 mb-4 sm:mb-0 sm:mr-6">
+          <div className="flex flex-row flex-wrap sm:flex-col gap-3 sm:gap-3 mb-4 sm:mb-0 sm:w-60 shrink-0">
             {["customerstatus", "document", "leadform", "leadsource", "products", "others"].map((tab) => (
               <button
                 key={tab}
-                className={`px-4 sm:px-6 py-2 sm:py-3 rounded-md font-semibold cursor-pointer text-sm sm:text-base ${
+                className={`px-4 sm:px-5 py-3 rounded-xl font-semibold cursor-pointer text-sm sm:text-base transition-all duration-200 text-left ${
                   activesettings === tab
-                    ? "bg-blue-600 text-white shadow-md"
-                    : "bg-gray-200 text-gray-700"
+                    ? "bg-[#FF8A00] text-black font-bold shadow-lg shadow-[#FF8A00]/25"
+                    : "bg-[#141414] border border-[#262626] text-gray-300 hover:text-white hover:border-[#FF8A00]/50"
                 }`}
                 onClick={() => setactivesettings(tab)}
               >
@@ -353,12 +352,12 @@ function Settings() {
             ))}
           </div>
 
-          <div className="flex-1 bg-white rounded-xl shadow-md p-4 sm:p-6 overflow-y-auto h-full">
+          <div className="flex-1 bg-[#141414] border border-[#262626] rounded-2xl shadow-xl p-4 sm:p-6 overflow-y-auto h-full text-white">
             {activesettings === "customerstatus" && (
               <>
                 <div className="flex justify-end mb-4">
                   <button
-                    className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-md shadow text-sm sm:text-base"
+                    className="bg-[#FF8A00] hover:bg-[#E67A00] text-black font-bold px-4 py-2.5 rounded-xl shadow-lg shadow-[#FF8A00]/25 text-sm sm:text-base transition cursor-pointer"
                     onClick={() => dispatch(togglecustomerstatusModal())}
                   >
                     + Add new
@@ -368,31 +367,31 @@ function Settings() {
                   <Spinner />
                 ) : fetchsettingsstatus.data?.getCustomerstatus?.length > 0 ? (
                   <div className="flex flex-col w-full">
-                    <div className="w-full max-w-4xl mx-auto bg-white shadow-md rounded-lg overflow-x-auto">
+                    <div className="w-full max-w-4xl mx-auto bg-[#141414] border border-[#262626] shadow-xl rounded-xl overflow-x-auto">
                       <table className="min-w-full text-xs sm:text-sm">
-                        <thead className="bg-gray-200 text-gray-700">
+                        <thead className="bg-gradient-to-r from-[#FF8A00] to-[#E67A00] text-black font-bold sticky top-0 z-10">
                           <tr>
-                            <th className="px-2 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold">#</th>
-                            <th className="px-2 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold">Status</th>
-                            <th className="px-2 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold">Edit</th>
-                            <th className="px-2 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold">Active</th>
-                            <th className="px-2 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold">Delete</th>
+                            <th className="px-3 sm:px-6 py-3 text-left font-bold uppercase tracking-wider text-black">#</th>
+                            <th className="px-3 sm:px-6 py-3 text-left font-bold uppercase tracking-wider text-black">Status</th>
+                            <th className="px-3 sm:px-6 py-3 text-left font-bold uppercase tracking-wider text-black">Edit</th>
+                            <th className="px-3 sm:px-6 py-3 text-left font-bold uppercase tracking-wider text-black">Active</th>
+                            <th className="px-3 sm:px-6 py-3 text-left font-bold uppercase tracking-wider text-black">Delete</th>
                           </tr>
                         </thead>
-                        <tbody>
+                        <tbody className="divide-y divide-[#262626] text-white">
                           {fetchsettingsstatus.data.getCustomerstatus.map((customerstatus, index) => (
-                            <tr key={customerstatus._id} className="border-b">
-                              <td className="px-2 sm:px-6 py-2 sm:py-3">{index + 1}</td>
-                              <td className="px-2 sm:px-6 py-2 sm:py-3 truncate">{customerstatus.title}</td>
-                              <td className="px-2 sm:px-6 py-2 sm:py-3">
+                            <tr key={customerstatus._id} className="bg-[#141414] even:bg-[#181818] hover:bg-[#202020] transition border-b border-[#262626]">
+                              <td className="px-3 sm:px-6 py-3 font-medium">{index + 1}</td>
+                              <td className="px-3 sm:px-6 py-3 truncate font-semibold text-white">{customerstatus.title}</td>
+                              <td className="px-3 sm:px-6 py-3">
                                 <button
-                                  className="text-blue-600 hover:text-blue-800 text-base sm:text-lg"
+                                  className="text-[#FF8A00] hover:text-[#E67A00] transition text-base sm:text-lg cursor-pointer"
                                   onClick={() => dispatch(togglecustomerstatuseditModal(customerstatus))}
                                 >
                                   <FaEdit />
                                 </button>
                               </td>
-                              <td className="px-2 sm:px-6 py-2 sm:py-3">
+                              <td className="px-3 sm:px-6 py-3">
                                 <label className="relative inline-flex items-center cursor-pointer w-10 sm:w-11 h-5 sm:h-6">
                                   <input
                                     type="checkbox"
@@ -400,13 +399,13 @@ function Settings() {
                                     checked={!!customerstatus?.active}
                                     onChange={(e) => handleactivecustomerstatus(customerstatus._id, e.target.checked)}
                                   />
-                                  <div className="w-10 sm:w-11 h-5 sm:h-6 bg-red-600 rounded-full peer-checked:bg-green-600 transition-colors duration-300"></div>
+                                  <div className="w-10 sm:w-11 h-5 sm:h-6 bg-[#262626] rounded-full peer-checked:bg-[#FF8A00] transition-colors duration-300"></div>
                                   <div className="absolute left-1 top-0.5 sm:top-1 w-4 h-4 bg-white rounded-full transition-transform duration-300 transform peer-checked:translate-x-5"></div>
                                 </label>
                               </td>
-                              <td className="px-2 sm:px-6 py-2 sm:py-3">
+                              <td className="px-3 sm:px-6 py-3">
                                 <button
-                                  className="text-red-600 hover:text-red-800 text-base sm:text-lg"
+                                  className="text-red-400 hover:text-red-300 transition text-base sm:text-lg cursor-pointer"
                                   onClick={() => handledeletestatus(customerstatus._id)}
                                 >
                                   <FaTrash />
@@ -419,7 +418,7 @@ function Settings() {
                     </div>
                   </div>
                 ) : (
-                  <div className="flex items-center justify-center h-full text-gray-500 text-sm sm:text-lg">
+                  <div className="flex items-center justify-center h-48 text-gray-400 text-sm sm:text-base">
                     No customer statuses added yet.
                   </div>
                 )}
@@ -429,7 +428,7 @@ function Settings() {
               <>
                 <div className="flex justify-end mb-4">
                   <button
-                    className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-md shadow text-sm sm:text-base"
+                    className="bg-[#FF8A00] hover:bg-[#E67A00] text-black font-bold px-4 py-2.5 rounded-xl shadow-lg shadow-[#FF8A00]/25 text-sm sm:text-base transition cursor-pointer"
                     onClick={() => dispatch(toggledocumentsModal())}
                   >
                     + Add new
@@ -439,31 +438,31 @@ function Settings() {
                   <Spinner />
                 ) : fetchdocuments.data?.getDocument?.length > 0 ? (
                   <div className="flex flex-col w-full">
-                    <div className="w-full max-w-4xl mx-auto bg-white shadow-md rounded-lg overflow-x-auto">
+                    <div className="w-full max-w-4xl mx-auto bg-[#141414] border border-[#262626] shadow-xl rounded-xl overflow-x-auto">
                       <table className="min-w-full text-xs sm:text-sm">
-                        <thead className="bg-gray-200 text-gray-700">
+                        <thead className="bg-gradient-to-r from-[#FF8A00] to-[#E67A00] text-black font-bold sticky top-0 z-10">
                           <tr>
-                            <th className="px-2 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold">#</th>
-                            <th className="px-2 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold">Status</th>
-                            <th className="px-2 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold">Edit</th>
-                            <th className="px-2 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold">Active</th>
-                            <th className="px-2 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold">Delete</th>
+                            <th className="px-3 sm:px-6 py-3 text-left font-bold uppercase tracking-wider text-black">#</th>
+                            <th className="px-3 sm:px-6 py-3 text-left font-bold uppercase tracking-wider text-black">Status</th>
+                            <th className="px-3 sm:px-6 py-3 text-left font-bold uppercase tracking-wider text-black">Edit</th>
+                            <th className="px-3 sm:px-6 py-3 text-left font-bold uppercase tracking-wider text-black">Active</th>
+                            <th className="px-3 sm:px-6 py-3 text-left font-bold uppercase tracking-wider text-black">Delete</th>
                           </tr>
                         </thead>
-                        <tbody>
+                        <tbody className="divide-y divide-[#262626] text-white">
                           {fetchdocuments.data.getDocument.map((document, index) => (
-                            <tr key={document._id} className="border-b">
-                              <td className="px-2 sm:px-6 py-2 sm:py-3">{index + 1}</td>
-                              <td className="px-2 sm:px-6 py-2 sm:py-3 truncate">{document.title}</td>
-                              <td className="px-2 sm:px-6 py-2 sm:py-3">
+                            <tr key={document._id} className="bg-[#141414] even:bg-[#181818] hover:bg-[#202020] transition border-b border-[#262626]">
+                              <td className="px-3 sm:px-6 py-3 font-medium">{index + 1}</td>
+                              <td className="px-3 sm:px-6 py-3 truncate font-semibold text-white">{document.title}</td>
+                              <td className="px-3 sm:px-6 py-3">
                                 <button
-                                  className="text-blue-600 hover:text-blue-800 text-base sm:text-lg"
+                                  className="text-[#FF8A00] hover:text-[#E67A00] transition text-base sm:text-lg cursor-pointer"
                                   onClick={() => dispatch(toggledocumentseditModal(document))}
                                 >
                                   <FaEdit />
                                 </button>
                               </td>
-                              <td className="px-2 sm:px-6 py-2 sm:py-3">
+                              <td className="px-3 sm:px-6 py-3">
                                 <label className="relative inline-flex items-center cursor-pointer w-10 sm:w-11 h-5 sm:h-6">
                                   <input
                                     type="checkbox"
@@ -471,13 +470,13 @@ function Settings() {
                                     checked={!!document?.active}
                                     onChange={(e) => handleactivedocument(document._id, e.target.checked)}
                                   />
-                                  <div className="w-10 sm:w-11 h-5 sm:h-6 bg-red-600 rounded-full peer-checked:bg-green-600 transition-colors duration-300"></div>
+                                  <div className="w-10 sm:w-11 h-5 sm:h-6 bg-[#262626] rounded-full peer-checked:bg-[#FF8A00] transition-colors duration-300"></div>
                                   <div className="absolute left-1 top-0.5 sm:top-1 w-4 h-4 bg-white rounded-full transition-transform duration-300 transform peer-checked:translate-x-5"></div>
                                 </label>
                               </td>
-                              <td className="px-2 sm:px-6 py-2 sm:py-3">
+                              <td className="px-3 sm:px-6 py-3">
                                 <button
-                                  className="text-red-600 hover:text-red-800 text-base sm:text-lg"
+                                  className="text-red-400 hover:text-red-300 transition text-base sm:text-lg cursor-pointer"
                                   onClick={() => handledeletedocument(document._id)}
                                 >
                                   <FaTrash />
@@ -490,7 +489,7 @@ function Settings() {
                     </div>
                   </div>
                 ) : (
-                  <div className="flex items-center justify-center h-full text-gray-500 text-sm sm:text-lg">
+                  <div className="flex items-center justify-center h-48 text-gray-400 text-sm sm:text-base">
                     No documents added yet.
                   </div>
                 )}
@@ -500,7 +499,7 @@ function Settings() {
               <>
                 <div className="flex justify-end mb-4">
                   <button
-                    className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-md shadow text-sm sm:text-base"
+                    className="bg-[#FF8A00] hover:bg-[#E67A00] text-black font-bold px-4 py-2.5 rounded-xl shadow-lg shadow-[#FF8A00]/25 text-sm sm:text-base transition cursor-pointer"
                     onClick={() => dispatch(toggleleadformModal())}
                   >
                     + Add new
@@ -510,33 +509,33 @@ function Settings() {
                   <Spinner />
                 ) : fetchsettingformfield.data?.getLeadform?.length > 0 ? (
                   <div className="flex flex-col w-full">
-                    <div className="w-full max-w-4xl mx-auto bg-white shadow-md rounded-lg overflow-x-auto">
+                    <div className="w-full max-w-4xl mx-auto bg-[#141414] border border-[#262626] shadow-xl rounded-xl overflow-x-auto">
                       <table className="min-w-full text-xs sm:text-sm">
-                        <thead className="bg-gray-200 text-gray-700">
+                        <thead className="bg-gradient-to-r from-[#FF8A00] to-[#E67A00] text-black font-bold sticky top-0 z-10">
                           <tr>
-                            <th className="px-2 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold">#</th>
-                            <th className="px-2 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold">Field Name</th>
-                            <th className="px-2 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold">Field Type</th>
-                            <th className="px-2 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold">Edit</th>
-                            <th className="px-2 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold">Active</th>
-                            <th className="px-2 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold">Delete</th>
+                            <th className="px-3 sm:px-6 py-3 text-left font-bold uppercase tracking-wider text-black">#</th>
+                            <th className="px-3 sm:px-6 py-3 text-left font-bold uppercase tracking-wider text-black">Field Name</th>
+                            <th className="px-3 sm:px-6 py-3 text-left font-bold uppercase tracking-wider text-black">Field Type</th>
+                            <th className="px-3 sm:px-6 py-3 text-left font-bold uppercase tracking-wider text-black">Edit</th>
+                            <th className="px-3 sm:px-6 py-3 text-left font-bold uppercase tracking-wider text-black">Active</th>
+                            <th className="px-3 sm:px-6 py-3 text-left font-bold uppercase tracking-wider text-black">Delete</th>
                           </tr>
                         </thead>
-                        <tbody>
+                        <tbody className="divide-y divide-[#262626] text-white">
                           {fetchsettingformfield.data.getLeadform.map((formfield, index) => (
-                            <tr key={formfield._id} className="border-b">
-                              <td className="px-2 sm:px-6 py-2 sm:py-3">{index + 1}</td>
-                              <td className="px-2 sm:px-6 py-2 sm:py-3 truncate">{formfield.name}</td>
-                              <td className="px-2 sm:px-6 py-2 sm:py-3 truncate">{formfield.type}</td>
-                              <td className="px-2 sm:px-6 py-2 sm:py-3">
+                            <tr key={formfield._id} className="bg-[#141414] even:bg-[#181818] hover:bg-[#202020] transition border-b border-[#262626]">
+                              <td className="px-3 sm:px-6 py-3 font-medium">{index + 1}</td>
+                              <td className="px-3 sm:px-6 py-3 truncate font-semibold text-white">{formfield.name}</td>
+                              <td className="px-3 sm:px-6 py-3 truncate text-gray-300">{formfield.type}</td>
+                              <td className="px-3 sm:px-6 py-3">
                                 <button
-                                  className="text-blue-600 hover:text-blue-800 text-base sm:text-lg"
+                                  className="text-[#FF8A00] hover:text-[#E67A00] transition text-base sm:text-lg cursor-pointer"
                                   onClick={() => dispatch(toggleleadformeditModal(formfield))}
                                 >
                                   <FaEdit />
                                 </button>
                               </td>
-                              <td className="px-2 sm:px-6 py-2 sm:py-3">
+                              <td className="px-3 sm:px-6 py-3">
                                 <label className="relative inline-flex items-center cursor-pointer w-10 sm:w-11 h-5 sm:h-6">
                                   <input
                                     type="checkbox"
@@ -544,13 +543,13 @@ function Settings() {
                                     checked={!!formfield?.active}
                                     onChange={(e) => handleactiveformfield(formfield._id, e.target.checked)}
                                   />
-                                  <div className="w-10 sm:w-11 h-5 sm:h-6 bg-red-600 rounded-full peer-checked:bg-green-600 transition-colors duration-300"></div>
+                                  <div className="w-10 sm:w-11 h-5 sm:h-6 bg-[#262626] rounded-full peer-checked:bg-[#FF8A00] transition-colors duration-300"></div>
                                   <div className="absolute left-1 top-0.5 sm:top-1 w-4 h-4 bg-white rounded-full transition-transform duration-300 transform peer-checked:translate-x-5"></div>
                                 </label>
                               </td>
-                              <td className="px-2 sm:px-6 py-2 sm:py-3">
+                              <td className="px-3 sm:px-6 py-3">
                                 <button
-                                  className="text-red-600 hover:text-red-800 text-base sm:text-lg"
+                                  className="text-red-400 hover:text-red-300 transition text-base sm:text-lg cursor-pointer"
                                   onClick={() => handledeleteformfield(formfield._id)}
                                 >
                                   <FaTrash />
@@ -563,7 +562,7 @@ function Settings() {
                     </div>
                   </div>
                 ) : (
-                  <div className="flex items-center justify-center h-full text-gray-500 text-sm sm:text-lg">
+                  <div className="flex items-center justify-center h-48 text-gray-400 text-sm sm:text-base">
                     No lead forms added yet.
                   </div>
                 )}
@@ -573,7 +572,7 @@ function Settings() {
               <>
                 <div className="flex justify-end mb-4">
                   <button
-                    className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-md shadow text-sm sm:text-base"
+                    className="bg-[#FF8A00] hover:bg-[#E67A00] text-black font-bold px-4 py-2.5 rounded-xl shadow-lg shadow-[#FF8A00]/25 text-sm sm:text-base transition cursor-pointer"
                     onClick={() => dispatch(toggleleadsourceModal())}
                   >
                     + Add new
@@ -583,31 +582,31 @@ function Settings() {
                   <Spinner />
                 ) : fetchsettingsources.data?.getLeadsource?.length > 0 ? (
                   <div className="flex flex-col w-full">
-                    <div className="w-full max-w-4xl mx-auto bg-white shadow-md rounded-lg overflow-x-auto">
+                    <div className="w-full max-w-4xl mx-auto bg-[#141414] border border-[#262626] shadow-xl rounded-xl overflow-x-auto">
                       <table className="min-w-full text-xs sm:text-sm">
-                        <thead className="bg-gray-200 text-gray-700">
+                        <thead className="bg-gradient-to-r from-[#FF8A00] to-[#E67A00] text-black font-bold sticky top-0 z-10">
                           <tr>
-                            <th className="px-2 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold">#</th>
-                            <th className="px-2 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold">Source</th>
-                            <th className="px-2 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold">Edit</th>
-                            <th className="px-2 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold">Active</th>
-                            <th className="px-2 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold">Delete</th>
+                            <th className="px-3 sm:px-6 py-3 text-left font-bold uppercase tracking-wider text-black">#</th>
+                            <th className="px-3 sm:px-6 py-3 text-left font-bold uppercase tracking-wider text-black">Source</th>
+                            <th className="px-3 sm:px-6 py-3 text-left font-bold uppercase tracking-wider text-black">Edit</th>
+                            <th className="px-3 sm:px-6 py-3 text-left font-bold uppercase tracking-wider text-black">Active</th>
+                            <th className="px-3 sm:px-6 py-3 text-left font-bold uppercase tracking-wider text-black">Delete</th>
                           </tr>
                         </thead>
-                        <tbody>
+                        <tbody className="divide-y divide-[#262626] text-white">
                           {fetchsettingsources.data.getLeadsource.map((source, index) => (
-                            <tr key={source._id} className="border-b">
-                              <td className="px-2 sm:px-6 py-2 sm:py-3">{index + 1}</td>
-                              <td className="px-2 sm:px-6 py-2 sm:py-3 truncate">{source.title}</td>
-                              <td className="px-2 sm:px-6 py-2 sm:py-3">
+                            <tr key={source._id} className="bg-[#141414] even:bg-[#181818] hover:bg-[#202020] transition border-b border-[#262626]">
+                              <td className="px-3 sm:px-6 py-3 font-medium">{index + 1}</td>
+                              <td className="px-3 sm:px-6 py-3 truncate font-semibold text-white">{source.title}</td>
+                              <td className="px-3 sm:px-6 py-3">
                                 <button
-                                  className="text-blue-600 hover:text-blue-800 text-base sm:text-lg"
+                                  className="text-[#FF8A00] hover:text-[#E67A00] transition text-base sm:text-lg cursor-pointer"
                                   onClick={() => dispatch(toggleleadsourceeditModal(source))}
                                 >
                                   <FaEdit />
                                 </button>
                               </td>
-                              <td className="px-2 sm:px-6 py-2 sm:py-3">
+                              <td className="px-3 sm:px-6 py-3">
                                 <label className="relative inline-flex items-center cursor-pointer w-10 sm:w-11 h-5 sm:h-6">
                                   <input
                                     type="checkbox"
@@ -615,13 +614,13 @@ function Settings() {
                                     checked={!!source?.active}
                                     onChange={(e) => handleactivesource(source._id, e.target.checked)}
                                   />
-                                  <div className="w-10 sm:w-11 h-5 sm:h-6 bg-red-600 rounded-full peer-checked:bg-green-600 transition-colors duration-300"></div>
+                                  <div className="w-10 sm:w-11 h-5 sm:h-6 bg-[#262626] rounded-full peer-checked:bg-[#FF8A00] transition-colors duration-300"></div>
                                   <div className="absolute left-1 top-0.5 sm:top-1 w-4 h-4 bg-white rounded-full transition-transform duration-300 transform peer-checked:translate-x-5"></div>
                                 </label>
                               </td>
-                              <td className="px-2 sm:px-6 py-2 sm:py-3">
+                              <td className="px-3 sm:px-6 py-3">
                                 <button
-                                  className="text-red-600 hover:text-red-800 text-base sm:text-lg"
+                                  className="text-red-400 hover:text-red-300 transition text-base sm:text-lg cursor-pointer"
                                   onClick={() => handledeletesource(source._id)}
                                 >
                                   <FaTrash/>
@@ -634,7 +633,7 @@ function Settings() {
                     </div>
                   </div>
                 ) : (
-                  <div className="flex items-center justify-center h-full text-gray-500 text-sm sm:text-lg">
+                  <div className="flex items-center justify-center h-48 text-gray-400 text-sm sm:text-base">
                     No lead sources added yet.
                   </div>
                 )}
@@ -644,7 +643,7 @@ function Settings() {
               <>
                 <div className="flex justify-end mb-4">
                   <button
-                    className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-md shadow text-sm sm:text-base"
+                    className="bg-[#FF8A00] hover:bg-[#E67A00] text-black font-bold px-4 py-2.5 rounded-xl shadow-lg shadow-[#FF8A00]/25 text-sm sm:text-base transition cursor-pointer"
                     onClick={() => dispatch(toggleproductsModal())}
                   >
                     + Add new
@@ -654,35 +653,35 @@ function Settings() {
                   <Spinner />
                 ) : fetchproducts.data?.Products?.length > 0 ? (
                   <div className="flex flex-col w-full">
-                    <div className="w-full max-w-4xl mx-auto bg-white shadow-md rounded-lg overflow-x-auto">
+                    <div className="w-full max-w-4xl mx-auto bg-[#141414] border border-[#262626] shadow-xl rounded-xl overflow-x-auto">
                       <table className="min-w-full text-xs sm:text-sm">
-                        <thead className="bg-gray-200 text-gray-700">
+                        <thead className="bg-gradient-to-r from-[#FF8A00] to-[#E67A00] text-black font-bold sticky top-0 z-10">
                           <tr>
-                            <th className="px-2 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold">#</th>
-                            <th className="px-2 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold">Product</th>
-                            <th className="px-2 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold">Duration</th>
-                            <th className="px-2 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold">Amount</th>
-                            <th className="px-2 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold">Edit</th>
-                            <th className="px-2 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold">Active</th>
-                            <th className="px-2 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold">Delete</th>
+                            <th className="px-3 sm:px-6 py-3 text-left font-bold uppercase tracking-wider text-black">#</th>
+                            <th className="px-3 sm:px-6 py-3 text-left font-bold uppercase tracking-wider text-black">Product</th>
+                            <th className="px-3 sm:px-6 py-3 text-left font-bold uppercase tracking-wider text-black">Duration</th>
+                            <th className="px-3 sm:px-6 py-3 text-left font-bold uppercase tracking-wider text-black">Amount</th>
+                            <th className="px-3 sm:px-6 py-3 text-left font-bold uppercase tracking-wider text-black">Edit</th>
+                            <th className="px-3 sm:px-6 py-3 text-left font-bold uppercase tracking-wider text-black">Active</th>
+                            <th className="px-3 sm:px-6 py-3 text-left font-bold uppercase tracking-wider text-black">Delete</th>
                           </tr>
                         </thead>
-                        <tbody>
+                        <tbody className="divide-y divide-[#262626] text-white">
                           {fetchproducts.data.Products.map((product, index) => (
-                            <tr key={product._id} className="border-b">
-                              <td className="px-2 sm:px-6 py-2 sm:py-3">{index + 1}</td>
-                              <td className="px-2 sm:px-6 py-2 sm:py-3 truncate">{product.title}</td>
-                              <td className="px-2 sm:px-6 py-2 sm:py-3 truncate">{product.duration}</td>
-                              <td className="px-2 sm:px-6 py-2 sm:py-3 truncate">{product.amount}</td>
-                              <td className="px-2 sm:px-6 py-2 sm:py-3">
+                            <tr key={product._id} className="bg-[#141414] even:bg-[#181818] hover:bg-[#202020] transition border-b border-[#262626]">
+                              <td className="px-3 sm:px-6 py-3 font-medium">{index + 1}</td>
+                              <td className="px-3 sm:px-6 py-3 truncate font-semibold text-white">{product.title}</td>
+                              <td className="px-3 sm:px-6 py-3 truncate text-gray-300">{product.duration}</td>
+                              <td className="px-3 sm:px-6 py-3 truncate text-emerald-400 font-medium">₹{product.amount}</td>
+                              <td className="px-3 sm:px-6 py-3">
                                 <button
-                                  className="text-blue-600 hover:text-blue-800 text-base sm:text-lg"
+                                  className="text-[#FF8A00] hover:text-[#E67A00] transition text-base sm:text-lg cursor-pointer"
                                   onClick={() => dispatch(toggleproductseditModal(product))}
                                 >
                                   <FaEdit />
                                 </button>
                               </td>
-                              <td className="px-2 sm:px-6 py-2 sm:py-3">
+                              <td className="px-3 sm:px-6 py-3">
                                 <label className="relative inline-flex items-center cursor-pointer w-10 sm:w-11 h-5 sm:h-6">
                                   <input
                                     type="checkbox"
@@ -690,13 +689,13 @@ function Settings() {
                                     checked={!!product?.active}
                                     onChange={(e) => handleactiveproduct(product._id, e.target.checked)}
                                   />
-                                  <div className="w-10 sm:w-11 h-5 sm:h-6 bg-red-600 rounded-full peer-checked:bg-green-600 transition-colors duration-300"></div>
+                                  <div className="w-10 sm:w-11 h-5 sm:h-6 bg-[#262626] rounded-full peer-checked:bg-[#FF8A00] transition-colors duration-300"></div>
                                   <div className="absolute left-1 top-0.5 sm:top-1 w-4 h-4 bg-white rounded-full transition-transform duration-300 transform peer-checked:translate-x-5"></div>
                                 </label>
                               </td>
-                              <td className="px-2 sm:px-6 py-2 sm:py-3">
+                              <td className="px-3 sm:px-6 py-3">
                                 <button
-                                  className="text-red-600 hover:text-red-800 text-base sm:text-lg"
+                                  className="text-red-400 hover:text-red-300 transition text-base sm:text-lg cursor-pointer"
                                   onClick={() => handledeleteproduct(product._id)}
                                 >
                                   <FaTrash />
@@ -709,7 +708,7 @@ function Settings() {
                     </div>
                   </div>
                 ) : (
-                  <div className="flex items-center justify-center h-full text-gray-500 text-sm sm:text-lg">
+                  <div className="flex items-center justify-center h-48 text-gray-400 text-sm sm:text-base">
                     No products added yet.
                   </div>
                 )}
@@ -718,18 +717,18 @@ function Settings() {
             {activesettings === "others" && (
               <>
                 <div className="flex flex-col w-full">
-                  <div className="w-full max-w-4xl mx-auto bg-white shadow-md rounded-lg overflow-x-auto">
+                  <div className="w-full max-w-4xl mx-auto bg-[#141414] border border-[#262626] shadow-xl rounded-xl overflow-x-auto p-4 sm:p-6">
                     <table className="min-w-full text-xs sm:text-sm">
-                      <thead className="bg-gray-200 text-gray-700">
+                      <thead className="bg-gradient-to-r from-[#FF8A00] to-[#E67A00] text-black font-bold sticky top-0 z-10">
                         <tr>
-                          <th className="px-2 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold">Activity</th>
-                          <th className="px-2 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold">Active</th>
+                          <th className="px-3 sm:px-6 py-3 text-left font-bold uppercase tracking-wider text-black">Activity</th>
+                          <th className="px-3 sm:px-6 py-3 text-left font-bold uppercase tracking-wider text-black">Active</th>
                         </tr>
                       </thead>
-                      <tbody>
-                        <tr className="border-b">
-                          <td className="px-2 sm:px-6 py-2 sm:py-3 truncate">Activate Next FollowUp Date</td>
-                          <td className="px-2 sm:px-6 py-2 sm:py-3">
+                      <tbody className="divide-y divide-[#262626] text-white">
+                        <tr className="bg-[#141414] hover:bg-[#181818] transition border-b border-[#262626]">
+                          <td className="px-3 sm:px-6 py-3.5 truncate font-semibold text-white">Activate Next FollowUp Date</td>
+                          <td className="px-3 sm:px-6 py-3.5">
                             <label className="relative inline-flex items-center cursor-pointer w-10 sm:w-11 h-5 sm:h-6">
                               <input
                                 type="checkbox"
@@ -737,41 +736,48 @@ function Settings() {
                                 checked={!!fetchnextfollowup?.data?.setting?.isnextfollowupActive}
                                 onChange={(e) => handleactivatenextfollowup(e.target.checked)}
                               />
-                              <div className="w-10 sm:w-11 h-5 sm:h-6 bg-red-600 rounded-full peer-checked:bg-green-600 transition-colors duration-300"></div>
+                              <div className="w-10 sm:w-11 h-5 sm:h-6 bg-[#262626] rounded-full peer-checked:bg-[#FF8A00] transition-colors duration-300"></div>
                               <div className="absolute left-1 top-0.5 sm:top-1 w-4 h-4 bg-white rounded-full transition-transform duration-300 transform peer-checked:translate-x-5"></div>
                             </label>
                           </td>
                         </tr>
                       </tbody>
                     </table>
-                    <table className="min-w-full text-xs sm:text-sm mt-4">
-                      <thead className="bg-gray-200 text-gray-700">
-                        <tr>
-                          <th className="px-2 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold">Permission</th>
-                          <th className="px-2 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold">Status</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {fetchPermission?.data?.getPermission?.map((permission, index) => (
-                          <tr className="border-b" key={permission._id}>
-                            <td className="px-2 sm:px-6 py-2 sm:py-3 truncate">{permission.title}</td>
-                            <td className="px-2 sm:px-6 py-2 sm:py-3">
-                              <label className="relative inline-flex items-center cursor-pointer w-10 sm:w-11 h-5 sm:h-6">
-                                <input
-                                  type="checkbox"
-                                  className="sr-only peer"
-                                  checked={!!permission?.active}
-                                  onChange={(e) => handleactivepermission(permission._id, e.target.checked)}
-                                />
-                                <div className="w-10 sm:w-11 h-5 sm:h-6 bg-red-600 rounded-full peer-checked:bg-green-600 transition-colors duration-300"></div>
-                                <div className="absolute left-1 top-0.5 sm:top-1 w-4 h-4 bg-white rounded-full transition-transform duration-300 transform peer-checked:translate-x-5"></div>
-                              </label>
-                            </td>
+
+                    <div className="mt-8">
+                      <h4 className="text-sm sm:text-base font-bold text-white mb-3">Permissions</h4>
+                      <table className="min-w-full text-xs sm:text-sm border border-[#262626] rounded-xl overflow-hidden">
+                        <thead className="bg-gradient-to-r from-[#FF8A00] to-[#E67A00] text-black font-bold sticky top-0 z-10">
+                          <tr>
+                            <th className="px-3 sm:px-6 py-3 text-left font-bold uppercase tracking-wider text-black">Permission</th>
+                            <th className="px-3 sm:px-6 py-3 text-left font-bold uppercase tracking-wider text-black">Status</th>
                           </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                    <Gstmodal/>
+                        </thead>
+                        <tbody className="divide-y divide-[#262626] text-white">
+                          {fetchPermission?.data?.getPermission?.map((permission, index) => (
+                            <tr className="bg-[#141414] even:bg-[#181818] hover:bg-[#202020] transition border-b border-[#262626]" key={permission._id}>
+                              <td className="px-3 sm:px-6 py-3 truncate font-medium text-white">{permission.title}</td>
+                              <td className="px-3 sm:px-6 py-3">
+                                <label className="relative inline-flex items-center cursor-pointer w-10 sm:w-11 h-5 sm:h-6">
+                                  <input
+                                    type="checkbox"
+                                    className="sr-only peer"
+                                    checked={!!permission?.active}
+                                    onChange={(e) => handleactivepermission(permission._id, e.target.checked)}
+                                  />
+                                  <div className="w-10 sm:w-11 h-5 sm:h-6 bg-[#262626] rounded-full peer-checked:bg-[#FF8A00] transition-colors duration-300"></div>
+                                  <div className="absolute left-1 top-0.5 sm:top-1 w-4 h-4 bg-white rounded-full transition-transform duration-300 transform peer-checked:translate-x-5"></div>
+                                </label>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+
+                    <div className="mt-8">
+                      <Gstmodal/>
+                    </div>
                   </div>
                 </div>
               </>
@@ -789,7 +795,7 @@ function Settings() {
               transition={{ duration: 0.3 }}
               className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-0"
             >
-              <motion.div className="absolute inset-0 bg-black opacity-50" />
+              <motion.div className="absolute inset-0 bg-black/80 backdrop-blur-sm" />
               <div className="relative z-10 w-full max-w-md sm:max-w-lg">
                 <Customerstatusmodal />
               </div>
@@ -804,7 +810,7 @@ function Settings() {
               transition={{ duration: 0.3 }}
               className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-0"
             >
-              <motion.div className="absolute inset-0 bg-black opacity-50" />
+              <motion.div className="absolute inset-0 bg-black/80 backdrop-blur-sm" />
               <div className="relative z-10 w-full max-w-md sm:max-w-lg">
                 <Customerstatuseditmodal />
               </div>
@@ -819,7 +825,7 @@ function Settings() {
               transition={{ duration: 0.3 }}
               className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-0"
             >
-              <motion.div className="absolute inset-0 bg-black opacity-50" />
+              <motion.div className="absolute inset-0 bg-black/80 backdrop-blur-sm" />
               <div className="relative z-10 w-full max-w-md sm:max-w-lg">
                 <Gsteditmodal />
               </div>
@@ -834,7 +840,7 @@ function Settings() {
               transition={{ duration: 0.3 }}
               className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-0"
             >
-              <motion.div className="absolute inset-0 bg-black opacity-50" />
+              <motion.div className="absolute inset-0 bg-black/80 backdrop-blur-sm" />
               <div className="relative z-10 w-full max-w-md sm:max-w-lg">
                 <Documentmodal />
               </div>
@@ -849,7 +855,7 @@ function Settings() {
               transition={{ duration: 0.3 }}
               className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-0"
             >
-              <motion.div className="absolute inset-0 bg-black opacity-50" />
+              <motion.div className="absolute inset-0 bg-black/80 backdrop-blur-sm" />
               <div className="relative z-10 w-full max-w-md sm:max-w-lg">
                 <Documenteditmodal />
               </div>
@@ -864,7 +870,7 @@ function Settings() {
               transition={{ duration: 0.3 }}
               className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-0"
             >
-              <motion.div className="absolute inset-0 bg-black opacity-50" />
+              <motion.div className="absolute inset-0 bg-black/80 backdrop-blur-sm" />
               <div className="relative z-10 w-full max-w-md sm:max-w-lg">
                 <ProductAddModal />
               </div>
@@ -879,7 +885,7 @@ function Settings() {
               transition={{ duration: 0.3 }}
               className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-0"
             >
-              <motion.div className="absolute inset-0 bg-black opacity-50" />
+              <motion.div className="absolute inset-0 bg-black/80 backdrop-blur-sm" />
               <div className="relative z-10 w-full max-w-md sm:max-w-lg">
                 <ProductEditModal />
               </div>
@@ -894,7 +900,7 @@ function Settings() {
               transition={{ duration: 0.3 }}
               className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-0"
             >
-              <motion.div className="absolute inset-0 bg-black opacity-50" />
+              <motion.div className="absolute inset-0 bg-black/80 backdrop-blur-sm" />
               <div className="relative z-10 w-full max-w-md sm:max-w-lg">
                 <Leadsourcemodal />
               </div>
@@ -909,7 +915,7 @@ function Settings() {
               transition={{ duration: 0.3 }}
               className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-0"
             >
-              <motion.div className="absolute inset-0 bg-black opacity-50" />
+              <motion.div className="absolute inset-0 bg-black/80 backdrop-blur-sm" />
               <div className="relative z-10 w-full max-w-md sm:max-w-lg">
                 <Leadsourceeditmodal />
               </div>
@@ -924,7 +930,7 @@ function Settings() {
               transition={{ duration: 0.3 }}
               className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-0"
             >
-              <motion.div className="absolute inset-0 bg-black opacity-50" />
+              <motion.div className="absolute inset-0 bg-black/80 backdrop-blur-sm" />
               <div className="relative z-10 w-full max-w-md sm:max-w-lg">
                 <Leadformfieldsmodal />
               </div>
@@ -939,7 +945,7 @@ function Settings() {
               transition={{ duration: 0.3 }}
               className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-0"
             >
-              <motion.div className="absolute inset-0 bg-black opacity-50" />
+              <motion.div className="absolute inset-0 bg-black/80 backdrop-blur-sm" />
               <div className="relative z-10 w-full max-w-md sm:max-w-lg">
                 <Leadformfieldseditmodal />
               </div>
@@ -952,9 +958,9 @@ function Settings() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
             >
-              <motion.div className="absolute inset-0 bg-black opacity-30" />
+              <motion.div className="absolute inset-0 bg-black/80 backdrop-blur-sm" />
               <motion.div
-                className="relative z-10 bg-green-200 text-green-800 px-6 sm:px-10 py-4 sm:py-6 rounded-xl shadow-xl text-sm sm:text-base font-semibold w-full max-w-xs sm:max-w-sm h-[100px] sm:h-[120px] flex items-center justify-center text-center"
+                className="relative z-10 bg-[#141414] border border-emerald-500/50 text-emerald-400 px-6 sm:px-10 py-4 sm:py-6 rounded-2xl shadow-2xl text-sm sm:text-base font-bold w-full max-w-xs sm:max-w-sm h-[100px] sm:h-[120px] flex items-center justify-center text-center"
                 initial={{ scale: 0.5 }}
                 animate={{ scale: 1 }}
                 exit={{ scale: 0.5 }}

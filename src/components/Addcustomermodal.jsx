@@ -84,19 +84,19 @@ function Addcustomermodal() {
   });
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-50 bg-black/50 p-4 sm:p-0">
+    <div className="fixed inset-0 flex items-center justify-center z-50 bg-black/80 backdrop-blur-md p-4">
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.9 }}
         transition={{ duration: 0.4 }}
-        className="bg-white w-full max-w-md sm:max-w-lg md:max-w-3xl mx-auto rounded-2xl shadow-2xl flex flex-col md:flex-row overflow-hidden"
+        className="bg-[#141414] border border-[#282828] text-white w-full max-w-md sm:max-w-lg md:max-w-3xl mx-auto rounded-2xl shadow-2xl flex flex-col md:flex-row overflow-hidden"
       >
         {/* LEFT SIDE */}
-        <div className="bg-gradient-to-b from-[#00B5A6] to-[#1E6DB0] w-full md:w-1/3 flex flex-col items-center justify-center p-6 text-white">
-          <FaUserPlus className="text-6xl mb-4" />
-          <h2 className="text-xl font-bold">Add Customer</h2>
-          <p className="text-sm mt-2 text-center">
+        <div className="bg-gradient-to-b from-[#FF8A00] to-[#E67A00] w-full md:w-1/3 flex flex-col items-center justify-center p-6 text-black text-center">
+          <FaUserPlus className="text-6xl mb-4 text-black drop-shadow-md" />
+          <h2 className="text-2xl font-extrabold">Add Customer</h2>
+          <p className="text-sm mt-2 font-medium opacity-90 text-center">
             Register new customers to manage leads and interactions.
           </p>
         </div>
@@ -105,12 +105,12 @@ function Addcustomermodal() {
         <div className="relative w-full md:w-2/3 p-6 md:p-8">
           <button
             onClick={() => dispatch(toggleaddcustomermodal())}
-            className="absolute top-4 right-4 text-2xl text-gray-400 hover:text-red-500"
+            className="absolute top-4 right-4 text-3xl text-gray-400 hover:text-[#FF8A00] transition"
           >
             &times;
           </button>
 
-          <h3 className="text-xl font-semibold text-gray-800 mb-4">
+          <h3 className="text-xl font-bold text-white mb-4">
             Enter Customer Details
           </h3>
 
@@ -122,23 +122,20 @@ function Addcustomermodal() {
 
           <form onSubmit={addcustomerForm.handleSubmit} className="space-y-4">
             {/* NAME */}
-            {/* NAME */}
             <div>
-              <label className="text-gray-700 font-medium mb-1 block">
+              <label className="text-gray-300 font-medium mb-1 block text-sm">
                 Customer Name
               </label>
 
               <input
                 type="text"
                 {...addcustomerForm.getFieldProps("name")}
-                className="border border-gray-300 p-3 w-full rounded-lg 
-               focus:ring-2 focus:ring-blue-400 
-               placeholder-gray-400 placeholder:text-sm"
+                className="border border-[#2E2E2E] bg-[#181818] text-white p-3 w-full rounded-xl focus:border-[#FF8A00] focus:ring-1 focus:ring-[#FF8A00] placeholder-gray-500 placeholder:text-sm outline-none"
                 placeholder="Enter full name"
               />
 
               {addcustomerForm.touched.name && addcustomerForm.errors.name && (
-                <p className="text-red-500 text-sm mt-1">
+                <p className="text-red-400 text-sm mt-1">
                   {addcustomerForm.errors.name}
                 </p>
               )}
@@ -146,7 +143,7 @@ function Addcustomermodal() {
 
             {/* PRIMARY MOBILE */}
             <div>
-              <label className="text-gray-700 font-medium mb-1 block">
+              <label className="text-gray-300 font-medium mb-1 block text-sm">
                 Primary Mobile Number
               </label>
 
@@ -155,10 +152,8 @@ function Addcustomermodal() {
                 value={addcustomerForm.values.mobile.replace("+", "")}
                 onChange={handlePhoneChange}
                 enableSearch
-                inputClass="!w-full !pl-17 !py-3 
-                !text-gray-800 !border !border-gray-300 !rounded-lg 
-                !placeholder-gray-400 !placeholder:text-sm"
-                buttonClass="!border-gray-300 !bg-white"
+                inputClass="!w-full !pl-17 !py-3 !bg-[#181818] !text-white !border !border-[#2E2E2E] !rounded-xl !placeholder-gray-500 !placeholder:text-sm"
+                buttonClass="!border-[#2E2E2E] !bg-[#1E1E1E]"
                 containerClass="!w-full"
                 inputProps={{
                   placeholder: "Enter primary mobile number",
@@ -167,7 +162,7 @@ function Addcustomermodal() {
 
               {addcustomerForm.touched.mobile &&
                 addcustomerForm.errors.mobile && (
-                  <p className="text-red-500 text-sm mt-2">
+                  <p className="text-red-400 text-sm mt-2">
                     {addcustomerForm.errors.mobile}
                   </p>
                 )}
@@ -175,22 +170,20 @@ function Addcustomermodal() {
 
             {/* EMAIL */}
             <div>
-              <label className="text-gray-700 font-medium mb-1 block">
+              <label className="text-gray-300 font-medium mb-1 block text-sm">
                 Email Address
               </label>
 
               <input
                 type="email"
                 {...addcustomerForm.getFieldProps("email")}
-                className="border border-gray-300 p-3 w-full rounded-lg 
-               focus:ring-2 focus:ring-blue-400 
-               placeholder-gray-400 placeholder:text-sm"
+                className="border border-[#2E2E2E] bg-[#181818] text-white p-3 w-full rounded-xl focus:border-[#FF8A00] focus:ring-1 focus:ring-[#FF8A00] placeholder-gray-500 placeholder:text-sm outline-none"
                 placeholder="Enter your email"
               />
 
               {addcustomerForm.touched.email &&
                 addcustomerForm.errors.email && (
-                  <p className="text-red-500 text-sm mt-1">
+                  <p className="text-red-400 text-sm mt-1">
                     {addcustomerForm.errors.email}
                   </p>
                 )}
@@ -198,7 +191,7 @@ function Addcustomermodal() {
 
             {/* ALT MOBILE */}
             <div>
-              <label className="text-gray-700 font-medium mb-1 block">
+              <label className="text-gray-300 font-medium mb-1 block text-sm">
                 Alternate Mobile Number
               </label>
 
@@ -210,10 +203,8 @@ function Addcustomermodal() {
                 )}
                 onChange={handleAltPhoneChange}
                 enableSearch
-                inputClass="!w-full !pl-17 !py-3 
-                !text-gray-800 !border !border-gray-300 !rounded-lg 
-                !placeholder-gray-400 !placeholder:text-sm"
-                buttonClass="!border-gray-300 !bg-white"
+                inputClass="!w-full !pl-17 !py-3 !bg-[#181818] !text-white !border !border-[#2E2E2E] !rounded-xl !placeholder-gray-500 !placeholder:text-sm"
+                buttonClass="!border-[#2E2E2E] !bg-[#1E1E1E]"
                 containerClass="!w-full"
                 inputProps={{
                   placeholder: "Enter alternate mobile number",
@@ -222,7 +213,7 @@ function Addcustomermodal() {
 
               {addcustomerForm.touched.alternativemobile &&
                 addcustomerForm.errors.alternativemobile && (
-                  <p className="text-red-500 text-sm mt-2">
+                  <p className="text-red-400 text-sm mt-2">
                     {addcustomerForm.errors.alternativemobile}
                   </p>
                 )}
@@ -231,7 +222,7 @@ function Addcustomermodal() {
             <button
               type="submit"
               disabled={addingcustomer.isPending}
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-semibold transition disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-gradient-to-r from-[#FF8A00] to-[#E67A00] text-black py-3.5 rounded-xl font-extrabold transition shadow-[0_0_15px_rgba(255,138,0,0.3)] hover:brightness-110 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Add Customer
             </button>

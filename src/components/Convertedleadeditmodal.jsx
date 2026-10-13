@@ -147,40 +147,40 @@ function Convertedleadeditmodal() {
 
   return (
     <>
-      <div className="fixed inset-0 flex items-center justify-center z-50 bg-black/50 p-4 sm:p-0">
+      <div className="fixed inset-0 flex items-center justify-center z-50 bg-black/80 backdrop-blur-sm p-4 sm:p-0">
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.9 }}
           transition={{ duration: 0.4 }}
-          className="bg-white w-full max-w-md sm:max-w-lg md:max-w-3xl mx-auto rounded-2xl shadow-2xl flex flex-col md:flex-row overflow-hidden"
+          className="bg-[#141414] border border-[#262626] text-white w-full max-w-md sm:max-w-lg md:max-w-3xl mx-auto rounded-2xl shadow-2xl flex flex-col md:flex-row overflow-hidden"
         >
           {/* LEFT SECTION */}
-          <div className="bg-gradient-to-b from-[#00B5A6] to-[#1E6DB0] w-full md:w-1/3 flex flex-col items-center justify-center p-4 sm:p-6 text-white">
-            <FaUserPlus className="text-5xl sm:text-6xl md:text-[80px] mb-3 sm:mb-4" />
-            <h2 className="text-lg sm:text-xl md:text-2xl font-bold">
+          <div className="bg-gradient-to-b from-[#FF8A00] to-[#E67A00] w-full md:w-1/3 flex flex-col items-center justify-center p-4 sm:p-6 text-black">
+            <FaUserPlus className="text-5xl sm:text-6xl md:text-[80px] mb-3 sm:mb-4 text-black" />
+            <h2 className="text-lg sm:text-xl md:text-2xl font-black text-black">
               Edit Customer
             </h2>
-            <p className="text-xs sm:text-sm mt-2 text-center">
+            <p className="text-xs sm:text-sm mt-2 text-center text-black/80 font-medium">
               Update details of Sub-admins or Agents as needed.
             </p>
           </div>
 
           {/* RIGHT SECTION */}
-          <div className="relative w-full md:w-2/3 p-4 sm:p-6 md:p-8">
+          <div className="relative w-full md:w-2/3 p-4 sm:p-6 md:p-8 bg-[#141414]">
             <button
               onClick={() => dispatch(toggleconvertedleadeditModal(null))}
-              className="absolute top-3 right-3 sm:top-4 sm:right-4 text-xl sm:text-2xl text-gray-400 hover:text-red-500 transition"
+              className="absolute top-3 right-3 sm:top-4 sm:right-4 text-xl sm:text-2xl text-gray-400 hover:text-white transition"
             >
               &times;
             </button>
 
-            <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-800 mb-3 sm:mb-4">
+            <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-white mb-3 sm:mb-4">
               Edit Customer Details
             </h3>
 
             {updatingcustomerdetails.isError && (
-              <p className="text-red-600 bg-red-100 p-2 sm:p-3 rounded-md mb-3 sm:mb-4 text-sm sm:text-base">
+              <p className="text-red-400 bg-red-950/40 border border-red-500/40 p-2 sm:p-3 rounded-md mb-3 sm:mb-4 text-sm sm:text-base">
                 {updatingcustomerdetails.error?.response?.data?.message}
               </p>
             )}
@@ -195,7 +195,7 @@ function Convertedleadeditmodal() {
                 type="text"
                 name="name"
                 {...convertedleadeditForm.getFieldProps("name")}
-                className="border-2 border-gray-300 p-2 sm:p-3 w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                className="bg-[#121212] border border-[#2E2E2E] p-2 sm:p-3 w-full rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#FF8A00] focus:border-[#FF8A00]"
                 placeholder="Enter the name"
               />
 
@@ -204,13 +204,13 @@ function Convertedleadeditmodal() {
                 type="email"
                 name="email"
                 {...convertedleadeditForm.getFieldProps("email")}
-                className="border-2 border-gray-300 p-2 sm:p-3 w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                className="bg-[#121212] border border-[#2E2E2E] p-2 sm:p-3 w-full rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#FF8A00] focus:border-[#FF8A00]"
                 placeholder="Enter the email"
               />
 
               {/* PRIMARY MOBILE */}
               <div>
-                <label className="text-gray-700 font-medium mb-1 block">
+                <label className="text-gray-300 font-medium mb-1 block text-sm">
                   Primary Mobile Number
                 </label>
 
@@ -219,9 +219,10 @@ function Convertedleadeditmodal() {
                   value={convertedleadeditForm.values.mobile.replace("+", "")}
                   onChange={handlePhoneChange}
                   enableSearch
-                  inputClass="!w-full !pl-17 !py-3 !text-gray-800 !border !border-gray-300 !rounded-lg"
-                  buttonClass="!border-gray-300 !bg-white"
+                  inputClass="!w-full !pl-17 !py-3 !text-white !bg-[#121212] !border !border-[#2E2E2E] !rounded-lg focus:!ring-2 focus:!ring-[#FF8A00]"
+                  buttonClass="!border-[#2E2E2E] !bg-[#181818]"
                   containerClass="!w-full"
+                  dropdownClass="!text-white !bg-[#181818] !border-[#2E2E2E]"
                   inputProps={{
                     placeholder: "Enter primary mobile number",
                   }}
@@ -229,7 +230,7 @@ function Convertedleadeditmodal() {
 
                 {convertedleadeditForm.touched.mobile &&
                   convertedleadeditForm.errors.mobile && (
-                    <p className="text-red-500 text-sm mt-2">
+                    <p className="text-red-400 text-sm mt-2">
                       {convertedleadeditForm.errors.mobile}
                     </p>
                   )}
@@ -237,7 +238,7 @@ function Convertedleadeditmodal() {
 
               {/* ALT MOBILE */}
               <div>
-                <label className="text-gray-700 font-medium mb-1 block">
+                <label className="text-gray-300 font-medium mb-1 block text-sm">
                   Alternate Mobile Number
                 </label>
 
@@ -249,9 +250,10 @@ function Convertedleadeditmodal() {
                   )}
                   onChange={handleAltPhoneChange}
                   enableSearch
-                  inputClass="!w-full !pl-17 !py-3 !text-gray-800 !border !border-gray-300 !rounded-lg"
-                  buttonClass="!border-gray-300 !bg-white"
+                  inputClass="!w-full !pl-17 !py-3 !text-white !bg-[#121212] !border !border-[#2E2E2E] !rounded-lg focus:!ring-2 focus:!ring-[#FF8A00]"
+                  buttonClass="!border-[#2E2E2E] !bg-[#181818]"
                   containerClass="!w-full"
+                  dropdownClass="!text-white !bg-[#181818] !border-[#2E2E2E]"
                   inputProps={{
                     placeholder: "Enter alternate mobile number",
                   }}
@@ -259,7 +261,7 @@ function Convertedleadeditmodal() {
 
                 {convertedleadeditForm.touched.alternativemobile &&
                   convertedleadeditForm.errors.alternativemobile && (
-                    <p className="text-red-500 text-sm mt-2">
+                    <p className="text-red-400 text-sm mt-2">
                       {convertedleadeditForm.errors.alternativemobile}
                     </p>
                   )}
@@ -270,15 +272,15 @@ function Convertedleadeditmodal() {
                 name="product"
                 onChange={convertedleadeditForm.handleChange}
                 value={convertedleadeditForm.values.product}
-                className="border border-gray-300 p-2 sm:p-3 w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 text-black"
+                className="bg-[#121212] border border-[#2E2E2E] p-2 sm:p-3 w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF8A00] focus:border-[#FF8A00] text-white"
               >
                 {getProduct.isLoading ? (
-                  <option disabled>Loading products...</option>
+                  <option disabled className="bg-[#181818] text-gray-400">Loading products...</option>
                 ) : (
                   <>
-                    <option value="">-- Select Product --</option>
+                    <option value="" className="bg-[#181818] text-gray-400">-- Select Product --</option>
                     {getSelectedProduct.map((product) => (
-                      <option key={product._id} value={product._id}>
+                      <option key={product._id} value={product._id} className="bg-[#181818] text-white">
                         {product.title}
                       </option>
                     ))}
@@ -290,10 +292,10 @@ function Convertedleadeditmodal() {
               <button
                 type="submit"
                 disabled={updatingcustomerdetails.isPending}
-                className={`w-full py-2 sm:py-3 rounded-lg font-semibold transition text-sm sm:text-base ${
+                className={`w-full py-2 sm:py-3 rounded-lg font-bold transition text-sm sm:text-base shadow-lg ${
                   updatingcustomerdetails.isPending
-                    ? "bg-gray-400 cursor-not-allowed"
-                    : "bg-blue-600 hover:bg-blue-700 text-white"
+                    ? "bg-[#FF8A00]/50 text-black cursor-not-allowed"
+                    : "bg-[#FF8A00] hover:bg-[#E67A00] text-black"
                 }`}
               >
                 {updatingcustomerdetails.isPending ? "Updating..." : "Update"}

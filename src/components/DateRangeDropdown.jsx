@@ -311,16 +311,16 @@ const DateRangeDropdown = ({ onDateRangeChange }) => {
       <button
         type="button"
         onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-        className="flex items-center gap-2 border border-gray-300 px-4 py-2 bg-white rounded-md shadow-sm text-sm text-gray-700 hover:bg-gray-50"
+        className="flex items-center gap-2 border border-[#2E2E2E] px-4 py-2 bg-[#181818] rounded-xl shadow-md text-sm text-white hover:border-[#FF8A00]/50 transition-all font-medium"
       >
-        <FaCalendarAlt className="text-gray-500" />
+        <FaCalendarAlt className="text-[#FF8A00]" />
         {getLabel()}
-        <span className="ml-2">▼</span>
+        <span className="ml-2 text-xs text-gray-400">▼</span>
       </button>
 
       {isDropdownOpen && (
-        <div className="mt-2 w-72 bg-white shadow-lg border rounded-md p-3 absolute left-0 sm:right-0 z-50">
-          <div className="max-h-64 overflow-y-auto text-sm">
+        <div className="mt-2 w-72 bg-[#161616] shadow-2xl border border-[#2A2A2A] rounded-2xl p-3 absolute left-0 sm:right-0 z-50 text-white">
+          <div className="max-h-72 overflow-y-auto text-sm scrollbar-thin">
 
             {/* Predefined Ranges */}
             {[
@@ -335,20 +335,20 @@ const DateRangeDropdown = ({ onDateRangeChange }) => {
               <button
                 key={item.key}
                 onClick={() => applyDateRange(item.key)}
-                className={`block w-full text-left px-3 py-2 rounded-md ${
+                className={`block w-full text-left px-3 py-2 rounded-xl transition-all ${
                   selectedRange === item.key
-                    ? "bg-indigo-100 text-indigo-700 font-semibold"
-                    : "hover:bg-gray-100"
+                    ? "bg-[#FF8A00] text-black font-bold shadow-[0_0_12px_rgba(255,138,0,0.3)]"
+                    : "text-gray-300 hover:bg-[#222222] hover:text-white"
                 }`}
               >
                 {item.label}
               </button>
             ))}
 
-            <div className="border-t my-2" />
+            <div className="border-t border-[#2A2A2A] my-2" />
 
             {/* Custom Range */}
-            <p className="font-medium text-gray-700 mb-1">Custom Range</p>
+            <p className="font-semibold text-gray-300 text-xs uppercase tracking-wider mb-2">Custom Range</p>
 
             <input
               type="date"
@@ -357,7 +357,7 @@ const DateRangeDropdown = ({ onDateRangeChange }) => {
                 setCustomStart(e.target.value);
                 validateYear(e.target.value);
               }}
-              className="border px-3 py-2 rounded w-full mb-2"
+              className="border border-[#2E2E2E] bg-[#1E1E1E] text-white px-3 py-2 rounded-xl w-full mb-2 text-sm focus:border-[#FF8A00] focus:ring-1 focus:ring-[#FF8A00] outline-none"
             />
 
             <input
@@ -367,16 +367,16 @@ const DateRangeDropdown = ({ onDateRangeChange }) => {
                 setCustomEnd(e.target.value);
                 validateYear(e.target.value);
               }}
-              className="border px-3 py-2 rounded w-full mb-2"
+              className="border border-[#2E2E2E] bg-[#1E1E1E] text-white px-3 py-2 rounded-xl w-full mb-2 text-sm focus:border-[#FF8A00] focus:ring-1 focus:ring-[#FF8A00] outline-none"
             />
 
             {yearError && (
-              <p className="text-red-600 text-xs mb-2">{yearError}</p>
+              <p className="text-red-400 text-xs mb-2">{yearError}</p>
             )}
 
             <button
               onClick={handleCustomSubmit}
-              className="w-full bg-indigo-600 text-white py-2 rounded hover:bg-indigo-700"
+              className="w-full bg-[#FF8A00] hover:bg-[#E67A00] text-black font-bold py-2 rounded-xl shadow-[0_0_12px_rgba(255,138,0,0.3)] transition-all"
             >
               Apply Custom Range
             </button>

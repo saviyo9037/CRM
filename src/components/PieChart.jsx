@@ -210,31 +210,31 @@ const LeadStatusPieChart = ({ leads, isLoading }) => {
     const percentage = total ? ((count / total) * 100).toFixed(1) : 0;
 
     return (
-      <div className="flex items-center gap-4 px-5 py-3 bg-gradient-to-r from-gray-50 to-gray-100 border border-gray-200 rounded-2xl shadow-sm hover:shadow-md hover:scale-[1.01] transition-all duration-300">
+      <div className="flex items-center gap-4 px-5 py-3.5 bg-[#181818] border border-[#262626] rounded-2xl shadow-sm hover:border-[#FF8A00]/40 transition-all duration-300">
         {/* Color Pill */}
         <div
-          className="w-2 h-14 rounded-full flex-shrink-0"
+          className="w-2.5 h-12 rounded-full flex-shrink-0"
           style={{
-            background: `linear-gradient(180deg, ${color}, ${color}CC)`,
-            boxShadow: `0 0 8px ${color}55`,
+            background: color,
+            boxShadow: `0 0 10px ${color}88`,
           }}
         />
 
         {/* Label & Bar */}
         <div className="flex-1">
           <div className="flex justify-between items-center mb-2">
-            <span className="capitalize text-sm font-semibold text-gray-700 tracking-wide">
+            <span className="capitalize text-sm font-semibold text-white tracking-wide">
               {label}
             </span>
-            <span className="text-sm font-bold text-gray-900">
+            <span className="text-sm font-bold text-white">
               {count}
-              <span className="text-xs text-gray-500 font-medium ml-1">
+              <span className="text-xs text-gray-400 font-medium ml-1.5">
                 ({percentage}%)
               </span>
             </span>
           </div>
 
-          <div className="relative h-2.5 bg-gray-200 rounded-full overflow-hidden">
+          <div className="relative h-2 bg-[#282828] rounded-full overflow-hidden">
             <div
               className="absolute left-0 top-0 h-full rounded-full transition-all duration-700 ease-out"
               style={{
@@ -252,7 +252,7 @@ const LeadStatusPieChart = ({ leads, isLoading }) => {
   // ✅ Loading State
   if (isLoading) {
     return (
-      <div className="p-6 bg-white shadow-md rounded-3xl flex items-center justify-center h-64 border border-gray-100">
+      <div className="p-6 bg-[#141414] shadow-md rounded-2xl flex items-center justify-center h-64 border border-[#242424]">
         <Spinner />
       </div>
     );
@@ -260,24 +260,24 @@ const LeadStatusPieChart = ({ leads, isLoading }) => {
 
   // ✅ Main Render
   return (
-    <div className="p-6 sm:p-8 bg-gradient-to-br from-white via-gray-50 to-gray-100 shadow-lg hover:shadow-2xl border border-gray-100 rounded-3xl max-w-3xl mx-auto transition-all duration-300">
+    <div className="p-6 sm:p-8 bg-[#141414] shadow-xl border border-[#242424] rounded-2xl max-w-3xl mx-auto transition-all duration-300 text-white">
       {/* Header */}
       <div className="text-center mb-8">
-        <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-800 mb-1 tracking-wide">
-          📊 Lead Status Overview
+        <h2 className="text-2xl sm:text-3xl font-extrabold text-white mb-2 tracking-wide flex items-center justify-center gap-2">
+          <span className="text-[#FF8A00]">📊</span> Lead Status Overview
         </h2>
-        <p className="text-sm text-gray-500 mb-5">
+        <p className="text-sm text-gray-400 mb-5">
           Summary of all leads grouped by status
         </p>
 
-        <div className="inline-block bg-gradient-to-r from-blue-600 to-indigo-500 text-white px-8 py-3 rounded-full font-semibold text-lg shadow-md hover:shadow-lg transition-all duration-300">
+        <div className="inline-block bg-gradient-to-r from-[#FF8A00] to-[#E67A00] text-black px-8 py-3 rounded-full font-extrabold text-lg shadow-[0_0_20px_rgba(255,138,0,0.35)] hover:scale-105 transition-all duration-300">
           {total} {total === 1 ? "Lead" : "Leads"}
         </div>
       </div>
 
       {/* Bars */}
       {hasData ? (
-        <div className="space-y-4">
+        <div className="space-y-3.5">
           {statuses.map((status) => (
             <ProgressBar
               key={status}

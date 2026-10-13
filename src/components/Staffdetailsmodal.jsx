@@ -79,40 +79,34 @@ function Staffdetailsmodal() {
     })
 
     return (
-        <div className="fixed inset-0 bg-gradient-to-br from-gray-900/70 to-blue-900/70 flex items-center justify-center z-50 backdrop-blur-sm">
-            <div className="bg-white rounded-3xl shadow-2xl w-full max-w-md mx-4 p-8 relative transform transition-all duration-300 scale-100 hover:scale-[1.02]">
+        <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 backdrop-blur-md">
+            <div className="bg-[#141414] border border-[#282828] text-white rounded-3xl shadow-2xl w-full max-w-md mx-4 p-8 relative transform transition-all duration-300">
                 {/* Header */}
-                <div className="flex justify-between items-center border-b border-gray-200 pb-4 mb-6">
-                    {role !== 'Admin' ? (
-                        <h2 className="text-2xl font-extrabold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                            Staff Profile
-                        </h2>
-                    ) : (
-                        <h2 className="text-2xl font-extrabold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                            Admin Profile
-                        </h2>
-                    )}
+                <div className="flex justify-between items-center border-b border-[#242424] pb-4 mb-6">
+                    <h2 className="text-2xl font-extrabold text-[#FF8A00] tracking-wide">
+                        {role !== 'Admin' ? 'Staff Profile' : 'Admin Profile'}
+                    </h2>
                     <button
                         onClick={() => dispatch(toggleStaffdetailmodal(null))}
-                        className="text-gray-400 hover:text-red-500 text-2xl font-bold transition duration-300 transform hover:scale-125"
+                        className="text-gray-400 hover:text-[#FF8A00] text-2xl font-bold transition duration-300"
                     >
                         &times;
                     </button>
                 </div>
                 <div className="flex gap-4 mb-8">
                     <button
-                        className={`flex-1 py-3 px-6 rounded-xl text-sm font-semibold transition-all duration-300 ${section === 'details'
-                            ? 'bg-gradient-to-r from-blue-500 to-indigo-500 text-white shadow-lg'
-                            : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                        className={`flex-1 py-3 px-6 rounded-xl text-sm font-bold transition-all duration-300 ${section === 'details'
+                            ? 'bg-gradient-to-r from-[#FF8A00] to-[#E67A00] text-black shadow-[0_0_15px_rgba(255,138,0,0.3)]'
+                            : 'bg-[#181818] text-gray-400 hover:text-white border border-[#242424]'
                             }`}
                         onClick={() => setsection('details')}
                     >
                         Profile
                     </button>
                     <button
-                        className={`flex-1 py-3 px-6 rounded-xl text-sm font-semibold transition-all duration-300 ${section === 'changepassword'
-                            ? 'bg-gradient-to-r from-blue-500 to-indigo-500 text-white shadow-lg'
-                            : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                        className={`flex-1 py-3 px-6 rounded-xl text-sm font-bold transition-all duration-300 ${section === 'changepassword'
+                            ? 'bg-gradient-to-r from-[#FF8A00] to-[#E67A00] text-black shadow-[0_0_15px_rgba(255,138,0,0.3)]'
+                            : 'bg-[#181818] text-gray-400 hover:text-white border border-[#242424]'
                             }`}
                         onClick={() => setsection('changepassword')}
                     >
@@ -124,7 +118,7 @@ function Staffdetailsmodal() {
                 {section === 'details' ? (
                     <div className="space-y-4">
                         <div className="flex justify-center mb-4">
-                            <div className="w-24 h-24 rounded-full border-2 border-blue-500 overflow-hidden flex items-center justify-center bg-gray-100 shadow-md">
+                            <div className="w-24 h-24 rounded-full border-2 border-[#FF8A00] overflow-hidden flex items-center justify-center bg-[#1A1A1A] shadow-[0_0_15px_rgba(255,138,0,0.2)]">
                                 <img
                                     src={userlogged?.image}
                                     alt="Profile"
@@ -136,12 +130,12 @@ function Staffdetailsmodal() {
                             <Spinner />
                         )}
                         {uploadingImage.isError && (
-                            <p className="text-red-600 bg-red-50 p-4 rounded-xl text-sm font-medium shadow-sm">
+                            <p className="text-red-400 bg-red-950/30 border border-red-900/40 p-4 rounded-xl text-sm font-medium shadow-sm">
                                 Error: {uploadingImage.error?.message}
                             </p>
                         )}
                         {uploadingImage.isSuccess && (
-                            <p className="text-green-600 bg-green-50 p-4 rounded-xl text-sm font-medium shadow-sm">
+                            <p className="text-[#FF8A00] bg-[#FF8A00]/10 border border-[#FF8A00]/30 p-4 rounded-xl text-sm font-medium shadow-sm">
                                 Profile picture uploaded successfully!
                             </p>
                         )}
@@ -153,30 +147,30 @@ function Staffdetailsmodal() {
                                 onChange={(e) => {
                                     profileimageForm.setFieldValue('profileimage', e.currentTarget.files[0]);
                                 }}
-                                className="w-48 px-3 py-2 border border-gray-300 rounded-xl bg-gray-50 text-gray-700 text-sm file:mr-3 file:py-2 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-blue-100 file:text-blue-700 hover:file:bg-blue-200 transition"
+                                className="w-48 px-3 py-2 border border-[#2E2E2E] rounded-xl bg-[#181818] text-gray-300 text-sm file:mr-3 file:py-1.5 file:px-3 file:border-0 file:text-xs file:font-bold file:bg-[#FF8A00] file:text-black hover:file:bg-[#E67A00] transition"
                             />
                             <button
                                 type="submit"
-                                className="bg-blue-600 text-white px-5 py-2 rounded-xl text-sm font-medium hover:bg-blue-700 transition"
+                                className="bg-[#FF8A00] hover:bg-[#E67A00] text-black font-bold px-5 py-2 rounded-xl text-sm transition shadow-[0_0_10px_rgba(255,138,0,0.25)]"
                             >
                                 Upload
                             </button>
                         </form>
-                        <div className="flex justify-between items-center bg-gray-50 p-4 rounded-xl shadow-sm">
-                            <span className="font-medium text-gray-700">Name:</span>
-                            <span className="text-gray-900 font-semibold">{userlogged.name}</span>
+                        <div className="flex justify-between items-center bg-[#181818] border border-[#242424] p-4 rounded-xl shadow-sm">
+                            <span className="font-medium text-gray-400">Name:</span>
+                            <span className="text-white font-semibold">{userlogged.name}</span>
                         </div>
-                        <div className="flex justify-between items-center bg-gray-50 p-4 rounded-xl shadow-sm">
-                            <span className="font-medium text-gray-700">Email:</span>
-                            <span className="text-gray-900 font-semibold">{userlogged.email}</span>
+                        <div className="flex justify-between items-center bg-[#181818] border border-[#242424] p-4 rounded-xl shadow-sm">
+                            <span className="font-medium text-gray-400">Email:</span>
+                            <span className="text-white font-semibold">{userlogged.email}</span>
                         </div>
-                        <div className="flex justify-between items-center bg-gray-50 p-4 rounded-xl shadow-sm">
-                            <span className="font-medium text-gray-700">Role:</span>
-                            <span className="text-gray-900 font-semibold capitalize">{userlogged.role}</span>
+                        <div className="flex justify-between items-center bg-[#181818] border border-[#242424] p-4 rounded-xl shadow-sm">
+                            <span className="font-medium text-gray-400">Role:</span>
+                            <span className="text-[#FF8A00] font-semibold capitalize">{userlogged.role}</span>
                         </div>
-                        <div className="flex justify-between items-center bg-gray-50 p-4 rounded-xl shadow-sm">
-                            <span className="font-medium text-gray-700">Mobile:</span>
-                            <span className="text-gray-900 font-semibold">{userlogged.mobile}</span>
+                        <div className="flex justify-between items-center bg-[#181818] border border-[#242424] p-4 rounded-xl shadow-sm">
+                            <span className="font-medium text-gray-400">Mobile:</span>
+                            <span className="text-white font-semibold">{userlogged.mobile}</span>
                         </div>
                     </div>
                 ) : (
@@ -185,7 +179,7 @@ function Staffdetailsmodal() {
                             <Spinner />
                         )}
                         {changingpassword.isError && (
-                            <p className="text-red-600 bg-red-50 p-4 rounded-xl text-sm font-medium shadow-sm">
+                            <p className="text-red-400 bg-red-950/30 border border-red-900/40 p-4 rounded-xl text-sm font-medium shadow-sm">
                                 {changingpassword.error?.response?.data?.message}
                             </p>
                         )}
@@ -197,10 +191,10 @@ function Staffdetailsmodal() {
                                     placeholder="Current Password"
                                     value={changepasswordForm.values.oldpassword}
                                     {...changepasswordForm.getFieldProps('oldpassword')}
-                                    className="w-full px-5 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 transition bg-gray-50 text-gray-900 placeholder-gray-400"
+                                    className="w-full px-5 py-3 border border-[#2E2E2E] rounded-xl focus:outline-none focus:border-[#FF8A00] focus:ring-1 focus:ring-[#FF8A00] transition bg-[#181818] text-white placeholder-gray-500"
                                 />
                                 {changepasswordForm.touched.oldpassword && changepasswordForm.errors.oldpassword && (
-                                    <p className="text-red-500 text-xs mt-2">{changepasswordForm.errors.oldpassword}</p>
+                                    <p className="text-red-400 text-xs mt-2">{changepasswordForm.errors.oldpassword}</p>
                                 )}
                             </div>
                             <div>
@@ -210,10 +204,10 @@ function Staffdetailsmodal() {
                                     placeholder="New Password"
                                     value={changepasswordForm.values.newpassword}
                                     {...changepasswordForm.getFieldProps('newpassword')}
-                                    className="w-full px-5 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 transition bg-gray-50 text-gray-900 placeholder-gray-400"
+                                    className="w-full px-5 py-3 border border-[#2E2E2E] rounded-xl focus:outline-none focus:border-[#FF8A00] focus:ring-1 focus:ring-[#FF8A00] transition bg-[#181818] text-white placeholder-gray-500"
                                 />
                                 {changepasswordForm.touched.newpassword && changepasswordForm.errors.newpassword && (
-                                    <p className="text-red-500 text-xs mt-2">{changepasswordForm.errors.newpassword}</p>
+                                    <p className="text-red-400 text-xs mt-2">{changepasswordForm.errors.newpassword}</p>
                                 )}
                             </div>
                             <div>
@@ -223,15 +217,15 @@ function Staffdetailsmodal() {
                                     placeholder="Confirm New Password"
                                     value={changepasswordForm.values.confirmnewpassword}
                                     {...changepasswordForm.getFieldProps('confirmnewpassword')}
-                                    className="w-full px-5 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 transition bg-gray-50 text-gray-900 placeholder-gray-400"
+                                    className="w-full px-5 py-3 border border-[#2E2E2E] rounded-xl focus:outline-none focus:border-[#FF8A00] focus:ring-1 focus:ring-[#FF8A00] transition bg-[#181818] text-white placeholder-gray-500"
                                 />
                                 {changepasswordForm.touched.confirmnewpassword && changepasswordForm.errors.confirmnewpassword && (
-                                    <p className="text-red-500 text-xs mt-2">{changepasswordForm.errors.confirmnewpassword}</p>
+                                    <p className="text-red-400 text-xs mt-2">{changepasswordForm.errors.confirmnewpassword}</p>
                                 )}
                             </div>
                             <button
                                 type="submit"
-                                className="w-full bg-gradient-to-r from-blue-500 to-indigo-500 text-white py-3 rounded-xl font-semibold hover:from-blue-600 hover:to-indigo-600 transition duration-300 shadow-md"
+                                className="w-full bg-gradient-to-r from-[#FF8A00] to-[#E67A00] text-black py-3 rounded-xl font-bold hover:brightness-110 transition duration-300 shadow-[0_0_15px_rgba(255,138,0,0.3)]"
                             >
                                 Update Password
                             </button>

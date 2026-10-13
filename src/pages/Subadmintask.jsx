@@ -58,12 +58,12 @@ function Subadmintask() {
     const filteredtasks = fetchtasks?.data?.task?.filter((task) => task.assignedTo === userId)
 
     return (
-        <div className="flex min-h-screen w-screen bg-gray-100 overflow-x-hidden">
+        <div className="flex min-h-screen w-screen bg-[#0A0A0A] text-white overflow-x-hidden">
             <div className="fixed inset-y-0 left-0 z-40">
                 <motion.div
                     animate={{ x: sidebarVisible ? 0 : -260 }}
                     transition={{ duration: 0.3 }}
-                    className="w-64 h-full fixed top-0 left-0 z-50"
+                    className="w-64 h-full fixed top-0 left-0 z-50 bg-[#0A0A0A] border-r border-[#262626]"
                 >
                     <Sidebar />
                 </motion.div>
@@ -72,7 +72,7 @@ function Subadmintask() {
             <motion.div
                 animate={{ marginLeft: sidebarVisible ? 256 : 0 }}
                 transition={{ duration: 0.3 }}
-                className="flex-1 p-4 sm:p-8 overflow-y-auto"
+                className="flex-1 p-4 sm:p-8 overflow-y-auto bg-[#0A0A0A]"
             >
                 {fetchstaffs.isLoading &&
                     <Spinner />
@@ -84,9 +84,9 @@ function Subadmintask() {
                     <Spinner />
                 }
                 <div className='flex flex-col sm:flex-row justify-between mb-6 sm:mb-8'>
-                    <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4 sm:mb-0 flex items-center">
+                    <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4 sm:mb-0 flex items-center">
                         <button
-                            className="mr-4 text-blue-600 hover:text-blue-800 transition"
+                            className="mr-4 text-[#FF8A00] hover:text-[#E67A00] transition p-2 rounded-lg hover:bg-[#181818]"
                             onClick={() => setsidebarVisible(!sidebarVisible)}
                         >
                             <FaBars className="text-lg sm:text-xl" />
@@ -101,18 +101,18 @@ function Subadmintask() {
                 <div className='flex flex-col sm:flex-row justify-between mb-6 sm:mb-8 gap-4'>
                     <div className="flex gap-3 sm:gap-4">
                         <button
-                            className={`px-4 sm:px-6 py-2 rounded-lg font-semibold cursor-pointer text-sm sm:text-base ${activetask === 'staffs'
-                                ? 'bg-blue-600 text-white shadow-md'
-                                : 'bg-gray-200 text-gray-700'
+                            className={`px-5 sm:px-6 py-2.5 rounded-xl font-bold cursor-pointer text-sm sm:text-base transition ${activetask === 'staffs'
+                                ? 'bg-[#FF8A00] text-black shadow-lg shadow-[#FF8A00]/25'
+                                : 'bg-[#181818] border border-[#2A2A2A] text-gray-300 hover:text-white'
                                 }`}
                             onClick={() => setactivetask('staffs')}
                         >
                             Staffs
                         </button>
                         <button
-                            className={`px-4 sm:px-6 py-2 rounded-lg font-semibold cursor-pointer text-sm sm:text-base ${activetask === 'tasks'
-                                ? 'bg-blue-600 text-white shadow-md'
-                                : 'bg-gray-200 text-gray-700'
+                            className={`px-5 sm:px-6 py-2.5 rounded-xl font-bold cursor-pointer text-sm sm:text-base transition ${activetask === 'tasks'
+                                ? 'bg-[#FF8A00] text-black shadow-lg shadow-[#FF8A00]/25'
+                                : 'bg-[#181818] border border-[#2A2A2A] text-gray-300 hover:text-white'
                                 }`}
                             onClick={() => setactivetask('tasks')}
                         >
@@ -122,45 +122,45 @@ function Subadmintask() {
 
                     {!metadata &&
                         <button
-                            className="bg-gradient-to-r from-blue-600 to-blue-500 text-white px-4 sm:px-6 py-2 rounded-md shadow hover:from-blue-700 hover:to-blue-600 transition text-sm sm:text-base"
+                            className="bg-[#FF8A00] hover:bg-[#E67A00] text-black font-bold px-5 sm:px-6 py-2.5 rounded-xl shadow-lg shadow-[#FF8A00]/25 transition text-sm sm:text-base flex items-center justify-center gap-2"
                             onClick={() => dispatch(toggleaddtasksmodal())}
                         >
-                            <FaAddressBook className="inline-block mr-2" />Add Tasks
+                            <FaAddressBook />Add Tasks
                         </button>
                     }
                 </div>
 
                 {activetask === 'staffs' ? (
                     fetchstaffs.isLoading ? (
-                        <p className="text-center text-blue-600 font-medium py-6 text-sm sm:text-base">Loading staff...</p>
+                        <p className="text-center text-[#FF8A00] font-medium py-6 text-sm sm:text-base">Loading staff...</p>
                     ) : filteredStaffs?.length > 0 ? (
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                             {filteredStaffs?.map((staff, index) => (
                                 <motion.div
                                     key={staff._id}
-                                    className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 p-4 sm:p-6"
+                                    className="bg-[#141414] border border-[#262626] rounded-2xl shadow-xl hover:border-[#FF8A00]/50 transition-all duration-300 transform hover:-translate-y-1 p-5 sm:p-6"
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: index * 0.1 }}
                                 >
                                     <div className="flex items-center space-x-4">
-                                        <div className="text-blue-600 text-[80px] sm:text-[100px] lg:text-[120px]">
+                                        <div className="text-[#FF8A00] text-[80px] sm:text-[100px] lg:text-[120px]">
                                             {staff.profileImage ? <img
                                                 src={staff.profileImage}
                                                 alt='Profile image'
-                                                className='w-[120px] h-[120px] rounded-full  border-2 border-[#00B5A6] object-contain'
+                                                className='w-[100px] h-[100px] rounded-full border-2 border-[#FF8A00] object-cover'
                                             /> :
                                                 <FaUserCircle />}
 
                                         </div>
                                         <div className="flex-1">
-                                            <h4 className="text-lg sm:text-xl font-bold text-gray-800">{staff.name}</h4>
-                                            <p className="text-xs sm:text-sm text-gray-500 capitalize">{staff.role}</p>
+                                            <h4 className="text-lg sm:text-xl font-bold text-white">{staff.name}</h4>
+                                            <p className="text-xs sm:text-sm text-gray-400 capitalize">{staff.role}</p>
                                         </div>
                                         {!metadata &&
                                             <div className="flex flex-col gap-2 items-end">
                                                 <button
-                                                    className="text-blue-500 hover:text-blue-700 transition"
+                                                    className="text-[#FF8A00] hover:text-[#E67A00] transition p-1"
                                                     title="Edit Tasks"
                                                     onClick={() => dispatch(toggleViewedittaskmodal(staff))}
                                                 >
@@ -170,9 +170,9 @@ function Subadmintask() {
                                         }
                                     </div>
 
-                                    <div className="mt-4 sm:mt-6">
+                                    <div className="mt-5 sm:mt-6">
                                         <button
-                                            className="w-full flex items-center justify-center gap-2 border border-blue-600 text-blue-600 px-4 py-2 rounded-xl font-medium transition hover:bg-blue-600 hover:text-white text-sm sm:text-base"
+                                            className="w-full flex items-center justify-center gap-2 border border-[#FF8A00] text-[#FF8A00] hover:bg-[#FF8A00] hover:text-black px-4 py-2 rounded-xl font-semibold transition text-sm sm:text-base"
                                             onClick={() => dispatch(toggleViewtasksmodal(staff._id))}
                                         >
                                             <FaAddressBook />
@@ -183,35 +183,35 @@ function Subadmintask() {
                             ))}
                         </div>
                     ) : (
-                        <p className="text-gray-500 text-center text-base sm:text-lg py-6">No staff members available</p>
+                        <p className="text-gray-400 text-center text-base sm:text-lg py-6">No staff members available</p>
                     )
                 ) : (
                     fetchtasks.isLoading ? (
-                        <p className="text-center text-blue-600 font-medium py-6 text-sm sm:text-base">Loading tasks...</p>
+                        <p className="text-center text-[#FF8A00] font-medium py-6 text-sm sm:text-base">Loading tasks...</p>
                     ) : filteredtasks?.length > 0 ? (
-                        <div className="overflow-x-auto bg-white rounded-xl shadow">
-                            <table className="min-w-full table-auto text-left border border-gray-200">
+                        <div className="overflow-x-auto bg-[#141414] rounded-2xl shadow-xl border border-[#262626]">
+                            <table className="min-w-full table-auto text-left">
                                 <thead>
-                                    <tr className="bg-gradient-to-r from-[#00B5A6] to-[#1E6DB0] text-white">
-                                        <th className="px-3 sm:px-6 py-2 sm:py-3 text-xs sm:text-sm font-bold">#</th>
-                                        <th className="px-3 sm:px-6 py-2 sm:py-3 text-xs sm:text-sm font-bold">Name</th>
-                                        <th className="px-3 sm:px-6 py-2 sm:py-3 text-xs sm:text-sm font-bold">Dead Line</th>
-                                        <th className="px-3 sm:px-6 py-2 sm:py-3 text-xs sm:text-sm font-bold">Task Description</th>
-                                        <th className="px-3 sm:px-6 py-2 sm:py-3 text-xs sm:text-sm font-bold">Status</th>
+                                    <tr className="bg-gradient-to-r from-[#FF8A00] to-[#E67A00] text-black">
+                                        <th className="px-4 sm:px-6 py-3 text-xs sm:text-sm font-bold uppercase">#</th>
+                                        <th className="px-4 sm:px-6 py-3 text-xs sm:text-sm font-bold uppercase">Name</th>
+                                        <th className="px-4 sm:px-6 py-3 text-xs sm:text-sm font-bold uppercase">Dead Line</th>
+                                        <th className="px-4 sm:px-6 py-3 text-xs sm:text-sm font-bold uppercase">Task Description</th>
+                                        <th className="px-4 sm:px-6 py-3 text-xs sm:text-sm font-bold uppercase">Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {filteredtasks?.map((task, index) => (
                                         <motion.tr
                                             key={task._id}
-                                            className="border-t border-gray-200 hover:bg-gray-50"
+                                            className="border-t border-[#262626] hover:bg-[#1C1C1C] transition text-white"
                                             initial={{ opacity: 0, y: 10 }}
                                             animate={{ opacity: 1, y: 0 }}
                                             transition={{ delay: index * 0.05 }}
                                         >
-                                            <td className="px-3 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm text-gray-700">{index + 1}</td>
-                                            <td className="px-3 sm:px-6 py-3 sm:py-4 font-medium text-gray-900 text-xs sm:text-sm">{task.name}</td>
-                                            <td className="px-3 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm">
+                                            <td className="px-4 sm:px-6 py-4 text-xs sm:text-sm text-gray-300">{index + 1}</td>
+                                            <td className="px-4 sm:px-6 py-4 font-semibold text-white text-xs sm:text-sm">{task.name}</td>
+                                            <td className="px-4 sm:px-6 py-4 text-xs sm:text-sm text-gray-300">
                                                 {task.deadline
                                                     ? new Date(task.deadline).toLocaleDateString('en-US', {
                                                         year: 'numeric',
@@ -220,15 +220,15 @@ function Subadmintask() {
                                                     })
                                                     : 'N/A'}
                                             </td>
-                                            <td className="px-3 sm:px-6 py-3 sm:py-4 text-gray-600 capitalize text-xs sm:text-sm">{task.description}</td>
-                                            <td className="px-3 sm:px-6 py-3 sm:py-4">
+                                            <td className="px-4 sm:px-6 py-4 text-gray-300 capitalize text-xs sm:text-sm">{task.description}</td>
+                                            <td className="px-4 sm:px-6 py-4">
                                                 <select
-                                                    className="px-3 sm:px-4 py-1 sm:py-2 border border-gray-300 rounded-lg text-xs sm:text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200 bg-white text-gray-700"
+                                                    className="px-3 sm:px-4 py-1.5 border border-[#2A2A2A] rounded-xl text-xs sm:text-sm bg-[#181818] text-white outline-none focus:border-[#FF8A00] transition"
                                                     value={task.status}
                                                     onChange={(e) => handlestatuschange(task._id, e.target.value)}
                                                 >
-                                                    <option value="pending" className="text-yellow-600">Pending</option>
-                                                    <option value="completed" className="text-green-600">Completed</option>
+                                                    <option value="pending" className="bg-[#181818] text-yellow-400">Pending</option>
+                                                    <option value="completed" className="bg-[#181818] text-emerald-400">Completed</option>
                                                 </select>
                                             </td>
                                         </motion.tr>
@@ -237,7 +237,7 @@ function Subadmintask() {
                             </table>
                         </div>
                     ) : (
-                        <p className="text-center text-gray-500 py-6 text-base sm:text-lg">No tasks assigned to you yet.</p>
+                        <p className="text-center text-gray-400 py-6 text-base sm:text-lg">No tasks assigned to you yet.</p>
                     )
                 )}
 
@@ -255,10 +255,10 @@ function Subadmintask() {
                     >
                         <motion.div
                             initial={{ opacity: 0 }}
-                            animate={{ opacity: 0.5 }}
+                            animate={{ opacity: 0.7 }}
                             exit={{ opacity: 0 }}
                             transition={{ duration: 0.3, ease: 'easeInOut' }}
-                            className="absolute inset-0 bg-black backdrop-blur-sm"
+                            className="absolute inset-0 bg-black/80 backdrop-blur-sm"
                         />
                         <div className="relative z-10 w-full max-w-4xl mx-4 my-8 sm:my-0">
                             <Addtaskmodal />
@@ -276,10 +276,10 @@ function Subadmintask() {
                     >
                         <motion.div
                             initial={{ opacity: 0 }}
-                            animate={{ opacity: 0.5 }}
+                            animate={{ opacity: 0.7 }}
                             exit={{ opacity: 0 }}
                             transition={{ duration: 0.3, ease: 'easeInOut' }}
-                            className="absolute inset-0 bg-black backdrop-blur-sm"
+                            className="absolute inset-0 bg-black/80 backdrop-blur-sm"
                         />
                         <div className="relative z-10 w-full max-w-4xl mx-4 my-8 sm:my-0">
                             <Viewtasksmodal />
@@ -297,10 +297,10 @@ function Subadmintask() {
                     >
                         <motion.div
                             initial={{ opacity: 0 }}
-                            animate={{ opacity: 0.5 }}
+                            animate={{ opacity: 0.7 }}
                             exit={{ opacity: 0 }}
                             transition={{ duration: 0.3, ease: 'easeInOut' }}
-                            className="absolute inset-0 bg-black backdrop-blur-sm"
+                            className="absolute inset-0 bg-black/80 backdrop-blur-sm"
                         />
                         <div className="relative z-10 w-full max-w-4xl mx-4 my-8 sm:my-0">
                             <VieweditTaskmodal />
@@ -313,15 +313,15 @@ function Subadmintask() {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.3 }}
-                        className="fixed inset-0 z-50 flex items-center justify-center"
+                        className="fixed inset-0 z-50 flex items-center justify-center p-4"
                     >
-                        <motion.div className="absolute inset-0 bg-black opacity-30" />
+                        <motion.div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
                         <motion.div
-                            initial={{ scale: 0.5 }}
+                            initial={{ scale: 0.8 }}
                             animate={{ scale: 1 }}
-                            exit={{ scale: 0.5 }}
+                            exit={{ scale: 0.8 }}
                             transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                            className="relative z-10 bg-green-100 text-green-700 px-6 sm:px-10 py-4 sm:py-6 rounded-xl shadow-2xl text-sm sm:text-base font-semibold w-[90%] sm:w-[400px] h-[100px] sm:h-[120px] flex items-center justify-center text-center"
+                            className="relative z-10 bg-[#141414] border border-emerald-500/50 text-emerald-400 px-8 py-6 rounded-2xl shadow-2xl text-base font-semibold w-[90%] sm:w-[400px] flex items-center justify-center text-center"
                         >
                             Status updated successfully!
                         </motion.div>

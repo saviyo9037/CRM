@@ -24,14 +24,14 @@ import { liststaffs } from "../services/staffRouter";
 const StatCard = ({ icon, label, value, colorClass }) => (
   <motion.div
     whileHover={{ scale: 1.03 }}
-    className="bg-white p-5 rounded-xl shadow-md flex flex-col items-center text-center space-y-3 border border-gray-100 transition-all duration-200"
+    className="bg-[#121212] p-5 rounded-xl shadow-md flex flex-col items-center text-center space-y-3 border border-[#262626] transition-all duration-200"
   >
-    <div className={`p-4 rounded-full ${colorClass} bg-opacity-20`}>
-      <FontAwesomeIcon icon={icon} className={`${colorClass} text-2xl`} />
+    <div className="p-3.5 rounded-xl bg-[#FF8A00]/10 border border-[#FF8A00]/20">
+      <FontAwesomeIcon icon={icon} className="text-[#FF8A00] text-xl" />
     </div>
     <div>
-      <p className="text-gray-500 text-sm font-medium">{label}</p>
-      <p className="text-3xl font-bold text-gray-800">{value}</p>
+      <p className="text-gray-400 text-xs font-semibold uppercase tracking-wider">{label}</p>
+      <p className="text-2xl font-bold text-white mt-1">{value}</p>
     </div>
   </motion.div>
 );
@@ -126,7 +126,7 @@ function Staffdatamodal() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 z-[9999]"
+          className="fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 z-[9999]"
           onClick={() => dispatch(toggleStaffdatamodal())}
         >
           <motion.div
@@ -134,77 +134,76 @@ function Staffdatamodal() {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -40, opacity: 0 }}
             transition={{ type: "spring", stiffness: 200, damping: 22 }}
-            className="bg-white rounded-2xl shadow-2xl p-6 sm:p-8 w-full max-w-4xl max-h-[90vh] overflow-y-auto relative"
+            className="bg-[#141414] border border-[#262626] text-white rounded-2xl shadow-2xl p-6 sm:p-8 w-full max-w-4xl max-h-[90vh] overflow-y-auto relative custom-scrollbar"
             onClick={(e) => e.stopPropagation()}
           >
             {(isStaffLoading || isLeadsLoading || isTasksLoading) && (
-              <div className="absolute inset-0 bg-white/80 flex items-center justify-center rounded-2xl z-10">
+              <div className="absolute inset-0 bg-[#141414]/90 backdrop-blur-sm flex items-center justify-center rounded-2xl z-10">
                 <Spinner />
               </div>
             )}
 
             <button
               onClick={() => dispatch(toggleStaffdatamodal())}
-              className="absolute top-4 right-4 text-gray-400 hover:text-gray-700 text-3xl"
+              className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors text-2xl w-9 h-9 rounded-lg flex items-center justify-center hover:bg-[#222222]"
             >
               <FontAwesomeIcon icon={faTimes} />
             </button>
 
             {/* HEADER */}
-            <div className="flex items-center space-x-4 mb-8 pb-4 border-b border-gray-200">
-              <div className="w-14 h-14 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white text-3xl shadow-lg">
+            <div className="flex items-center space-x-4 mb-8 pb-4 border-b border-[#262626]">
+              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#FF8A00] to-[#E67A00] flex items-center justify-center text-black text-2xl font-bold shadow-lg shadow-[#FF8A00]/20">
                 <FontAwesomeIcon
                   icon={staffData?.role === "Agent" ? faUserTie : faUserCog}
                 />
               </div>
               <div>
-                <h2 className="text-3xl font-bold text-gray-800">
+                <h2 className="text-2xl font-bold text-white">
                   {staffData?.name}
                 </h2>
-                <p className="text-gray-500 text-lg">{staffData?.role}</p>
+                <p className="text-[#FF8A00] font-medium text-sm">{staffData?.role}</p>
               </div>
             </div>
 
             {!staffData ? (
               <div className="text-center py-10">
-                <p className="text-gray-600 text-lg">No staff selected.</p>
+                <p className="text-gray-400 text-lg">No staff selected.</p>
               </div>
             ) : (
-              <div className="space-y-10">
+              <div className="space-y-8">
                 {/* BASIC INFO */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-gray-50 p-6 rounded-xl border">
-                  <p className="text-gray-700 text-lg">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-[#181818] p-5 rounded-xl border border-[#262626]">
+                  <p className="text-gray-300 text-sm flex items-center">
                     <FontAwesomeIcon
                       icon={faEnvelope}
-                      className="mr-3 text-blue-500"
+                      className="mr-3 text-[#FF8A00]"
                     />
-                    <strong>Email:</strong> {staffData.email}
+                    <strong className="text-white mr-1.5">Email:</strong> {staffData.email}
                   </p>
-                  <p className="text-gray-700 text-lg">
+                  <p className="text-gray-300 text-sm flex items-center">
                     <FontAwesomeIcon
                       icon={faPhone}
-                      className="mr-3 text-green-500"
+                      className="mr-3 text-[#FF8A00]"
                     />
-                    <strong>Mobile:</strong> {staffData.mobile}
+                    <strong className="text-white mr-1.5">Mobile:</strong> {staffData.mobile}
                   </p>
                   {staffData.role === "Agent" && (
-                    <p className="text-gray-700 text-lg">
+                    <p className="text-gray-300 text-sm flex items-center">
                       <FontAwesomeIcon
                         icon={faUserTie}
-                        className="mr-3 text-blue-500"
+                        className="mr-3 text-[#FF8A00]"
                       />
-                      <strong>Sub-Admin:</strong>{" "}
+                      <strong className="text-white mr-1.5">Sub-Admin:</strong>{" "}
                       {staffData?.assignedTo?.name || "N/A"}
                     </p>
                   )}
                 </div>
 
-                {/* ========================================= */}
-                {/* 🟨 SUB-ADMIN LEAD OVERVIEW (Added Section) */}
-                {/* ========================================= */}
+                {/* SUB-ADMIN LEAD OVERVIEW */}
                 {staffData.role === "Sub-Admin" && (
-                  <div className="bg-yellow-50 p-6 rounded-xl border border-yellow-200 space-y-4">
-                    <h4 className="text-xl font-semibold text-yellow-800 mb-3">
+                  <div className="bg-[#181818] p-6 rounded-xl border border-[#262626] space-y-4">
+                    <h4 className="text-lg font-bold text-white flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-[#FF8A00]"></span>
                       Sub-Admin Lead Overview
                     </h4>
 
@@ -213,42 +212,42 @@ function Staffdatamodal() {
                         icon={faClipboardList}
                         label="Leads Created By Me"
                         value={leadsCreatedByMe.length}
-                        colorClass="text-blue-600"
+                        colorClass="text-[#FF8A00]"
                       />
 
                       <StatCard
                         icon={faUserCog}
                         label="Leads Assigned To Me"
                         value={leadsAssignedToMe.length}
-                        colorClass="text-purple-600"
+                        colorClass="text-[#FF8A00]"
                       />
 
                       <StatCard
                         icon={faUserTie}
                         label="Team Leads Created By Agents"
                         value={teamLeadsCreated.length}
-                        colorClass="text-green-600"
+                        colorClass="text-[#FF8A00]"
                       />
 
                       <StatCard
                         icon={faTasks}
                         label="Team Leads Assigned To Agents"
                         value={teamLeadsAssigned.length}
-                        colorClass="text-indigo-600"
+                        colorClass="text-[#FF8A00]"
                       />
 
                       <StatCard
                         icon={faChartLine}
                         label="Total Leads Under Me"
                         value={totalLeadsUnderMe}
-                        colorClass="text-red-600"
+                        colorClass="text-[#FF8A00]"
                       />
 
                       <StatCard
                         icon={faUserTie}
                         label="Agents Count"
                         value={staffData.assignedAgents?.length || 0}
-                        colorClass="text-orange-600"
+                        colorClass="text-[#FF8A00]"
                       />
                     </div>
                   </div>
@@ -257,15 +256,15 @@ function Staffdatamodal() {
                 {/* ASSIGNED AGENTS */}
                 {staffData.role === "Sub-Admin" &&
                   staffData.assignedAgents?.length > 0 && (
-                    <div className="bg-gray-50 p-6 rounded-xl border">
-                      <h5 className="text-xl font-semibold mb-3">
+                    <div className="bg-[#181818] p-6 rounded-xl border border-[#262626]">
+                      <h5 className="text-base font-bold text-white mb-3">
                         Assigned Agents ({staffData.assignedAgents.length})
                       </h5>
                       <div className="flex flex-wrap gap-2">
                         {staffData.assignedAgents.map((a) => (
                           <span
                             key={a._id}
-                            className="bg-indigo-100 text-indigo-800 text-xs px-3 py-1 rounded-full"
+                            className="bg-[#222222] border border-[#333333] text-gray-200 text-xs px-3 py-1.5 rounded-lg"
                           >
                             {a.name}
                           </span>
@@ -275,62 +274,62 @@ function Staffdatamodal() {
                   )}
 
                 {/* LEADS OVERVIEW */}
-                <div className="bg-blue-50 p-6 rounded-xl border border-blue-200">
-                  <h4 className="text-xl font-semibold text-blue-800 mb-5 flex items-center">
-                    <FontAwesomeIcon icon={faChartLine} className="mr-3" />{" "}
+                <div className="bg-[#181818] p-6 rounded-xl border border-[#262626]">
+                  <h4 className="text-lg font-bold text-white mb-5 flex items-center">
+                    <FontAwesomeIcon icon={faChartLine} className="mr-2.5 text-[#FF8A00]" />{" "}
                     Leads Overview
                   </h4>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
                     <StatCard
                       icon={faClipboardList}
                       label="Total Leads"
                       value={totalLeads}
-                      colorClass="text-blue-600"
+                      colorClass="text-[#FF8A00]"
                     />
                     <StatCard
                       icon={faHourglassHalf}
                       label="Open Leads"
                       value={openLeads}
-                      colorClass="text-yellow-600"
+                      colorClass="text-[#FF8A00]"
                     />
                     <StatCard
                       icon={faCheckCircle}
                       label="Converted"
                       value={convertedLeads}
-                      colorClass="text-green-600"
+                      colorClass="text-[#FF8A00]"
                     />
                     <StatCard
                       icon={faTimes}
                       label="Rejected"
                       value={rejectedLeads}
-                      colorClass="text-red-600"
+                      colorClass="text-[#FF8A00]"
                     />
                   </div>
 
                   {staffLeads.length > 0 && (
-                    <div className="space-y-3 max-h-60 overflow-y-auto pr-2">
+                    <div className="space-y-2.5 max-h-60 overflow-y-auto pr-2 custom-scrollbar">
                       {staffLeads.map((lead) => (
                         <div
                           key={lead._id}
-                          className="bg-white p-4 rounded-lg shadow border flex justify-between items-center"
+                          className="bg-[#121212] p-3.5 rounded-xl border border-[#262626] flex justify-between items-center"
                         >
                           <div>
-                            <p className="font-semibold text-gray-800">
+                            <p className="font-semibold text-white text-sm">
                               {lead.name}
                             </p>
-                            <p className="text-gray-600 text-sm">
+                            <p className="text-gray-400 text-xs mt-0.5">
                               {lead.email} | {lead.mobile}
                             </p>
                           </div>
 
                           <span
-                            className={`px-3 py-1 rounded-full text-xs font-semibold ${
+                            className={`px-3 py-1 rounded-full text-xs font-semibold capitalize ${
                               lead.status === "converted"
-                                ? "bg-green-100 text-green-800"
+                                ? "bg-emerald-500/15 border border-emerald-500/30 text-emerald-400"
                                 : lead.status === "rejected"
-                                ? "bg-red-100 text-red-800"
-                                : "bg-yellow-100 text-yellow-800"
+                                ? "bg-red-500/15 border border-red-500/30 text-red-400"
+                                : "bg-amber-500/15 border border-amber-500/30 text-amber-400"
                             }`}
                           >
                             {lead.status}
@@ -342,55 +341,55 @@ function Staffdatamodal() {
                 </div>
 
                 {/* TASKS OVERVIEW */}
-                <div className="bg-purple-50 p-6 rounded-xl border border-purple-200">
-                  <h4 className="text-xl font-semibold text-purple-800 mb-5 flex items-center">
-                    <FontAwesomeIcon icon={faTasks} className="mr-3" /> Tasks
+                <div className="bg-[#181818] p-6 rounded-xl border border-[#262626]">
+                  <h4 className="text-lg font-bold text-white mb-5 flex items-center">
+                    <FontAwesomeIcon icon={faTasks} className="mr-2.5 text-[#FF8A00]" /> Tasks
                     Overview
                   </h4>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
                     <StatCard
                       icon={faTasks}
                       label="Total Tasks"
                       value={totalTasks}
-                      colorClass="text-purple-600"
+                      colorClass="text-[#FF8A00]"
                     />
                     <StatCard
                       icon={faHourglassHalf}
                       label="Pending Tasks"
                       value={pendingTasks}
-                      colorClass="text-orange-600"
+                      colorClass="text-[#FF8A00]"
                     />
                     <StatCard
                       icon={faCheckCircle}
                       label="Completed"
                       value={completedTasks}
-                      colorClass="text-green-600"
+                      colorClass="text-[#FF8A00]"
                     />
                   </div>
 
                   {staffTasks.length > 0 && (
-                    <div className="space-y-3 max-h-60 overflow-y-auto pr-2">
+                    <div className="space-y-2.5 max-h-60 overflow-y-auto pr-2 custom-scrollbar">
                       {staffTasks.map((task) => (
                         <div
                           key={task._id}
-                          className="bg-white p-4 rounded-lg shadow border flex justify-between items-center"
+                          className="bg-[#121212] p-3.5 rounded-xl border border-[#262626] flex justify-between items-center"
                         >
                           <div>
-                            <p className="font-semibold text-gray-800">
+                            <p className="font-semibold text-white text-sm">
                               {task.title}
                             </p>
-                            <p className="text-gray-600 text-sm">
+                            <p className="text-gray-400 text-xs mt-0.5">
                               Updated:{" "}
                               {new Date(task.updatedAt).toLocaleDateString()}
                             </p>
                           </div>
 
                           <span
-                            className={`px-3 py-1 rounded-full text-xs font-semibold ${
+                            className={`px-3 py-1 rounded-full text-xs font-semibold capitalize ${
                               task.status === "completed"
-                                ? "bg-green-100 text-green-800"
-                                : "bg-orange-100 text-orange-800"
+                                ? "bg-emerald-500/15 border border-emerald-500/30 text-emerald-400"
+                                : "bg-[#FF8A00]/15 border border-[#FF8A00]/30 text-[#FF8A00]"
                             }`}
                           >
                             {task.status}

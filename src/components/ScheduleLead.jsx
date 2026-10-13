@@ -72,32 +72,32 @@ const ScheduleLead = ({ leadId, onClose }) => {
   };
 
   return (
-    <div>
-      <h1 className="text-xl font-semibold text-gray-800 mb-4">
+    <div className="text-white">
+      <h1 className="text-xl font-bold text-white mb-4">
         Schedule Reminder
       </h1>
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="flex flex-col">
-          <label className="mb-1 text-gray-700 font-medium">Date</label>
+          <label className="mb-1 text-gray-300 font-medium text-sm">Date</label>
           <input
             type="date"
             name="date"
             value={formData.date}
             onChange={handleChange}
-            className="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            className="bg-[#121212] border border-[#2E2E2E] text-white rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#FF8A00] focus:border-[#FF8A00] focus:outline-none"
           />
         </div>
 
         <div className="flex flex-col">
-          <label className="mb-1 text-gray-700 font-medium">Notes</label>
+          <label className="mb-1 text-gray-300 font-medium text-sm">Notes</label>
           <input
             type="text"
             name="notes"
             placeholder="Enter reminder text"
             value={formData.notes}
             onChange={handleChange}
-            className="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            className="bg-[#121212] border border-[#2E2E2E] text-white rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#FF8A00] focus:border-[#FF8A00] focus:outline-none placeholder-gray-500"
           />
         </div>
 
@@ -106,17 +106,17 @@ const ScheduleLead = ({ leadId, onClose }) => {
             type="button"
             onClick={onClose}
             disabled={addRemainderMutation.isPending}
-            className="px-4 py-2 border rounded-lg text-gray-600 hover:bg-gray-100"
+            className="px-4 py-2 border border-[#333333] rounded-lg text-gray-300 hover:text-white hover:bg-[#262626] transition-colors"
           >
             Cancel
           </button>
           <button
             type="submit"
             disabled={addRemainderMutation.isPending}
-            className={`px-4 py-2 text-white rounded-lg ${
+            className={`px-4 py-2 text-black font-bold rounded-lg transition-colors ${
               addRemainderMutation.isPending
-                ? "bg-blue-400"
-                : "bg-blue-600 hover:bg-blue-700"
+                ? "bg-[#FF8A00]/50 cursor-not-allowed"
+                : "bg-[#FF8A00] hover:bg-[#E67A00]"
             }`}
           >
             {addRemainderMutation.isPending ? "Saving..." : "Save"}

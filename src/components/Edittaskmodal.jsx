@@ -56,37 +56,37 @@ function Edittaskmodal() {
   })
 
   return (
-    <div className='fixed inset-0 flex items-center justify-center bg-black/50 z-50 overflow-y-auto'>
+    <div className='fixed inset-0 flex items-center justify-center bg-black/80 backdrop-blur-sm z-50 overflow-y-auto'>
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.9 }}
         transition={{ duration: 0.4 }}
-        className='bg-white w-full max-w-4xl mx-4 my-8 rounded-2xl shadow-2xl flex flex-col md:flex-row overflow-hidden sm:my-4'
+        className='bg-[#141414] border border-[#262626] text-white w-full max-w-4xl mx-4 my-8 rounded-2xl shadow-2xl flex flex-col md:flex-row overflow-hidden sm:my-4'
       >
-        <div className="bg-gradient-to-b from-[#00B5A6] to-[#1E6DB0] w-full md:w-1/3 flex flex-col items-center justify-center p-6 text-white">
-          <FaTasks className='text-6xl sm:text-[80px] mb-4' />
-          <h2 className='text-xl sm:text-2xl font-bold'>Edit Tasks</h2>
-          <p className='text-xs sm:text-sm mt-2 text-center'>
-            Register new customers to start managing their leads and communications.
+        <div className="bg-gradient-to-b from-[#FF8A00] to-[#E67A00] w-full md:w-1/3 flex flex-col items-center justify-center p-6 text-black">
+          <FaTasks className='text-6xl sm:text-[80px] mb-4 text-black' />
+          <h2 className='text-xl sm:text-2xl font-black text-black'>Edit Tasks</h2>
+          <p className='text-xs sm:text-sm mt-2 text-center text-black/80 font-medium'>
+            Update task details, assignment and deadline.
           </p>
         </div>
 
-        <div className='relative w-full md:w-2/3 p-4 sm:p-8'>
+        <div className='relative w-full md:w-2/3 p-4 sm:p-8 bg-[#141414]'>
           <button
             onClick={() => dispatch(toggleedittaskmodal(null))}
-            className='absolute top-3 right-4 text-xl sm:text-2xl text-gray-400 hover:text-red-500 transition'
+            className='absolute top-3 right-4 text-xl sm:text-2xl text-gray-400 hover:text-white transition'
           >
             &times;
           </button>
 
-          <h3 className='text-xl sm:text-2xl font-semibold text-gray-800 mb-4'>Edit your Task</h3>
+          <h3 className='text-xl sm:text-2xl font-bold text-white mb-4'>Edit your Task</h3>
 
           {updatingtask.isPending && (
             <Spinner />
           )}
           {updatingtask.isError && (
-            <p className='text-red-600 bg-red-100 p-3 rounded-md mb-4 text-sm'>
+            <p className='text-red-400 bg-red-950/40 border border-red-500/40 p-3 rounded-md mb-4 text-sm'>
               {updatingtask.error?.response?.data?.message}
             </p>
           )}
@@ -98,11 +98,11 @@ function Edittaskmodal() {
                 name='name'
                 value={edittaskForm.values.name}
                 {...edittaskForm.getFieldProps('name')}
-                className='border border-gray-300 p-3 w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm sm:text-base'
+                className='bg-[#121212] border border-[#2E2E2E] text-white placeholder-gray-500 p-3 w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF8A00] focus:border-[#FF8A00] text-sm sm:text-base'
                 placeholder='Enter the Taskname'
               />
               {edittaskForm.touched.name && edittaskForm.errors.name && (
-                <p className='text-red-500 text-xs sm:text-sm mt-1'>{edittaskForm.errors.name}</p>
+                <p className='text-red-400 text-xs sm:text-sm mt-1'>{edittaskForm.errors.name}</p>
               )}
             </div>
 
@@ -114,15 +114,15 @@ function Edittaskmodal() {
                 name='assignedTo'
                 value={edittaskForm.values.assignedTo}
                 {...edittaskForm.getFieldProps('assignedTo')}
-                className='border border-gray-300 p-3 w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm sm:text-base'
+                className='bg-[#121212] border border-[#2E2E2E] text-white p-3 w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF8A00] focus:border-[#FF8A00] text-sm sm:text-base'
               >
-                <option value=''>--Select Staff--</option>
+                <option value='' className="bg-[#181818] text-gray-400">--Select Staff--</option>
                 {liststaff?.data?.map((staff) => (
-                  <option key={staff._id} value={staff._id}>{staff.name} ({staff.role})</option>
+                  <option key={staff._id} value={staff._id} className="bg-[#181818] text-white">{staff.name} ({staff.role})</option>
                 ))}
               </select>
               {edittaskForm.touched.assignedTo && edittaskForm.errors.assignedTo && (
-                <p className='text-red-500 text-xs sm:text-sm mt-1'>{edittaskForm.errors.assignedTo}</p>
+                <p className='text-red-400 text-xs sm:text-sm mt-1'>{edittaskForm.errors.assignedTo}</p>
               )}
             </div>
 
@@ -132,10 +132,10 @@ function Edittaskmodal() {
                 name='deadline'
                 value={edittaskForm.values.deadline}
                 {...edittaskForm.getFieldProps('deadline')}
-                className='border border-gray-300 p-3 w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm sm:text-base'
+                className='bg-[#121212] border border-[#2E2E2E] text-white p-3 w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF8A00] focus:border-[#FF8A00] text-sm sm:text-base'
               />
               {edittaskForm.touched.deadline && edittaskForm.errors.deadline && (
-                <p className='text-red-500 text-xs sm:text-sm mt-1'>{edittaskForm.errors.deadline}</p>
+                <p className='text-red-400 text-xs sm:text-sm mt-1'>{edittaskForm.errors.deadline}</p>
               )}
             </div>
 
@@ -144,18 +144,18 @@ function Edittaskmodal() {
                 name='description'
                 value={edittaskForm.values.description}
                 {...edittaskForm.getFieldProps('description')}
-                className='border border-gray-300 p-3 w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm sm:text-base'
+                className='bg-[#121212] border border-[#2E2E2E] text-white placeholder-gray-500 p-3 w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF8A00] focus:border-[#FF8A00] text-sm sm:text-base resize-none'
                 rows='4'
                 placeholder='Enter task description'
               ></textarea>
               {edittaskForm.touched.description && edittaskForm.errors.description && (
-                <p className='text-red-500 text-xs sm:text-sm mt-1'>{edittaskForm.errors.description}</p>
+                <p className='text-red-400 text-xs sm:text-sm mt-1'>{edittaskForm.errors.description}</p>
               )}
             </div>
 
             <button
               type='submit'
-              className='w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-semibold transition text-sm sm:text-base'
+              className='w-full bg-[#FF8A00] hover:bg-[#E67A00] text-black py-3 rounded-lg font-bold transition text-sm sm:text-base shadow-lg'
             >
               Edit Task
             </button>
@@ -170,9 +170,9 @@ function Edittaskmodal() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            <motion.div className="absolute inset-0 bg-black opacity-30" />
+            <motion.div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
             <motion.div
-              className="relative z-10 bg-green-200 text-green-800 px-6 sm:px-10 py-4 sm:py-6 rounded-xl shadow-xl text-sm sm:text-base font-semibold w-full max-w-xs sm:max-w-sm h-[100px] sm:h-[120px] flex items-center justify-center text-center"
+              className="relative z-10 bg-[#181818] border border-[#FF8A00] text-[#FF8A00] px-6 sm:px-10 py-4 sm:py-6 rounded-2xl shadow-2xl text-sm sm:text-base font-bold w-full max-w-xs sm:max-w-sm h-[100px] sm:h-[120px] flex items-center justify-center text-center"
               initial={{ scale: 0.5 }}
               animate={{ scale: 1 }}
               exit={{ scale: 0.5 }}

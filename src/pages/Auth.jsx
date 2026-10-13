@@ -67,68 +67,78 @@ function Auth() {
     })
 
     return (
-        <div className="flex min-h-screen bg-gradient-to-br from-[#00B5A6] to-[#1E6DB0]">
+        <div className="flex min-h-screen bg-[#0A0A0A] relative overflow-hidden">
+            {/* Ambient background glow */}
+            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#FF8A00]/10 rounded-full blur-[120px] pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-[#FF8A00]/5 rounded-full blur-[100px] pointer-events-none" />
+
             <motion.div
                 initial={{ opacity: 0, x: -100 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, ease: 'easeOut' }}
-                className="w-full lg:w-1/2 flex items-center justify-center p-4 sm:p-6 lg:p-10 bg-white shadow-2xl lg:rounded-r-3xl"
+                className="w-full lg:w-1/2 flex items-center justify-center p-4 sm:p-6 lg:p-10 bg-[#121212] border-r border-[#1F1F1F] shadow-2xl relative z-10"
             >
                 <div className="w-full max-w-md">
-                    <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#1E6DB0] mb-2">Sign In</h2>
-                    <p className="text-gray-500 mb-4 sm:mb-6 lg:mb-8 text-sm sm:text-base">Login with your credentials</p>
+                    <div className="flex items-center gap-2 mb-3">
+                        <span className="w-2.5 h-2.5 rounded-full bg-[#FF8A00] shadow-[0_0_10px_#FF8A00]" />
+                        <span className="text-xs font-semibold tracking-wider text-[#FF8A00] uppercase">Enterprise Portal</span>
+                    </div>
+                    <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white mb-2 tracking-tight">Sign In</h2>
+                    <p className="text-[#A1A1AA] mb-6 sm:mb-8 text-sm sm:text-base">Login with your credentials</p>
 
                     {modulelogin.isPending &&
                         <Spinner />
                     }
 
                     {modulelogin.isError && (
-                        <p className="text-red-600 bg-red-100 p-3 rounded-lg text-center mb-4 text-sm sm:text-base">
+                        <p className="text-red-400 bg-red-950/40 border border-red-800/50 p-3 rounded-lg text-center mb-4 text-sm sm:text-base">
                             {modulelogin.error?.response?.data?.message || 'Login failed. Please try again.'}
                         </p>
                     )}
 
                     <form onSubmit={loginForm.handleSubmit} className="space-y-4 sm:space-y-6">
                         <div>
+                            <label className="block text-xs font-semibold text-[#A1A1AA] uppercase mb-1.5">Email Address</label>
                             <input
                                 type="email"
-                                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1E6DB0] focus:outline-none placeholder-gray-400 text-sm sm:text-base"
+                                className="w-full p-3 bg-[#181818] border border-[#2A2A2A] rounded-lg text-white placeholder-[#71717A] focus:ring-2 focus:ring-[#FF8A00] focus:border-[#FF8A00] focus:outline-none text-sm sm:text-base transition"
                                 name="email"
                                 value={loginForm.values.email}
                                 {...loginForm.getFieldProps('email')}
-                                placeholder="Enter your email"
+                                placeholder="name@company.com"
                             />
                             {loginForm.touched.email && loginForm.errors.email && (
-                                <p className="text-red-500 text-xs sm:text-sm mt-1">{loginForm.errors.email}</p>
+                                <p className="text-red-400 text-xs sm:text-sm mt-1">{loginForm.errors.email}</p>
                             )}
                         </div>
 
                         <div className="space-y-1">
+                            <label className="block text-xs font-semibold text-[#A1A1AA] uppercase mb-1.5">Password</label>
                             <div className="relative">
                                 <input
                                     type={showPassword ? 'text' : 'password'}
-                                    className="w-full p-3 pr-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1E6DB0] focus:outline-none placeholder-gray-400 text-sm sm:text-base"
+                                    className="w-full p-3 pr-10 bg-[#181818] border border-[#2A2A2A] rounded-lg text-white placeholder-[#71717A] focus:ring-2 focus:ring-[#FF8A00] focus:border-[#FF8A00] focus:outline-none text-sm sm:text-base transition"
                                     name="password"
                                     value={loginForm.values.password}
                                     {...loginForm.getFieldProps('password')}
                                     placeholder="Enter your password"
                                 />
                                 <div
-                                    className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center cursor-pointer text-gray-500"
+                                    className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center cursor-pointer text-[#71717A] hover:text-[#FF8A00] transition"
                                     onClick={() => setshowPassword(!showPassword)}
                                 >
-                                    {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                                    {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                                 </div>
                             </div>
                             {loginForm.touched.password && loginForm.errors.password && (
-                                <p className="text-red-500 text-xs sm:text-sm">{loginForm.errors.password}</p>
+                                <p className="text-red-400 text-xs sm:text-sm">{loginForm.errors.password}</p>
                             )}
                         </div>
                         <div className="flex justify-end">
                             <button
                                 type="button"
                                 onClick={() => dispatch(togglepasswordModal())}
-                                className="text-xs sm:text-sm text-[#1E6DB0] hover:underline focus:outline-none mt-1"
+                                className="text-xs sm:text-sm text-[#FF8A00] hover:text-[#FFA033] hover:underline focus:outline-none mt-1 transition"
                             >
                                 Forgot Password?
                             </button>
@@ -136,15 +146,15 @@ function Auth() {
 
                         <button
                             type="submit"
-                            className="w-full bg-[#00B5A6] hover:bg-[#1E6DB0] text-white py-3 rounded-lg font-semibold cursor-pointer shadow-md hover:shadow-lg transition-all duration-300 text-sm sm:text-base"
+                            className="w-full bg-[#FF8A00] hover:bg-[#E67A00] text-black py-3 rounded-lg font-bold cursor-pointer shadow-lg shadow-orange-500/20 hover:shadow-orange-500/35 transition-all duration-300 text-sm sm:text-base tracking-wide"
                         >
-                            Login
+                            Sign In
                         </button>
                     </form>
                     {countingadmin?.count === 0 &&
                         <button
                             onClick={() => dispatch(toggleregisteradminModal())}
-                            className="w-full mt-5 bg-[#00B5A6] hover:bg-[#1E6DB0] text-white py-3 rounded-lg font-semibold cursor-pointer shadow-md hover:shadow-lg transition-all duration-300 text-sm sm:text-base"
+                            className="w-full mt-4 bg-transparent border border-[#FF8A00] hover:bg-[#FF8A00]/10 text-[#FF8A00] py-3 rounded-lg font-semibold cursor-pointer transition-all duration-300 text-sm sm:text-base"
                         >
                             Register as Admin
                         </button>
@@ -156,27 +166,41 @@ function Auth() {
                 initial={{ opacity: 0, x: 100 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, ease: 'easeOut', delay: 0.2 }}
-                className="hidden lg:flex w-1/2 items-center justify-center p-4 sm:p-6 lg:p-10"
+                className="hidden lg:flex w-1/2 items-center justify-center p-4 sm:p-6 lg:p-10 relative z-10"
             >
                 <motion.div
                     initial={{ scale: 0.8 }}
                     animate={{ scale: 1 }}
                     transition={{ duration: 0.5, delay: 0.4 }}
-                    className="text-white max-w-md text-center"
+                    className="text-white max-w-md text-left"
                 >
-                    <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold mb-4 sm:mb-6 tracking-wide">Welcome to CRM Pro!</h1>
-                    <ul className="space-y-4 text-base sm:text-lg text-left font-medium">
-                        <li className="flex items-center gap-3">
-                            <FaUserTie className='text-[#FFD700] text-lg sm:text-xl' />
-                            Lead Management
+                    <div className="inline-block px-3 py-1 bg-[#FF8A00]/15 text-[#FF8A00] rounded-full text-xs font-bold uppercase tracking-wider mb-4 border border-[#FF8A00]/30">
+                        Next-Gen CRM
+                    </div>
+                    <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black mb-4 tracking-tight leading-tight">
+                        Powering Your <span className="text-[#FF8A00]">Growth</span> & Velocity
+                    </h1>
+                    <p className="text-[#A1A1AA] text-base mb-8">
+                        Streamlined customer relationship workflows with intelligent lead routing and performance tracking.
+                    </p>
+                    <ul className="space-y-4 text-base font-medium">
+                        <li className="flex items-center gap-3.5 p-3 rounded-xl bg-[#141414] border border-[#222222]">
+                            <div className="p-2 rounded-lg bg-[#FF8A00]/15 text-[#FF8A00]">
+                                <FaUserTie className='text-lg' />
+                            </div>
+                            <span className="text-white">Intelligent Lead Routing</span>
                         </li>
-                        <li className="flex items-center gap-3">
-                            <FaTasks className='text-[#FFD700] text-lg sm:text-xl' />
-                            Clients & Task Handling
+                        <li className="flex items-center gap-3.5 p-3 rounded-xl bg-[#141414] border border-[#222222]">
+                            <div className="p-2 rounded-lg bg-[#FF8A00]/15 text-[#FF8A00]">
+                                <FaTasks className='text-lg' />
+                            </div>
+                            <span className="text-white">Seamless Task & Pipeline Management</span>
                         </li>
-                        <li className="flex items-center gap-3">
-                            <FaChartLine className='text-[#FFD700] text-lg sm:text-xl' />
-                            Real-Time Report Tracking
+                        <li className="flex items-center gap-3.5 p-3 rounded-xl bg-[#141414] border border-[#222222]">
+                            <div className="p-2 rounded-lg bg-[#FF8A00]/15 text-[#FF8A00]">
+                                <FaChartLine className='text-lg' />
+                            </div>
+                            <span className="text-white">Real-Time Performance Analytics</span>
                         </li>
                     </ul>
                 </motion.div>

@@ -35,19 +35,19 @@ function Subadminleads() {
   const [downloadFormat, setDownloadFormat] = useState("csv");
 
   const statusColors = {
-    new: "bg-blue-100 text-blue-700 font-semibold",
-    open: "bg-yellow-100 text-yellow-700 font-semibold",
-    converted: "bg-green-100 text-green-700 font-semibold",
-    walkin: "bg-purple-100 text-purple-700 font-semibold",
-    paused: "bg-orange-100 text-orange-700 font-semibold",
-    rejected: "bg-red-100 text-red-700 font-semibold",
-    unavailable: "bg-gray-200 text-gray-600 font-semibold",
+    new: "bg-blue-950/60 text-blue-400 border border-blue-800/60 font-semibold",
+    open: "bg-yellow-950/60 text-yellow-400 border border-yellow-800/60 font-semibold",
+    converted: "bg-emerald-950/60 text-emerald-400 border border-emerald-800/60 font-semibold",
+    walkin: "bg-purple-950/60 text-purple-400 border border-purple-800/60 font-semibold",
+    paused: "bg-orange-950/60 text-orange-400 border border-orange-800/60 font-semibold",
+    rejected: "bg-red-950/60 text-red-400 border border-red-800/60 font-semibold",
+    unavailable: "bg-neutral-800 text-gray-400 border border-neutral-700 font-semibold",
   };
 
   const priorityColor = {
-    hot: "bg-red-100 text-red-700 font-semibold",
-    warm: "bg-yellow-100 text-yellow-700 font-semibold",
-    cold: "bg-purple-100 text-purple-700 font-semibold",
+    hot: "bg-red-950/60 text-red-400 border border-red-800/60 font-semibold",
+    warm: "bg-yellow-950/60 text-yellow-400 border border-yellow-800/60 font-semibold",
+    cold: "bg-blue-950/60 text-blue-400 border border-blue-800/60 font-semibold",
   };
 
   // Status ordering
@@ -344,12 +344,12 @@ function Subadminleads() {
     return orderA - orderB;
   });
   return (
-    <div className="fixed inset-0 z-40 flex overflow-x-hidden bg-gray-50">
+    <div className="fixed inset-0 z-40 flex overflow-x-hidden bg-[#0A0A0A]">
       {/* Sidebar */}
       <motion.div
         animate={{ x: sidebarVisible ? 0 : -260 }}
         transition={{ duration: 0.3 }}
-        className="w-64 h-full fixed top-0 left-0 z-50"
+        className="w-64 h-full fixed top-0 left-0 z-50 bg-[#0A0A0A] border-r border-[#262626]"
       >
         <Sidebar />
       </motion.div>
@@ -358,48 +358,46 @@ function Subadminleads() {
       <motion.div
         animate={{ marginLeft: sidebarVisible ? 256 : 0 }}
         transition={{ duration: 0.3 }}
-        className="flex-1 h-screen overflow-y-auto"
+        className="flex-1 h-screen overflow-y-auto bg-[#0A0A0A]"
       >
         {fetchstaffs.isLoading && <Spinner />}
         {updatestatusmutation.isPending && <Spinner />}
         {deleteLeadsMutation.isPending && <Spinner />}
-        <div className="flex flex-col min-h-screen">
+        <div className="flex flex-col min-h-screen bg-[#0A0A0A]">
           {/* Header */}
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center p-4 sm:p-6 bg-white shadow sticky top-0 z-30 border-b">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center p-4 sm:p-6 bg-[#0A0A0A] sticky top-0 z-30 border-b border-[#262626]">
             <div className="flex items-center mb-4 sm:mb-0">
               <button
-                className="mr-2 sm:mr-4 text-blue-600 hover:text-blue-800 transition"
+                className="mr-2 sm:mr-4 text-[#FF8A00] hover:text-[#E67A00] transition p-2 rounded-lg hover:bg-[#181818]"
                 onClick={() => setsidebarVisible(!sidebarVisible)}
               >
                 <FaBars className="text-lg sm:text-xl md:text-2xl" />
               </button>
-              <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900">
+              <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white">
                 Leads
               </h3>
             </div>
             <div className="flex items-center space-x-2 sm:space-x-4">
               <Icons />
             </div>
-{/* changed saviyo ........................................................................................ */}
             {role  && !metadata && (
-              // ..............................................................
               <button
-                className="fixed bottom-4 sm:bottom-6 right-4 sm:right-6 bg-blue-600 hover:bg-blue-700 text-white p-3 sm:p-4 md:p-5 rounded-full shadow-lg transform hover:-translate-y-2 transition-all duration-300 z-40"
+                className="fixed bottom-4 sm:bottom-6 right-4 sm:right-6 bg-[#FF8A00] hover:bg-[#E67A00] text-black font-bold p-3 sm:p-4 md:p-5 rounded-full shadow-lg shadow-[#FF8A00]/25 transform hover:-translate-y-2 transition-all duration-300 z-40"
                 onClick={() => dispatch(toggleCustomermodal())}
               >
-                <FaPlusCircle className="text-base sm:text-lg md:text-xl text-white" />
+                <FaPlusCircle className="text-base sm:text-lg md:text-xl text-black" />
               </button>
             )}
           </div>
           
-          <div className="flex justify-between items-center  p-2 flex-wrap gap-y-3">
+          <div className="flex justify-between items-center p-4 flex-wrap gap-3 bg-[#0A0A0A]">
             {/* Left side: Filters */}
             <div className="flex flex-wrap gap-3">
               {/* Status Filter */}
               <div className="relative status-dropdown">
                 <button
                   onClick={() => setIsStatusDropdownOpen(!isStatusDropdownOpen)}
-                  className="min-w-[140px] px-4 py-2 rounded-lg border border-gray-300 text-gray-700 bg-white shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all hover:border-blue-400 flex items-center justify-between"
+                  className="min-w-[140px] px-4 py-2 rounded-xl border border-[#2A2A2A] text-white bg-[#181818] shadow-sm hover:border-[#FF8A00]/50 focus:outline-none transition-all flex items-center justify-between font-medium"
                 >
                   <span>
                     {statusfilter.length > 0
@@ -408,7 +406,7 @@ function Subadminleads() {
                     }
                   </span>
                   <svg
-                    className={`w-4 h-4 transition-transform ${isStatusDropdownOpen ? 'rotate-180' : ''}`}
+                    className={`w-4 h-4 text-[#FF8A00] transition-transform ${isStatusDropdownOpen ? 'rotate-180' : ''}`}
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -417,9 +415,9 @@ function Subadminleads() {
                   </svg>
                 </button>
                 {isStatusDropdownOpen && (
-                  <div className="absolute z-50 mt-1 w-full bg-white border border-gray-300 rounded-lg shadow-lg max-h-48 overflow-y-auto">
+                  <div className="absolute z-50 mt-1 w-full bg-[#181818] border border-[#2A2A2A] rounded-xl shadow-2xl max-h-48 overflow-y-auto">
                     {["new", "open", "converted", "walkin", "paused", "rejected", "unavailable"].map((status) => (
-                      <label key={status} className="flex items-center px-4 py-2 hover:bg-gray-50 cursor-pointer">
+                      <label key={status} className="flex items-center px-4 py-2 hover:bg-[#222222] cursor-pointer">
                         <input
                           type="checkbox"
                           checked={statusfilter.includes(status)}
@@ -430,9 +428,9 @@ function Subadminleads() {
                               setstatusfilter(statusfilter.filter(s => s !== status));
                             }
                           }}
-                          className="mr-2 h-4 w-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500"
+                          className="mr-2 h-4 w-4 accent-[#FF8A00] rounded"
                         />
-                        <span className="text-sm text-gray-700 capitalize">{status}</span>
+                        <span className="text-sm text-gray-200 capitalize">{status}</span>
                       </label>
                     ))}
                   </div>
@@ -440,38 +438,36 @@ function Subadminleads() {
                 
               </div>
               {/* ✅ FIXED: Date Range Dropdown correctly overlays table */}
-<div className="z-[20] min-w-[140px] relative status-dropdown">
-
-  <DateRangeDropdown
-    onDateRangeChange={(start, end) => {
-      setDateRange({ start, end });
-    }}
-  />
-</div>
-
+              <div className="z-[20] min-w-[140px] relative status-dropdown">
+                <DateRangeDropdown
+                  onDateRangeChange={(start, end) => {
+                    setDateRange({ start, end });
+                  }}
+                />
+              </div>
 
               {/* Priority Filter */}
               <select
                 value={priorityfilter}
                 onChange={(e) => setpriorityfilter(e.target.value)}
-                className="px-3 py-2 rounded-lg border border-gray-300 bg-white text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm sm:text-base transition duration-200 hover:border-blue-400"
+                className="px-4 py-2 rounded-xl border border-[#2A2A2A] bg-[#181818] text-white shadow-sm focus:outline-none focus:border-[#FF8A00] text-sm sm:text-base transition hover:border-[#FF8A00]/50 font-medium"
               >
-                <option>Priority</option>
-                <option value="hot">Hot</option>
-                <option value="warm">Warm</option>
-                <option value="cold">Cold</option>
-                <option value="Not Assigned">Not Assigned</option>
+                <option value="Priority" className="bg-[#181818]">Priority</option>
+                <option value="hot" className="bg-[#181818]">Hot</option>
+                <option value="warm" className="bg-[#181818]">Warm</option>
+                <option value="cold" className="bg-[#181818]">Cold</option>
+                <option value="Not Assigned" className="bg-[#181818]">Not Assigned</option>
               </select>
 
               {/* Assigned To Filter */}
               <select
                 value={assignedfilter}
                 onChange={(e) => setassignedfilter(e.target.value)}
-                className="min-w-[140px] px-4 py-2 rounded-lg border border-gray-300 text-gray-700 bg-white shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all hover:border-blue-400"
+                className="min-w-[140px] px-4 py-2 rounded-xl border border-[#2A2A2A] text-white bg-[#181818] shadow-sm focus:outline-none focus:border-[#FF8A00] transition hover:border-[#FF8A00]/50 font-medium"
               >
-                <option value="AssignedTo">Assigned To</option>
+                <option value="AssignedTo" className="bg-[#181818]">Assigned To</option>
                 {assignedStaff?.map((staff) => (
-                  <option key={staff._id} value={staff._id}>
+                  <option key={staff._id} value={staff._id} className="bg-[#181818]">
                     {staff.name}
                   </option>
                 ))}
@@ -487,7 +483,7 @@ function Subadminleads() {
                     type="text"
                     value={searchText}
                     onChange={(e) => setsearchText(e.target.value)}
-                    className="px-4 py-2 rounded-lg border border-gray-300 text-gray-700 bg-white shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all w-40 sm:w-56"
+                    className="px-4 py-2 rounded-xl border border-[#2A2A2A] text-white bg-[#181818] shadow-sm focus:outline-none focus:border-[#FF8A00] transition-all w-40 sm:w-56 placeholder-gray-400"
                     placeholder="Search..."
                     initial={{ opacity: 0, width: 0 }}
                     animate={{ opacity: 1, width: "auto" }}
@@ -497,7 +493,7 @@ function Subadminleads() {
                 )}
               </AnimatePresence>
               <button
-                className="p-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 focus:ring-2 focus:ring-blue-400 transition"
+                className="p-2.5 rounded-xl bg-[#FF8A00] text-black font-bold hover:bg-[#E67A00] transition shadow-md"
                 onClick={() => setshowsearch(!showsearch)}
               >
                 <FaSearch />
@@ -507,25 +503,25 @@ function Subadminleads() {
 
           {/* New section for lead counts (Admin only) */}
           {role === "Admin" && allAgentsSubAdminsLeadCounts.length > 0 && (
-            <div className="p-4  sm:p-6 bg-gray-100">
-              <h4 className="text-lg sm:text-xl font-semibold text-gray-800 mb-3">Agent/Sub-Admin Lead Summary</h4>
-              <div className="overflow-x-auto bg-white rounded-xl shadow-lg">
-                <table className="min-w-full divide-y divide-gray-200">
-                  <thead className="bg-gray-50">
+            <div className="p-4 sm:p-6 bg-[#0A0A0A]">
+              <h4 className="text-lg sm:text-xl font-semibold text-white mb-3">Agent/Sub-Admin Lead Summary</h4>
+              <div className="overflow-x-auto bg-[#141414] rounded-2xl shadow-xl border border-[#262626]">
+                <table className="min-w-full divide-y divide-[#262626]">
+                  <thead className="bg-[#181818]">
                     <tr>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Role</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Assigned Leads</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Created Leads</th>
+                      <th className="px-6 py-3 text-left text-xs font-semibold text-[#FF8A00] uppercase tracking-wider">Name</th>
+                      <th className="px-6 py-3 text-left text-xs font-semibold text-[#FF8A00] uppercase tracking-wider">Role</th>
+                      <th className="px-6 py-3 text-left text-xs font-semibold text-[#FF8A00] uppercase tracking-wider">Assigned Leads</th>
+                      <th className="px-6 py-3 text-left text-xs font-semibold text-[#FF8A00] uppercase tracking-wider">Created Leads</th>
                     </tr>
                   </thead>
-                  <tbody className="bg-white divide-y divide-gray-200">
+                  <tbody className="bg-[#141414] divide-y divide-[#262626]">
                     {allAgentsSubAdminsLeadCounts.map((staff) => (
-                      <tr key={staff.userId}>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{staff.name}</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{staff.role}</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{staff.assignedCount || 0}</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{staff.createdCount || 0}</td>
+                      <tr key={staff.userId} className="hover:bg-[#1C1C1C] transition">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-white">{staff.name}</td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{staff.role}</td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{staff.assignedCount || 0}</td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{staff.createdCount || 0}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -535,12 +531,12 @@ function Subadminleads() {
           )}
 
           {/* Table Content */}
-          <div className="flex-grow p-4 sm:p-1 bg-gray-100">
-            <div className="flex justify-end mb-1 gap-2">
+          <div className="flex-grow p-4 sm:p-2 bg-[#0A0A0A]">
+            <div className="flex justify-end mb-3 gap-2 flex-wrap">
               { (
                 <button
                   onClick={() => dispatch(toggleUploadcsvmodal())}
-                  className="flex items-center gap-2 bg-blue-600 text-white px-1 py-2 rounded-lg hover:bg-blue-700 transition-shadow shadow-md"
+                  className="flex items-center gap-2 bg-[#FF8A00] hover:bg-[#E67A00] text-black font-bold px-3 py-2 rounded-xl transition shadow-md shadow-[#FF8A00]/20 text-sm"
                 >
                   <CloudUpload size={18} />
                   Upload
@@ -550,14 +546,14 @@ function Subadminleads() {
                 <select
                   value={downloadFormat}
                   onChange={(e) => setDownloadFormat(e.target.value)}
-                  className="px-3 py-2 rounded-lg border border-gray-300 bg-white text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm sm:text-base transition duration-200 hover:border-blue-400"
+                  className="px-3 py-2 rounded-xl border border-[#2A2A2A] bg-[#181818] text-white shadow-sm focus:outline-none focus:border-[#FF8A00] text-sm transition hover:border-[#FF8A00]/50 font-medium"
                 >
-                  <option value="csv">CSV</option>
-                  <option value="xlsx">Excel</option>
+                  <option value="csv" className="bg-[#181818]">CSV</option>
+                  <option value="xlsx" className="bg-[#181818]">Excel</option>
                 </select>
                 <button
                   onClick={handleDownloadLeads}
-                  className="flex items-center gap-2 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-shadow shadow-md"
+                  className="flex items-center gap-2 bg-[#181818] border border-[#2A2A2A] hover:border-[#FF8A00] text-white px-4 py-2 rounded-xl transition shadow-md text-sm font-semibold"
                 >
                   Download
                 </button>
@@ -569,7 +565,7 @@ function Subadminleads() {
                   exit={{ opacity: 0, x: 20 }}
                   transition={{ duration: 0.3 }}
                   onClick={handleDeleteSelected}
-                  className="flex items-center gap-2 bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-shadow shadow-md"
+                  className="flex items-center gap-2 bg-red-600 text-white px-4 py-2 rounded-xl hover:bg-red-700 transition shadow-md text-sm font-semibold"
                 >
                   <Trash2 size={18} />
                   Delete Selected
@@ -582,7 +578,7 @@ function Subadminleads() {
                   exit={{ opacity: 0, x: 20 }}
                   transition={{ duration: 0.3 }}
                   onClick={() => setShowDeleteAllConfirm(true)}
-                  className="flex items-center gap-2 bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-shadow shadow-md"
+                  className="flex items-center gap-2 bg-red-950/70 border border-red-800 text-red-300 hover:bg-red-900 px-4 py-2 rounded-xl transition shadow-md text-sm font-semibold"
                 >
                   <Trash2 size={18} />
                   Delete All Leads
@@ -593,10 +589,10 @@ function Subadminleads() {
               <Spinner />
             ) : fetchleads?.leads?.length > 0 ? (
               <>
-                <div className="overflow-x-auto w-full bg-white p-3 sm:p-4 rounded-xl shadow-lg">
+                <div className="overflow-x-auto w-full bg-[#141414] p-3 sm:p-4 rounded-2xl shadow-xl border border-[#262626]">
                   <div className="max-h-[70vh] sm:max-h-[75vh] overflow-y-auto">
                     <table className="w-full table-auto border-collapse text-xs sm:text-sm min-w-[800px]">
-                      <thead className="sticky top-0 bg-gradient-to-r from-[#00B5A6] to-[#1E6DB0] text-white text-xs sm:text-sm uppercase z-10">
+                      <thead className="sticky top-0 bg-gradient-to-r from-[#FF8A00] to-[#E67A00] text-black text-xs sm:text-sm uppercase font-bold z-10">
                         <tr>
                           <th className="py-2 sm:py-3 px-2 sm:px-4 text-left">
                             {role && (
@@ -616,7 +612,7 @@ function Subadminleads() {
                                     setSelectedLeads([]);
                                   }
                                 }}
-                                className="h-4 w-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500"
+                                className="h-4 w-4 accent-black rounded border-[#2A2A2A] focus:ring-[#FF8A00]"
                               />
                             )}
                           </th>
@@ -661,7 +657,7 @@ function Subadminleads() {
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.4, delay: index * 0.05 }}
-                            className="bg-white even:bg-gray-50 hover:bg-blue-50 text-xs sm:text-sm"
+                            className="bg-[#141414] even:bg-[#181818] hover:bg-[#202020] text-xs sm:text-sm text-white border-b border-[#262626] transition"
                           >
                             <td className="py-2 sm:py-4 px-2 sm:px-4 align-middle">
                               {role && (
@@ -669,16 +665,16 @@ function Subadminleads() {
                                   type="checkbox"
                                   checked={selectedLeads.includes(lead._id)}
                                   onChange={() => handleSelectLead(lead._id)}
-                                  className="h-4 w-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500"
+                                  className="h-4 w-4 accent-[#FF8A00] rounded border-[#2A2A2A]"
                                 />
                               )}
                             </td>
-                            <td className="py-2 sm:py-4 px-2 sm:px-4 align-middle">
+                            <td className="py-2 sm:py-4 px-2 sm:px-4 align-middle text-gray-300">
                               {(currentpage - 1) * leadsperpage + index + 1}
                             </td>
                             <td className="py-2 sm:py-4 px-2 sm:px-4 align-middle">
                               <button
-                                className="text-blue-700 font-semibold hover:underline"
+                                className="text-[#FF8A00] font-semibold hover:underline"
                                 onClick={() =>
                                   dispatch(toggleCustomerdetailmodal(lead))
                                 }
@@ -687,20 +683,20 @@ function Subadminleads() {
                               </button>
                             </td>
 
-                            <td className="py-2 sm:py-4 px-2 sm:px-4 align-middle">
+                            <td className="py-2 sm:py-4 px-2 sm:px-4 align-middle text-gray-200">
                               {lead.mobile}
                             </td>
-                            <td className="py-2 sm:py-4 px-2 sm:px-4 align-middle">
+                            <td className="py-2 sm:py-4 px-2 sm:px-4 align-middle text-gray-300">
                               {lead.createdBy?.name}
                             </td>
-                            <td className="py-2 sm:py-4 px-2 sm:px-4 text-gray-600 align-middle">
+                            <td className="py-2 sm:py-4 px-2 sm:px-4 text-gray-300 align-middle">
                               {lead.assignedTo?.name || (
-                                <span className="italic text-gray-400">
+                                <span className="italic text-gray-500">
                                   Not yet assigned
                                 </span>
                               )}
                             </td>
-                            <td className="py-2 sm:py-4 px-2 sm:px-4 align-middle">
+                            <td className="py-2 sm:py-4 px-2 sm:px-4 align-middle text-gray-300">
                               {lead.createdAt
                                 ? new Date(lead.createdAt).toLocaleDateString(
                                     "en-US",
@@ -713,12 +709,12 @@ function Subadminleads() {
                                 : "N/A"}
                             </td>
 
-                            <td className="py-2 sm:py-4 px-2 sm:px-4 align-middle">
+                            <td className="py-2 sm:py-4 px-2 sm:px-4 align-middle text-gray-300">
                               {lead.source?.title || "N/A"}
                             </td>
                             <td className="py-2 sm:py-4 px-2 sm:px-4 align-middle">
                               <select
-                                className={`border p-1 sm:p-2 rounded-md bg-gray-100 hover:bg-white focus:ring-2 focus:ring-blue-400 transition text-xs sm:text-sm w-full
+                                className={`border border-[#2A2A2A] p-1 sm:p-2 rounded-xl bg-[#181818] text-white hover:border-[#FF8A00]/50 focus:border-[#FF8A00] transition text-xs sm:text-sm w-full
                                  ${priorityColor[lead.priority] || ""} `}
                                 value={lead.priority}
                                 disabled={!!metadata}
@@ -726,24 +722,28 @@ function Subadminleads() {
                                   handlepriority(lead._id, e.target.value)
                                 }
                               >
-                                <option value="hot" className="">
+                                <option value="hot" className="bg-[#181818] text-white">
                                   Hot
                                 </option>
-                                <option value="warm">Warm</option>
-                                <option value="cold">Cold</option>
-                                <option value="Not Assigned">
+                                <option value="warm" className="bg-[#181818] text-white">
+                                  Warm
+                                </option>
+                                <option value="cold" className="bg-[#181818] text-white">
+                                  Cold
+                                </option>
+                                <option value="Not Assigned" className="bg-[#181818] text-white">
                                   Not Assigned
                                 </option>
                               </select>
                             </td>
-                            <td className="py-2 sm:py-4 px-2 sm:px-4 align-middle">
+                            <td className="py-2 sm:py-4 px-2 sm:px-4 align-middle text-gray-300">
                               {lead.location || "N/A"}
                             </td>
 
                             <td className="py-2 sm:py-4 px-2 sm:px-4 align-middle">
                               <select
-                                className={`border p-1 sm:p-2 rounded-md hover:bg-white focus:ring-2 focus:ring-blue-400 transition text-xs sm:text-sm w-full 
-      ${statusColors[lead.status] || ""}`}
+                                className={`border border-[#2A2A2A] p-1 sm:p-2 rounded-xl bg-[#181818] text-white hover:border-[#FF8A00]/50 focus:border-[#FF8A00] transition text-xs sm:text-sm w-full 
+       ${statusColors[lead.status] || ""}`}
                                 value={lead.status}
                                 disabled={!!metadata}
                                 onChange={(e) =>
@@ -752,43 +752,43 @@ function Subadminleads() {
                               >
                                 <option
                                   value="new"
-                                  className={statusColors.new}
+                                  className="bg-[#181818] text-white"
                                 >
                                   New
                                 </option>
                                 <option
                                   value="open"
-                                  className={statusColors.open}
+                                  className="bg-[#181818] text-white"
                                 >
                                   Open
                                 </option>
                                 <option
                                   value="converted"
-                                  className={statusColors.converted}
+                                  className="bg-[#181818] text-white"
                                 >
                                   Converted
                                 </option>
                                 <option
                                   value="walkin"
-                                  className={statusColors.walkin}
+                                  className="bg-[#181818] text-white"
                                 >
                                   Walk In
                                 </option>
                                 <option
                                   value="paused"
-                                  className={statusColors.paused}
+                                  className="bg-[#181818] text-white"
                                 >
                                   Paused
                                 </option>
                                 <option
                                   value="rejected"
-                                  className={statusColors.rejected}
+                                  className="bg-[#181818] text-white"
                                 >
                                   Rejected
                                 </option>
                                 <option
                                   value="unavailable"
-                                  className={statusColors.unavailable}
+                                  className="bg-[#181818] text-white"
                                 >
                                   Unavailable
                                 </option>
@@ -801,15 +801,15 @@ function Subadminleads() {
                   </div>
                 </div>
                 {assignedfilter === "AssignedTo" && <div className="flex justify-center gap-2 mt-4">
-<div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mt-6 p-3 sm:p-4 bg-white border border-gray-200 shadow-sm rounded-2xl transition-all duration-300 hover:shadow-md">
+<div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mt-6 p-3 sm:p-4 bg-[#141414] border border-[#262626] shadow-xl rounded-2xl">
   {/* ⬅️ Prev */}
   <button
     disabled={currentpage === 1}
     onClick={() => handlePageChange(currentpage - 1)}
-    className={`px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${
+    className={`px-4 py-2 text-sm font-semibold rounded-xl transition-all duration-200 ${
       currentpage === 1
-        ? "bg-gray-200 text-gray-400 cursor-not-allowed"
-        : "bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:scale-105 hover:shadow"
+        ? "bg-[#181818] text-gray-600 border border-[#262626] cursor-not-allowed"
+        : "bg-[#181818] border border-[#2A2A2A] text-gray-200 hover:text-white hover:border-[#FF8A00]"
     }`}
   >
     ← Prev
@@ -829,14 +829,14 @@ function Subadminleads() {
       return (
         <React.Fragment key={page}>
           {showEllipsis && (
-            <span className="px-2 text-gray-400 select-none">…</span>
+            <span className="px-2 text-gray-500 select-none">…</span>
           )}
           <button
             onClick={() => handlePageChange(page)}
-            className={`w-9 h-9 rounded-lg text-sm font-medium transition-all duration-200 ${
+            className={`w-9 h-9 rounded-xl text-sm font-bold transition-all duration-200 ${
               currentpage === page
-                ? "bg-blue-600 text-white shadow-md scale-105"
-                : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                ? "bg-[#FF8A00] text-black shadow-md shadow-[#FF8A00]/25 scale-105"
+                : "bg-[#181818] border border-[#2A2A2A] text-gray-300 hover:text-white hover:border-[#FF8A00]"
             }`}
           >
             {page}
@@ -849,10 +849,10 @@ function Subadminleads() {
   <button
     disabled={currentpage === totalPages}
     onClick={() => handlePageChange(currentpage + 1)}
-    className={`px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${
+    className={`px-4 py-2 text-sm font-semibold rounded-xl transition-all duration-200 ${
       currentpage === totalPages
-        ? "bg-gray-200 text-gray-400 cursor-not-allowed"
-        : "bg-gradient-to-r from-indigo-600 to-blue-600 text-white hover:scale-105 hover:shadow"
+        ? "bg-[#181818] text-gray-600 border border-[#262626] cursor-not-allowed"
+        : "bg-[#181818] border border-[#2A2A2A] text-gray-200 hover:text-white hover:border-[#FF8A00]"
     }`}
   >
     Next →
@@ -865,7 +865,7 @@ function Subadminleads() {
       min="1"
       max={totalPages}
       placeholder="Page #"
-      className="w-16 sm:w-20 px-2 py-1.5 border border-gray-300 rounded-md text-sm text-center focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all duration-200"
+      className="w-16 sm:w-20 px-2 py-1.5 border border-[#2A2A2A] bg-[#181818] text-white rounded-xl text-sm text-center focus:border-[#FF8A00] outline-none transition"
       onKeyDown={(e) => {
         if (e.key === "Enter") {
           const page = Number(e.target.value);
@@ -877,8 +877,8 @@ function Subadminleads() {
         }
       }}
     />
-    <span className="text-xs sm:text-sm text-gray-500 whitespace-nowrap">
-      Page <strong>{currentpage}</strong> of {totalPages}
+    <span className="text-xs sm:text-sm text-gray-400 whitespace-nowrap">
+      Page <strong className="text-white">{currentpage}</strong> of {totalPages}
     </span>
   </div>
 </div>
@@ -886,7 +886,7 @@ function Subadminleads() {
  </div>}
               </>
             ) : (
-              <p className="text-gray-500 text-center text-sm sm:text-lg py-4 sm:py-6">
+              <p className="text-gray-400 text-center text-sm sm:text-lg py-4 sm:py-6">
                 {totalLeads > 0
                   ? `No leads available on page ${currentpage}. Try adjusting filters or navigating to another page.`
                   : "No Leads Available"}
@@ -936,13 +936,13 @@ function Subadminleads() {
             transition={{ duration: 0.3 }}
             className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-0"
           >
-            <motion.div className="absolute inset-0 bg-black opacity-30" />
+            <motion.div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
             <motion.div
-              initial={{ scale: 0.5 }}
+              initial={{ scale: 0.8 }}
               animate={{ scale: 1 }}
-              exit={{ scale: 0.5 }}
+              exit={{ scale: 0.8 }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              className="relative z-10 bg-green-100 text-green-700 px-6 sm:px-10 py-4 sm:py-6 rounded-xl shadow-2xl text-sm sm:text-base font-semibold w-full max-w-xs sm:max-w-sm md:max-w-md h-[100px] sm:h-[120px] flex items-center justify-center text-center"
+              className="relative z-10 bg-[#141414] border border-emerald-500/50 text-emerald-400 px-8 py-6 rounded-2xl shadow-2xl text-base font-semibold w-full max-w-sm flex items-center justify-center text-center"
             >
               Status Updated Successfully!
             </motion.div>
@@ -956,13 +956,13 @@ function Subadminleads() {
             transition={{ duration: 0.3 }}
             className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-0"
           >
-            <motion.div className="absolute inset-0 bg-black opacity-30" />
+            <motion.div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
             <motion.div
-              initial={{ scale: 0.5 }}
+              initial={{ scale: 0.8 }}
               animate={{ scale: 1 }}
-              exit={{ scale: 0.5 }}
+              exit={{ scale: 0.8 }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              className="relative z-10 bg-green-100 text-green-700 px-6 sm:px-10 py-4 sm:py-6 rounded-xl shadow-2xl text-sm sm:text-base font-semibold w-full max-w-xs sm:max-w-sm md:max-w-md h-[100px] sm:h-[120px] flex items-center justify-center text-center"
+              className="relative z-10 bg-[#141414] border border-emerald-500/50 text-emerald-400 px-8 py-6 rounded-2xl shadow-2xl text-base font-semibold w-full max-w-sm flex items-center justify-center text-center"
             >
               Leads Deleted Successfully!
             </motion.div>
@@ -970,34 +970,34 @@ function Subadminleads() {
         )}
         {showDeleteConfirm && (
           <motion.div
-            className="absolute inset-0 bg-black/60 flex items-center justify-center z-50"
+            className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
           >
             <motion.div
-              className="bg-white rounded-xl p-4 sm:p-6 md:p-8 shadow-lg text-center w-full max-w-xs sm:max-w-sm"
+              className="bg-[#141414] border border-[#262626] rounded-2xl p-6 md:p-8 shadow-2xl text-center w-full max-w-sm text-white"
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.8, opacity: 0 }}
               transition={{ duration: 0.3 }}
             >
-              <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-4 sm:mb-6">
+              <h3 className="text-lg sm:text-xl font-bold mb-6 text-white">
                 Are you sure you want to delete {selectedLeads.length} lead(s)?
               </h3>
-              <div className="flex gap-2 sm:gap-4 justify-center">
+              <div className="flex gap-3 justify-center">
                 <button
                   onClick={confirmDelete}
-                  className="bg-red-600 hover:bg-red-700 text-white px-4 sm:px-6 py-1.5 sm:py-2 rounded-lg transition text-xs sm:text-sm"
+                  className="bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-2.5 rounded-xl transition text-sm shadow-md"
                 >
-                  Yes
+                  Yes, Delete
                 </button>
                 <button
                   onClick={closeDeleteConfirm}
-                  className="bg-gray-300 hover:bg-gray-400 text-black px-4 sm:px-6 py-1.5 sm:py-2 rounded-lg transition text-xs sm:text-sm"
+                  className="bg-[#242424] hover:bg-[#303030] text-gray-200 px-6 py-2.5 rounded-xl transition text-sm font-semibold"
                 >
-                  No
+                  Cancel
                 </button>
               </div>
             </motion.div>
@@ -1020,35 +1020,35 @@ function Subadminleads() {
         )}
         {showDeleteAllConfirm && (
           <motion.div
-            className="absolute inset-0 bg-black/60 flex items-center justify-center z-50"
+            className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
           >
             <motion.div
-              className="bg-white rounded-xl p-4 sm:p-6 md:p-8 shadow-lg text-center w-full max-w-xs sm:max-w-sm"
+              className="bg-[#141414] border border-[#262626] rounded-2xl p-6 md:p-8 shadow-2xl text-center w-full max-w-sm text-white"
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.8, opacity: 0 }}
               transition={{ duration: 0.3 }}
             >
-              <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-4 sm:mb-6">
+              <h3 className="text-lg sm:text-xl font-bold mb-6 text-white">
                 Are you absolutely sure you want to delete ALL leads?
               </h3>
-              <div className="flex gap-2 sm:gap-4 justify-center">
+              <div className="flex gap-3 justify-center">
                 <button
                   onClick={() => {
                     setShowDeleteAllConfirm(false);
                     setShowSecondDeleteAllConfirm(true);
                   }}
-                  className="bg-red-600 hover:bg-red-700 text-white px-4 sm:px-6 py-1.5 sm:py-2 rounded-lg transition text-xs sm:text-sm"
+                  className="bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-2.5 rounded-xl transition text-sm shadow-md"
                 >
                   Yes, I'm Sure
                 </button>
                 <button
                   onClick={() => setShowDeleteAllConfirm(false)}
-                  className="bg-gray-300 hover:bg-gray-400 text-black px-4 sm:px-6 py-1.5 sm:py-2 rounded-lg transition text-xs sm:text-sm"
+                  className="bg-[#242424] hover:bg-[#303030] text-gray-200 px-6 py-2.5 rounded-xl transition text-sm font-semibold"
                 >
                   Cancel
                 </button>
@@ -1059,32 +1059,32 @@ function Subadminleads() {
 
         {showSecondDeleteAllConfirm && (
           <motion.div
-            className="absolute inset-0 bg-black/60 flex items-center justify-center z-50"
+            className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
           >
             <motion.div
-              className="bg-white rounded-xl p-4 sm:p-6 md:p-8 shadow-lg text-center w-full max-w-xs sm:max-w-sm"
+              className="bg-[#141414] border border-[#262626] rounded-2xl p-6 md:p-8 shadow-2xl text-center w-full max-w-sm text-white"
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.8, opacity: 0 }}
               transition={{ duration: 0.3 }}
             >
-              <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-4 sm:mb-6">
+              <h3 className="text-lg sm:text-xl font-bold mb-6 text-white text-red-400">
                 This action is irreversible. Confirm deletion of ALL leads?
               </h3>
-              <div className="flex gap-2 sm:gap-4 justify-center">
+              <div className="flex gap-3 justify-center">
                 <button
                   onClick={confirmDeleteAllLeads}
-                  className="bg-red-600 hover:bg-red-700 text-white px-4 sm:px-6 py-1.5 sm:py-2 rounded-lg transition text-xs sm:text-sm"
+                  className="bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-2.5 rounded-xl transition text-sm shadow-md"
                 >
                   Confirm Delete All
                 </button>
                 <button
                   onClick={() => setShowSecondDeleteAllConfirm(false)}
-                  className="bg-gray-300 hover:bg-gray-400 text-black px-4 sm:px-6 py-1.5 sm:py-2 rounded-lg transition text-xs sm:text-sm"
+                  className="bg-[#242424] hover:bg-[#303030] text-gray-200 px-6 py-2.5 rounded-xl transition text-sm font-semibold"
                 >
                   Cancel
                 </button>

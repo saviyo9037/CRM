@@ -114,14 +114,11 @@ const chartData = {
   }
 
   return (
-    <div className="bg-gradient-to-br from-white via-gray-50 to-gray-100 rounded-3xl border border-gray-200 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
+    <div className="bg-[#141414] border border-[#262626] rounded-3xl shadow-xl overflow-hidden">
       {/* Header */}
-      <div className="px-6 py-4 border-b border-gray-200 bg-white/60 backdrop-blur-sm flex flex-col items-center">
-        {/* <h2 className="text-xl sm:text-2xl font-semibold text-gray-800 mb-1">
-          📊 Customer Status Distribution
-        </h2> */}
-        <p className="text-gray-500 text-sm">
-          Total Customers: <span className="font-semibold text-gray-800">{total}</span>
+      <div className="px-6 py-4 border-b border-[#262626] bg-[#161616] flex flex-col items-center">
+        <p className="text-gray-400 text-sm">
+          Total Customers: <span className="font-bold text-white ml-1">{total}</span>
         </p>
       </div>
 
@@ -137,31 +134,31 @@ const chartData = {
         </div>
 
         {/* Status Summary */}
-        <div className="col-span-2 flex flex-col gap-4">
+        <div className="col-span-2 flex flex-col gap-3">
           {[
             { status: 'Success', count: statusCount.success, color: '#10B981' },
             { status: 'Failed', count: statusCount.failed, color: '#EF4444' },
-            { status: 'Pending', count: statusCount.pending, color: '#F59E0B' },
+            { status: 'Pending', count: statusCount.pending, color: '#FF8A00' },
           ].map(({ status, count, color }) => (
             <div
               key={status}
-              className="flex justify-between items-center bg-white/80 shadow-sm hover:shadow-md border border-gray-100 rounded-xl px-4 py-3 transition-all duration-200 hover:scale-[1.02]"
+              className="flex justify-between items-center bg-[#181818] border border-[#262626] hover:border-[#FF8A00]/40 rounded-xl px-4 py-3 transition-all duration-200"
             >
-              <div className="flex items-center gap-2 text-gray-800 font-semibold">
+              <div className="flex items-center gap-2.5 text-white font-medium text-sm">
                 <span
                   className="w-3 h-3 rounded-full"
                   style={{ backgroundColor: color }}
                 ></span>
                 <span className="capitalize">{status}</span>
               </div>
-              <span className="text-gray-700 font-bold">{count}</span>
+              <span className="text-[#FF8A00] font-bold text-base">{count}</span>
             </div>
           ))}
         </div>
       </div>
 
       {/* Footer */}
-      <div className="bg-gray-50 border-t border-gray-200 text-center py-2 text-xs text-gray-500">
+      <div className="bg-[#101010] border-t border-[#262626] text-center py-2.5 text-xs text-gray-500">
         Updated based on current customer records
       </div>
     </div>

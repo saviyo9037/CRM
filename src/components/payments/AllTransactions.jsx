@@ -131,24 +131,25 @@ const AllTransactions = () => {
     );
 
   return (
-    <div className="bg-white shadow-xl rounded-2xl p-6 mt-8 border border-gray-200/80">
-      <h1 className="text-3xl font-bold text-gray-800 mb-6">
+    <div className="bg-[#141414] shadow-xl rounded-2xl p-6 mt-8 border border-[#262626]">
+      <h1 className="text-2xl sm:text-3xl font-bold text-white mb-6 flex items-center gap-3">
+        <span className="w-2.5 h-2.5 rounded-full bg-[#FF8A00]"></span>
         Transactions Management
       </h1>
 
       {/* Filters */}
-      <div className="flex flex-wrap gap-4 mb-6">
+      <div className="flex flex-wrap gap-3 mb-6">
         <input
           type="text"
           placeholder="Customer name"
-          className="border rounded px-3 py-2"
+          className="border border-[#2A2A2A] bg-[#181818] text-white rounded-xl px-3.5 py-2 text-sm focus:border-[#FF8A00] outline-none placeholder-gray-500"
           value={filters.customer}
           onChange={(e) =>
             setFilters({ ...filters, customer: e.target.value })
           }
         />
         <select
-          className="border rounded px-3 py-2"
+          className="border border-[#2A2A2A] bg-[#181818] text-white rounded-xl px-3.5 py-2 text-sm focus:border-[#FF8A00] outline-none"
           value={filters.status}
           onChange={(e) => setFilters({ ...filters, status: e.target.value })}
         >
@@ -159,7 +160,7 @@ const AllTransactions = () => {
           <option value="Overdue">Overdue</option>
         </select>
         <select
-          className="border rounded px-3 py-2"
+          className="border border-[#2A2A2A] bg-[#181818] text-white rounded-xl px-3.5 py-2 text-sm focus:border-[#FF8A00] outline-none"
           value={filters.paymentMode}
           onChange={(e) =>
             setFilters({ ...filters, paymentMode: e.target.value })
@@ -172,20 +173,20 @@ const AllTransactions = () => {
           <option value="bank_transfer">Bank Transfer</option>
         </select>
         <select
-          className="border rounded px-3 py-2"
+          className="border border-[#2A2A2A] bg-[#181818] text-white rounded-xl px-3.5 py-2 text-sm focus:border-[#FF8A00] outline-none"
           value={filters.product}
           onChange={(e) => setFilters({ ...filters, product: e.target.value })}
         >
           <option value="">All Products</option>
           {products.map((p) => (
-            <option key={p._id} value={p._id}>
+            <option key={p._id} value={p._id} className="bg-[#141414] text-white">
               {p.title}
             </option>
           ))}
         </select>
         <input
           type="date"
-          className="border rounded px-3 py-2"
+          className="border border-[#2A2A2A] bg-[#181818] text-white rounded-xl px-3.5 py-2 text-sm focus:border-[#FF8A00] outline-none"
           value={filters.startDate}
           onChange={(e) =>
             setFilters({ ...filters, startDate: e.target.value })
@@ -193,7 +194,7 @@ const AllTransactions = () => {
         />
         <input
           type="date"
-          className="border rounded px-3 py-2"
+          className="border border-[#2A2A2A] bg-[#181818] text-white rounded-xl px-3.5 py-2 text-sm focus:border-[#FF8A00] outline-none"
           value={filters.endDate}
           onChange={(e) => setFilters({ ...filters, endDate: e.target.value })}
         />
@@ -201,68 +202,68 @@ const AllTransactions = () => {
 
       {/* Pagination Info */}
       {filteredTransactions.length > 0 && (
-        <div className="mb-4 text-sm text-gray-600">
+        <div className="mb-4 text-xs font-semibold text-gray-400">
           Showing {startIndex + 1} to {Math.min(startIndex + itemsPerPage, filteredTransactions.length)} of {filteredTransactions.length} transactions
         </div>
       )}
 
       {/* Transactions Table */}
-      <div className="overflow-x-auto rounded-lg border border-gray-200">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
+      <div className="overflow-x-auto rounded-xl border border-[#262626]">
+        <table className="min-w-full divide-y divide-[#262626]">
+          <thead className="bg-gradient-to-r from-[#FF8A00] to-[#E67A00]">
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider flex items-center">
+              <th className="px-6 py-3.5 text-left text-xs font-bold text-black uppercase tracking-wider flex items-center">
                 <FaUser className="mr-2" /> Customer
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3.5 text-left text-xs font-bold text-black uppercase tracking-wider">
                 Product
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider flex items-center">
+              <th className="px-6 py-3.5 text-left text-xs font-bold text-black uppercase tracking-wider flex items-center">
                 <FaCalendarAlt className="mr-2" /> Date
               </th>
-              <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3.5 text-right text-xs font-bold text-black uppercase tracking-wider">
                 Amount
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3.5 text-left text-xs font-bold text-black uppercase tracking-wider">
                 Mode
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3.5 text-left text-xs font-bold text-black uppercase tracking-wider">
                 Recorded By
               </th>
-              <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3.5 text-center text-xs font-bold text-black uppercase tracking-wider">
                 Status
               </th>
             </tr>
           </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
+          <tbody className="divide-y divide-[#262626]">
             {filteredTransactions.length > 0 ? (
               paginatedTransactions.map((txn) => {
                 if (!txn.payment) {
                   return (
                     <tr
                       key={txn._id}
-                      className="hover:bg-gray-50/50 transition-colors duration-150"
+                      className="bg-[#141414] even:bg-[#181818] hover:bg-[#202020] transition-colors duration-150"
                     >
-                      <td className="px-6 py-4 text-sm font-medium text-gray-900">
+                      <td className="px-6 py-4 text-sm font-semibold text-white">
                         N/A
                       </td>
-                      <td className="px-6 py-4 text-sm text-gray-600">
+                      <td className="px-6 py-4 text-sm text-gray-300">
                         N/A
                       </td>
-                      <td className="px-6 py-4 text-sm text-gray-600">
+                      <td className="px-6 py-4 text-sm text-gray-300">
                         {new Date(txn.transactionDate).toLocaleDateString("en-GB")}
                       </td>
-                      <td className="px-6 py-4 text-sm text-green-600 font-semibold text-right">
+                      <td className="px-6 py-4 text-sm text-green-400 font-bold text-right">
                         {formatCurrency(txn.paidAmount)}
                       </td>
-                      <td className="px-6 py-4 text-sm text-gray-600">
+                      <td className="px-6 py-4 text-sm text-gray-300">
                         {txn.paymentMode}
                       </td>
-                      <td className="px-6 py-4 text-sm text-gray-600">
+                      <td className="px-6 py-4 text-sm text-gray-400">
                         {txn.transactionRecordBy?.name || "N/A"}
                       </td>
                       <td className="px-6 py-4 text-center">
-                        <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                        <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-gray-800 text-gray-300 border border-gray-700">
                           <span className="mr-1.5"><FaTimesCircle /></span>
                           Unknown
                         </span>
@@ -275,54 +276,54 @@ const AllTransactions = () => {
                 const now = new Date();
 
                 let status = "Unpaid";
-                let statusColor = "bg-red-100 text-red-800";
+                let statusColor = "bg-red-500/10 border border-red-500/30 text-red-400";
                 let StatusIcon = <FaTimesCircle />;
 
                 if (totalPaid === totalAmount) {
                   status = "Paid";
-                  statusColor = "bg-green-100 text-green-800";
+                  statusColor = "bg-green-500/10 border border-green-500/30 text-green-400";
                   StatusIcon = <FaCheckCircle />;
                 } else if (totalPaid > 0 && totalPaid < totalAmount) {
                   status = "Partially Paid";
-                  statusColor = "bg-yellow-100 text-yellow-800";
+                  statusColor = "bg-[#FF8A00]/10 border border-[#FF8A00]/30 text-[#FF8A00]";
                   StatusIcon = <FaHourglassHalf />;
                 } else if (totalPaid === 0) {
                   status = "Unpaid";
-                  statusColor = "bg-gray-100 text-gray-800";
+                  statusColor = "bg-red-500/10 border border-red-500/30 text-red-400";
                   StatusIcon = <FaTimesCircle />;
                 }
                 if (dueDate && new Date(dueDate) < now && due > 0) {
                   status = "Overdue";
-                  statusColor = "bg-orange-100 text-orange-800";
+                  statusColor = "bg-orange-500/10 border border-orange-500/30 text-orange-400";
                   StatusIcon = <FaExclamationCircle />;
                 }
 
                 return (
                   <tr
                     key={txn._id}
-                    className="hover:bg-gray-50/50 transition-colors duration-150"
+                    className="bg-[#141414] even:bg-[#181818] hover:bg-[#202020] transition-colors duration-150"
                   >
-                    <td className="px-6 py-4 text-sm font-medium text-gray-900">
+                    <td className="px-6 py-4 text-sm font-semibold text-white">
                       {txn.payment.customer?.name || "N/A"}
                     </td>
-                    <td className="px-6 py-4 text-sm text-gray-600">
+                    <td className="px-6 py-4 text-sm text-gray-300">
                       {txn.payment.product?.title || "N/A"}
                     </td>
-                    <td className="px-6 py-4 text-sm text-gray-600">
+                    <td className="px-6 py-4 text-sm text-gray-300">
                       {new Date(txn.transactionDate).toLocaleDateString("en-GB")}
                     </td>
-                    <td className="px-6 py-4 text-sm text-green-600 font-semibold text-right">
+                    <td className="px-6 py-4 text-sm text-green-400 font-bold text-right">
                       {formatCurrency(txn.paidAmount)}
                     </td>
-                    <td className="px-6 py-4 text-sm text-gray-600">
+                    <td className="px-6 py-4 text-sm text-gray-300">
                       {txn.paymentMode}
                     </td>
-                    <td className="px-6 py-4 text-sm text-gray-600">
+                    <td className="px-6 py-4 text-sm text-gray-400">
                       {txn.transactionRecordBy?.name || "N/A"}
                     </td>
                     <td className="px-6 py-4 text-center">
                       <span
-                        className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${statusColor}`}
+                        className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold ${statusColor}`}
                       >
                         <span className="mr-1.5">{StatusIcon}</span>
                         {status}
@@ -333,8 +334,8 @@ const AllTransactions = () => {
               })
             ) : (
               <tr>
-                <td colSpan="7" className="text-center py-10 text-gray-500">
-                  <FaExclamationCircle className="text-3xl mx-auto mb-2" />
+                <td colSpan="7" className="text-center py-10 text-gray-400 bg-[#141414]">
+                  <FaExclamationCircle className="text-3xl text-gray-500 mx-auto mb-2" />
                   No transactions found.
                 </td>
               </tr>
@@ -349,7 +350,7 @@ const AllTransactions = () => {
           <button
             onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
             disabled={currentPage === 1}
-            className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50 hover:bg-gray-300"
+            className="px-4 py-2 bg-[#181818] border border-[#2A2A2A] text-gray-300 rounded-xl disabled:opacity-40 hover:bg-[#222222] transition text-sm font-medium"
           >
             Previous
           </button>
@@ -357,7 +358,7 @@ const AllTransactions = () => {
             <button
               key={page}
               onClick={() => setCurrentPage(page)}
-              className={`px-4 py-2 rounded ${currentPage === page ? 'bg-blue-500 text-white' : 'bg-gray-200 hover:bg-gray-300'}`}
+              className={`w-9 h-9 rounded-xl text-sm font-bold transition ${currentPage === page ? 'bg-[#FF8A00] text-black shadow-md shadow-[#FF8A00]/20' : 'bg-[#181818] border border-[#2A2A2A] text-gray-300 hover:bg-[#222222]'}`}
             >
               {page}
             </button>
@@ -365,7 +366,7 @@ const AllTransactions = () => {
           <button
             onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
             disabled={currentPage === totalPages}
-            className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50 hover:bg-gray-300"
+            className="px-4 py-2 bg-[#181818] border border-[#2A2A2A] text-gray-300 rounded-xl disabled:opacity-40 hover:bg-[#222222] transition text-sm font-medium"
           >
             Next
           </button>

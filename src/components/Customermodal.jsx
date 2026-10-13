@@ -200,58 +200,57 @@ const customerformvalidation = Yup.object({
 
   
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-50 bg-black/50 p-4 sm:p-0">
+    <div className="fixed inset-0 flex items-center justify-center z-50 bg-black/80 backdrop-blur-sm p-4 sm:p-0">
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.9 }}
         transition={{ duration: 0.4 }}
-        className="bg-white w-full max-w-md sm:max-w-lg md:max-w-3xl mx-auto rounded-2xl shadow-2xl flex flex-col md:flex-row overflow-hidden"
+        className="bg-[#141414] border border-[#262626] text-white w-full max-w-md sm:max-w-lg md:max-w-3xl mx-auto rounded-2xl shadow-2xl flex flex-col md:flex-row overflow-hidden"
       >
         {fetchleadsource.isLoading && <Spinner />}
 
         {/* Left Section */}
-        <div className="bg-gradient-to-b from-[#00B5A6] to-[#1E6DB0] w-full md:w-1/3 flex flex-col items-center justify-center p-6 text-white">
-          <FaUserPlus className="text-6xl md:text-[80px] mb-4" />
-          <h2 className="text-xl md:text-2xl font-bold">Add New Lead</h2>
-          <p className="text-sm mt-2 text-center">
+        <div className="bg-gradient-to-b from-[#FF8A00] to-[#E67A00] w-full md:w-1/3 flex flex-col items-center justify-center p-6 text-black">
+          <FaUserPlus className="text-6xl md:text-[80px] mb-4 text-black" />
+          <h2 className="text-xl md:text-2xl font-black text-black">Add New Lead</h2>
+          <p className="text-sm mt-2 text-center text-black/80 font-medium">
             Fill in the customer details to generate a new lead.
           </p>
         </div>
 
         {/* Right Section - Form */}
-        <div className="relative w-full md:w-2/3 p-6">
+        <div className="relative w-full md:w-2/3 p-6 bg-[#141414]">
           <button
             onClick={() => {
               setErrorMessage("");
               dispatch(toggleCustomermodal());
             }}
-            className="absolute top-4 right-4 text-2xl text-gray-400 hover:text-red-500 transition"
+            className="absolute top-4 right-4 text-2xl text-gray-400 hover:text-white transition"
           >
             &times;
           </button>
 
-          <h3 className="text-xl md:text-2xl font-semibold text-gray-800 mb-4">
+          <h3 className="text-xl md:text-2xl font-bold text-white mb-4">
             Lead Details
           </h3>
 
           <form onSubmit={customerForm.handleSubmit} className="space-y-4">
             {/* Name */}
             <div>
-<input
-  type="text"
-  name="name"
-  {...customerForm.getFieldProps("name")}
-  onInput={(e) => {
-    // Remove numbers and special characters live
-    e.target.value = e.target.value.replace(/[^A-Za-z\s]/g, "");
-  }}
-  className="border border-gray-300 p-3 w-full rounded-lg focus:ring-2 focus:ring-blue-400"
-  placeholder="Enter name"
-/>
+              <input
+                type="text"
+                name="name"
+                {...customerForm.getFieldProps("name")}
+                onInput={(e) => {
+                  e.target.value = e.target.value.replace(/[^A-Za-z\s]/g, "");
+                }}
+                className="bg-[#121212] border border-[#2E2E2E] text-white placeholder-gray-500 p-3 w-full rounded-lg focus:ring-2 focus:ring-[#FF8A00] focus:border-[#FF8A00] focus:outline-none"
+                placeholder="Enter name"
+              />
 
               {customerForm.touched.name && customerForm.errors.name && (
-                <p className="text-red-500 text-sm mt-1">
+                <p className="text-red-400 text-sm mt-1">
                   {customerForm.errors.name}
                 </p>
               )}
@@ -264,15 +263,15 @@ const customerformvalidation = Yup.object({
                 value={phone}
                 onChange={handlePhoneChange}
                 enableSearch
-                inputClass="!w-full !pl-22 !pr-4 !py-3 !text-gray-800 !border !border-gray-300 !rounded-lg focus:!ring-2 focus:!ring-blue-400"
-                buttonClass="!border-gray-300 !bg-white !rounded-l-lg !p-3"
+                inputClass="!w-full !pl-22 !pr-4 !py-3 !text-white !bg-[#121212] !border !border-[#2E2E2E] !rounded-lg focus:!ring-2 focus:!ring-[#FF8A00]"
+                buttonClass="!border-[#2E2E2E] !bg-[#181818] !rounded-l-lg !p-3"
                 containerClass="!w-full"
-                dropdownClass="!text-gray-800"
+                dropdownClass="!text-white !bg-[#181818] !border-[#2E2E2E]"
                 placeholder="Enter phone number"
               />
               {(!isValid ||
                 (customerForm.touched.mobile && customerForm.errors.mobile)) && (
-                <p className="text-red-500 text-sm mt-2">
+                <p className="text-red-400 text-sm mt-2">
                   {customerForm.errors.mobile ||
                     "⚠️ Please enter a valid phone number for selected country"}
                 </p>
@@ -285,11 +284,11 @@ const customerformvalidation = Yup.object({
                 type="email"
                 name="email"
                 {...customerForm.getFieldProps("email")}
-                className="border border-gray-300 p-3 w-full rounded-lg focus:ring-2 focus:ring-blue-400"
+                className="bg-[#121212] border border-[#2E2E2E] text-white placeholder-gray-500 p-3 w-full rounded-lg focus:ring-2 focus:ring-[#FF8A00] focus:border-[#FF8A00] focus:outline-none"
                 placeholder="Enter email (e.g. name@gmail.com)"
               />
               {customerForm.touched.email && customerForm.errors.email && (
-                <p className="text-red-500 text-sm mt-1">
+                <p className="text-red-400 text-sm mt-1">
                   {customerForm.errors.email}
                 </p>
               )}
@@ -300,11 +299,11 @@ const customerformvalidation = Yup.object({
               <select
                 name="source"
                 {...customerForm.getFieldProps("source")}
-                className="border border-gray-300 p-3 w-full rounded-lg focus:ring-2 focus:ring-blue-400"
+                className="bg-[#121212] border border-[#2E2E2E] text-white p-3 w-full rounded-lg focus:ring-2 focus:ring-[#FF8A00] focus:border-[#FF8A00] focus:outline-none"
               >
-                <option value="">Select Source</option>
+                <option value="" className="bg-[#181818] text-gray-400">Select Source</option>
                 {filteredsource?.map((source, index) => (
-                  <option key={index} value={source.title}>
+                  <option key={index} value={source.title} className="bg-[#181818] text-white">
                     {source.title}
                   </option>
                 ))}
@@ -317,43 +316,30 @@ const customerformvalidation = Yup.object({
                 type="text"
                 name="location"
                 {...customerForm.getFieldProps("location")}
-                className="border border-gray-300 p-3 w-full rounded-lg focus:ring-2 focus:ring-blue-400"
+                className="bg-[#121212] border border-[#2E2E2E] text-white placeholder-gray-500 p-3 w-full rounded-lg focus:ring-2 focus:ring-[#FF8A00] focus:border-[#FF8A00] focus:outline-none"
                 placeholder="Enter location"
               />
             </div>
 
             {/* Product */}
             <div>
-              {/* <select
+              <select
                 name="interestedproduct"
                 {...customerForm.getFieldProps("interestedproduct")}
-                className="border border-gray-300 p-3 w-full rounded-lg focus:ring-2 focus:ring-blue-400"
+                className="bg-[#121212] border border-[#2E2E2E] text-white p-3 w-full rounded-lg focus:ring-2 focus:ring-[#FF8A00] focus:border-[#FF8A00] focus:outline-none"
               >
-                <option value="">-- Select Product --</option>
+                <option value="" className="bg-[#181818] text-gray-400">-- Select Product --</option>
                 {getSelectedProduct?.map((product) => (
-                  <option key={product._id} value={product.title}>
+                  <option key={product._id} value={product.title} className="bg-[#181818] text-white">
                     {product.title}
                   </option>
                 ))}
-              </select> */}
-
-              <select
-  name="interestedproduct"
-  {...customerForm.getFieldProps("interestedproduct")}
-  className="border border-gray-300 p-3 w-full rounded-lg focus:ring-2 focus:ring-blue-400"
->
-  <option value="">-- Select Product --</option>
-  {getSelectedProduct?.map((product) => (
-    <option key={product._id} value={product.title}>
-      {product.title}
-    </option>
-  ))}
-</select>
-{customerForm.touched.interestedproduct && customerForm.errors.interestedproduct && (
-  <p className="text-red-500 text-sm mt-1">
-    {customerForm.errors.interestedproduct}
-  </p>
-)}
+              </select>
+              {customerForm.touched.interestedproduct && customerForm.errors.interestedproduct && (
+                <p className="text-red-400 text-sm mt-1">
+                  {customerForm.errors.interestedproduct}
+                </p>
+              )}
             </div>
 
             {/* Lead Value */}
@@ -362,27 +348,26 @@ const customerformvalidation = Yup.object({
                 type="text"
                 name="leadvalue"
                 {...customerForm.getFieldProps("leadvalue")}
-                className="border border-gray-300 p-3 w-full rounded-lg focus:ring-2 focus:ring-blue-400"
+                className="bg-[#121212] border border-[#2E2E2E] text-white placeholder-gray-500 p-3 w-full rounded-lg focus:ring-2 focus:ring-[#FF8A00] focus:border-[#FF8A00] focus:outline-none"
                 placeholder="Enter lead value"
               />
               {customerForm.touched.leadvalue &&
                 customerForm.errors.leadvalue && (
-                  <p className="text-red-500 text-sm mt-1">
+                  <p className="text-red-400 text-sm mt-1">
                     {customerForm.errors.leadvalue}
                   </p>
                 )}
             </div>
             {errorMessage && (
-  <p className="text-red-500 text-sm mt-2 font-semibold">
-    {errorMessage}
-  </p>
-)}
-
+              <p className="text-red-400 text-sm mt-2 font-semibold">
+                {errorMessage}
+              </p>
+            )}
 
             {/* Submit */}
             <button
               type="submit"
-              className="w-full py-3 rounded-lg font-semibold transition text-white bg-blue-600 hover:bg-blue-700"
+              className="w-full py-3 rounded-lg font-bold transition text-black bg-[#FF8A00] hover:bg-[#E67A00] shadow-lg"
             >
               Add Lead
             </button>
@@ -399,9 +384,9 @@ const customerformvalidation = Yup.object({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            <motion.div className="absolute inset-0 bg-black opacity-30" />
+            <motion.div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
             <motion.div
-              className="relative z-10 bg-green-200 text-green-800 px-6 sm:px-10 py-4 sm:py-6 rounded-xl shadow-xl text-sm sm:text-base font-semibold w-full max-w-xs sm:max-w-sm h-[100px] sm:h-[120px] flex items-center justify-center text-center"
+              className="relative z-10 bg-[#181818] border border-[#FF8A00] text-[#FF8A00] px-6 sm:px-10 py-4 sm:py-6 rounded-2xl shadow-2xl text-sm sm:text-base font-bold w-full max-w-xs sm:max-w-sm h-[100px] sm:h-[120px] flex items-center justify-center text-center"
               initial={{ scale: 0.5 }}
               animate={{ scale: 1 }}
               exit={{ scale: 0.5 }}

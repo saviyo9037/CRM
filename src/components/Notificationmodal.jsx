@@ -275,15 +275,22 @@ function Notificationmodal() {
   let count = 0; // Counter to limit to top 5 notifications only
 
   return (
-    <div className="w-96 p-6 bg-gradient-to-b from-[#00B5A6] to-[#1E6DB0] rounded-2xl shadow-2xl border border-gray-100 text-gray-900 transition-all duration-300">
-      <h3 className="text-xl font-semibold mb-4 text-white tracking-tight">Notifications</h3>
+    <div className="w-96 p-5 bg-[#141414] rounded-2xl shadow-2xl border border-[#282828] text-white transition-all duration-300">
+      <h3 className="text-xl font-bold mb-4 text-[#FF8A00] tracking-tight flex items-center justify-between">
+        <span>Notifications</span>
+        {notifications?.length > 0 && (
+          <span className="text-xs px-2 py-0.5 rounded-full bg-[#FF8A00]/15 text-[#FF8A00] border border-[#FF8A00]/30 font-semibold">
+            {notifications.length}
+          </span>
+        )}
+      </h3>
 
       {isLoading ? (
-        <div className="text-center py-8 text-sm text-white animate-pulse">Loading...</div>
+        <div className="text-center py-8 text-sm text-gray-400 animate-pulse">Loading...</div>
       ) : isError ? (
-        <div className="text-center py-8 text-sm text-red-200 font-medium">Failed to load notifications.</div>
+        <div className="text-center py-8 text-sm text-red-400 font-medium">Failed to load notifications.</div>
       ) : notifications && notifications.length > 0 ? (
-        <ul className="space-y-4 max-h-80 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
+        <ul className="space-y-3.5 max-h-80 overflow-y-auto pr-1 scrollbar-thin">
           {groupedNotifications.map(([label, items]) => {
             const groupToShow = [];
 
@@ -296,27 +303,27 @@ function Notificationmodal() {
 
             return (
               <div key={label} className="space-y-2">
-                <h4 className="text-xs font-medium text-white uppercase mb-2 tracking-wider">{label}</h4>
+                <h4 className="text-xs font-semibold text-gray-400 uppercase mb-2 tracking-wider">{label}</h4>
                 {groupToShow.map((notification) => (
                   <motion.li
                     key={notification._id}
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.2 }}
-                    className="flex items-stretch border border-black rounded-xl bg-white hover:bg-gray-100 transition-all duration-200 shadow-sm overflow-hidden"
+                    className="flex items-stretch border border-[#262626] rounded-xl bg-[#181818] hover:bg-[#202020] transition-all duration-200 shadow-md overflow-hidden"
                   >
-                    <div className={`w-5 ${getNotificationColor(notification.title)} rounded-l-xl`} />
-                    <div className="flex-1 p-4 flex justify-between items-center">
+                    <div className={`w-3 ${getNotificationColor(notification.title)} rounded-l-xl`} />
+                    <div className="flex-1 p-3.5 flex justify-between items-center">
                       <div>
-                        <p className="text-sm font-semibold text-gray-900">{notification.title}</p>
-                        <p className="text-xs text-gray-600 mt-1 line-clamp-2">{notification.message}</p>
+                        <p className="text-sm font-semibold text-white">{notification.title}</p>
+                        <p className="text-xs text-gray-400 mt-1 line-clamp-2 leading-relaxed">{notification.message}</p>
                       </div>
                       <button
                         onClick={() => handledelete(notification._id)}
-                        className="text-gray-500 hover:text-red-500 text-sm transition-colors duration-150 p-2 rounded-full hover:bg-gray-200"
+                        className="text-gray-500 hover:text-red-400 text-sm transition-colors duration-150 p-2 rounded-lg hover:bg-[#242424] ml-2"
                         aria-label={`Delete notification: ${notification.title}`}
                       >
-                        <FaTrash className="w-4 h-4" />
+                        <FaTrash className="w-3.5 h-3.5" />
                       </button>
                     </div>
                   </motion.li>
@@ -328,14 +335,14 @@ function Notificationmodal() {
           {notifications.length > 5 && (
             <button
               onClick={() => dispatch(toggleFullnotificationmodal())}
-              className="mt-4 text-white hover:text-gray-200 font-medium text-sm transition-colors duration-150"
+              className="mt-3 text-[#FF8A00] hover:text-[#FFA333] font-semibold text-sm transition-colors duration-150 block text-center w-full"
             >
-              View All Notifications
+              View All Notifications →
             </button>
           )}
         </ul>
       ) : (
-        <div className="text-center py-8 text-sm text-white">No notifications available</div>
+        <div className="text-center py-8 text-sm text-gray-400">No notifications available</div>
       )}
 
       <AnimatePresence>

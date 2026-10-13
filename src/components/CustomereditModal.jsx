@@ -39,8 +39,8 @@ const InputField = ({
   onBlur,
 }) => (
   <div className="space-y-2">
-    <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
-      <FontAwesomeIcon icon={icon} className="text-gray-400 w-4 h-4" />
+    <label className="text-sm font-semibold text-gray-300 flex items-center gap-2">
+      <FontAwesomeIcon icon={icon} className="text-[#FF8A00] w-4 h-4" />
       {label}
     </label>
     <div className="relative">
@@ -56,18 +56,18 @@ const InputField = ({
         onBlur={onBlur}
         placeholder={placeholder}
         className={`
-          w-full pl-10 pr-4 py-3 border-2 rounded-xl transition-all duration-200
-          focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
+          w-full pl-10 pr-4 py-3 border rounded-xl transition-all duration-200
+          focus:outline-none focus:ring-2 focus:ring-[#FF8A00] focus:border-[#FF8A00]
           ${
             error
-              ? "border-red-300 bg-red-50 text-black"
-              : "border-gray-200 hover:border-gray-300 bg-white"
+              ? "border-red-500/50 bg-red-950/20 text-red-300"
+              : "border-[#2E2E2E] hover:border-[#404040] bg-[#121212] text-white placeholder-gray-500"
           }
         `}
       />
     </div>
     {error && (
-      <p className="text-white-500 text-xs flex items-center gap-1">
+      <p className="text-red-400 text-xs flex items-center gap-1">
         <FontAwesomeIcon icon={faTimes} className="w-3 h-3" />
         {error}
       </p>
@@ -86,8 +86,8 @@ const SelectField = ({
   error,
 }) => (
   <div className="space-y-2">
-    <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
-      <FontAwesomeIcon icon={icon} className="text-gray-400 w-4 h-4" />
+    <label className="text-sm font-semibold text-gray-300 flex items-center gap-2">
+      <FontAwesomeIcon icon={icon} className="text-[#FF8A00] w-4 h-4" />
       {label}
     </label>
     <div className="relative">
@@ -101,19 +101,19 @@ const SelectField = ({
         onChange={onChange}
         onBlur={onBlur}
         className={`
-          w-full pl-10 pr-4 py-3 border-2 rounded-xl transition-all duration-200
-          focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
+          w-full pl-10 pr-4 py-3 border rounded-xl transition-all duration-200
+          focus:outline-none focus:ring-2 focus:ring-[#FF8A00] focus:border-[#FF8A00]
           ${
             error
-              ? "border-red-300 bg-red-50"
-              : "border-gray-200 hover:border-gray-300 bg-white"
+              ? "border-red-500/50 bg-red-950/20 text-red-300"
+              : "border-[#2E2E2E] hover:border-[#404040] bg-[#121212] text-white"
           }
-          appearance-none bg-white
+          appearance-none
         `}
       >
-        <option value="">{`Select ${label}`}</option>
+        <option value="" className="bg-[#181818] text-gray-400">{`Select ${label}`}</option>
         {options?.map((option, idx) => (
-          <option key={idx} value={option.code || option.title}>
+          <option key={idx} value={option.code || option.title} className="bg-[#181818] text-white">
             {option.flag && option.name
               ? `${option.flag} ${option.code} - ${option.name}`
               : option.title}
@@ -268,39 +268,25 @@ function CustomereditModal() {
   );
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: 50 }}
         transition={{ duration: 0.3, ease: "easeOut" }}
-        className="bg-white/95 backdrop-blur-lg p-6 sm:p-8 rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto relative border border-white/20"
+        className="bg-[#141414] border border-[#262626] text-white p-6 sm:p-8 rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto relative"
       >
-        {/* Spinner Overlay */}
-        {/* <AnimatePresence>
-          {(fetchleadsource.isLoading || updatingcustomers.isPending) && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="absolute inset-0 bg-white/80 backdrop-blur-sm rounded-2xl flex items-center justify-center z-40"
-            >
-              <Spinner />
-            </motion.div>
-          )}
-        </AnimatePresence> */}
-
         {/* Header */}
-        <div className="flex justify-between items-center mb-8 pb-4 border-b border-gray-100">
+        <div className="flex justify-between items-center mb-8 pb-4 border-b border-[#262626]">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl flex items-center justify-center">
-              <FontAwesomeIcon icon={faUser} className="text-white w-5 h-5" />
+            <div className="w-10 h-10 bg-gradient-to-r from-[#FF8A00] to-[#E67A00] text-black rounded-xl flex items-center justify-center font-bold">
+              <FontAwesomeIcon icon={faUser} className="text-black w-5 h-5" />
             </div>
             <div>
-              <h2 className="text-2xl font-bold text-gray-800">
+              <h2 className="text-2xl font-black text-white">
                 Edit Lead Details
               </h2>
-              <p className="text-sm text-gray-500">
+              <p className="text-sm text-gray-400">
                 Update customer information
               </p>
             </div>
@@ -308,7 +294,7 @@ function CustomereditModal() {
           <motion.button
             whileTap={{ scale: 0.9 }}
             onClick={() => dispatch(toggleCustomereditmodal())}
-            className="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all duration-200"
+            className="p-2 text-gray-400 hover:text-white hover:bg-[#262626] rounded-lg transition-all duration-200"
           >
             <FontAwesomeIcon icon={faTimes} className="w-5 h-5" />
           </motion.button>
@@ -321,7 +307,7 @@ function CustomereditModal() {
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
-              className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl mb-6 flex items-center gap-2"
+              className="bg-red-950/40 border border-red-500/40 text-red-400 px-4 py-3 rounded-xl mb-6 flex items-center gap-2"
             >
               <FontAwesomeIcon icon={faTimes} className="w-4 h-4" />
               {updatingcustomers.error?.response?.data?.message}
@@ -336,10 +322,10 @@ function CustomereditModal() {
               initial={{ opacity: 0, scale: 0.8, x: 100 }}
               animate={{ opacity: 1, scale: 1, x: 0 }}
               exit={{ opacity: 0, scale: 0.8, x: 100 }}
-              className="absolute top-4 right-4 bg-gradient-to-r from-green-500 to-green-600 text-white px-6 py-3 rounded-xl shadow-lg flex items-center gap-2 z-50"
+              className="absolute top-4 right-4 bg-[#FF8A00] text-black px-6 py-3 rounded-xl shadow-lg flex items-center gap-2 z-50 font-bold"
             >
               <FontAwesomeIcon icon={faCheckCircle} className="w-4 h-4" />
-              <span className="font-medium">Updated successfully!</span>
+              <span>Updated successfully!</span>
             </motion.div>
           )}
         </AnimatePresence>
@@ -451,7 +437,7 @@ function CustomereditModal() {
               whileTap={{ scale: 0.98 }}
               type="submit"
               disabled={updatingcustomers.isPending}
-              className="w-full bg-gradient-to-r from-[#00B5A6] via-[#00D4B6] to-[#1E6DB0] text-white py-4 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
+              className="w-full bg-[#FF8A00] hover:bg-[#E67A00] text-black py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
             >
               <FontAwesomeIcon icon={faCheckCircle} className="w-5 h-5" />
               {updatingcustomers.isPending ? "Updating..." : "Update Lead"}
@@ -460,7 +446,7 @@ function CustomereditModal() {
         </form>
 
         {/* Personal Details Component */}
-        <div className="mt-8 pt-6 border-t border-gray-100">
+        <div className="mt-8 pt-6 border-t border-[#262626]">
           <PersonalDetails />
         </div>
       </motion.div>

@@ -395,14 +395,14 @@ function Customerdetailmodal() {
   return (
     <AnimatePresence>
       <motion.div
-        className="fixed inset-0 flex items-center justify-center bg-black/70 z-50 p-2 sm:p-0 h-full"
+        className="fixed inset-0 flex items-center justify-center bg-black/80 backdrop-blur-sm z-50 p-2 sm:p-0 h-full"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.4, ease: "easeOut" }}
       >
         <motion.div
-          className="bg-white rounded-2xl shadow-2xl w-full max-w-md sm:max-w-lg md:max-w-3xl border border-gray-200 font-['Inter',sans-serif]"
+          className="bg-[#141414] text-white rounded-2xl shadow-2xl w-full max-w-md sm:max-w-lg md:max-w-3xl border border-[#262626] font-['Inter',sans-serif]"
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.9, opacity: 0 }}
@@ -413,31 +413,31 @@ function Customerdetailmodal() {
             convertingcustomer.isPending ||
             fetchleadforms.isLoading ||
             updatinguserleadform.isPending) && (
-            <div className="absolute inset-0 flex items-center justify-center bg-white/80 z-50 rounded ">
+            <div className="absolute inset-0 flex items-center justify-center bg-black/70 backdrop-blur-sm z-50 rounded-2xl">
               <Spinner />
             </div>
           )}
           <div
             ref={scrollContainerRef}
-            className="max-h-[700px] overflow-y-auto !important scroll-smoot -webkit-overflow-scrolling-touch"
+            className="max-h-[700px] overflow-y-auto !important scroll-smooth -webkit-overflow-scrolling-touch"
           >
             {/* Header */}
-            <div className="sticky top-0 z-20 bg-gradient-to-r from-green-600 to-blue-700 text-white p-5 sm:p-6 rounded-t-[10px] shadow-md">
+            <div className="sticky top-0 z-20 bg-gradient-to-r from-[#FF8A00] to-[#E67A00] text-black p-5 sm:p-6 rounded-t-2xl shadow-md">
               {/* Top row: user details + action buttons */}
               <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                 {/* Left: User details */}
                 <div className="flex items-center gap-3">
-                  <div className="bg-white/20 p-3 rounded-full">
+                  <div className="bg-black/20 text-black p-3 rounded-full">
                     <FontAwesomeIcon
                       icon={faUser}
                       className="text-2xl sm:text-3xl"
                     />
                   </div>
                   <div>
-                    <h2 className="text-xl sm:text-2xl font-bold tracking-wide">
+                    <h2 className="text-xl sm:text-2xl font-black tracking-wide text-black">
                       {selectedlead?.name || "Customer Details"}
                     </h2>
-                    <p className="text-sm sm:text-base mt-1 flex items-center gap-2 text-white/90">
+                    <p className="text-sm sm:text-base mt-1 flex items-center gap-2 text-black/80 font-medium">
                       <FontAwesomeIcon
                         icon={faPhone}
                         className="text-sm opacity-80"
@@ -456,7 +456,7 @@ function Customerdetailmodal() {
                         onClick={() =>
                           convertcustomer(selectedlead?._id, "converted")
                         }
-                        className="inline-flex items-center gap-2 bg-white text-green-700 hover:bg-green-50 px-4 py-2 rounded-full text-sm font-semibold shadow transition-all duration-300"
+                        className="inline-flex items-center gap-2 bg-black text-[#FF8A00] hover:bg-black/80 px-4 py-2 rounded-full text-sm font-bold shadow transition-all duration-300"
                       >
                         <FontAwesomeIcon icon={faCheckCircle} />
                         Convert
@@ -467,7 +467,7 @@ function Customerdetailmodal() {
                     <button
                       onClick={handleconfirm}
                       title="Delete"
-                      className="hover:bg-white/20 p-2 rounded-full transition-all duration-200"
+                      className="hover:bg-black/20 text-black p-2 rounded-full transition-all duration-200"
                     >
                       <FontAwesomeIcon icon={faTrash} className="text-base" />
                     </button>
@@ -483,7 +483,7 @@ function Customerdetailmodal() {
                         }
                       }}
                       title="Edit"
-                      className="hover:bg-white/20 p-2 rounded-full transition-all duration-200"
+                      className="hover:bg-black/20 text-black p-2 rounded-full transition-all duration-200"
                     >
                       <FontAwesomeIcon icon={faEdit} className="text-base" />
                     </button>
@@ -491,36 +491,35 @@ function Customerdetailmodal() {
 
                   <button
                     onClick={() => dispatch(toggleCustomerdetailmodal(null))}
-                    className="hover:bg-white/20 p-2 rounded-full transition-all duration-200"
+                    className="hover:bg-black/20 text-black p-2 rounded-full transition-all duration-200"
                   >
-                    <FontAwesomeIcon icon={faTimesCircle} className="text-lg" />
+                    <FontAwesomeIcon icon={faTimesCircle} className="text-xl" />
                   </button>
                 </div>
               </div>
             </div>
 
             {/* Lead Info */}
-
-            <div className="px-4 sm:px-6 pt-4 pb-3  ">
-              <div className="flex border-b border-gray-300 bg-white shadow-sm rounded-t-xl overflow-hidden">
+            <div className="px-4 sm:px-6 pt-4 pb-3">
+              <div className="flex border-b border-[#262626] bg-[#181818] shadow-sm rounded-t-xl overflow-hidden">
                 {["personal", "details", "followups"].map((tab) => (
                   <button
                     key={tab}
                     onClick={() => setActiveTab(tab)}
-                    className={`flex-1 px-6 py-3 text-center  font-medium transition-all duration-200 
+                    className={`flex-1 px-6 py-3 text-center font-medium transition-all duration-200 
         ${
           activeTab === tab
-            ? "bg-blue-600 text-white shadow-inner hover:scale-[1.02]"
-            : "text-gray-600 hover:bg-gray-100 hover:scale-[1.02]"
+            ? "bg-[#FF8A00] text-black font-bold shadow-inner"
+            : "text-gray-400 hover:text-white hover:bg-[#222222]"
         }`}
                   >
                     {tab === "personal" && (
-                      <span className="text-sm sm:text-base  font-semibold tracking-wide">
+                      <span className="text-sm sm:text-base font-semibold tracking-wide">
                         Personal Details
                       </span>
                     )}
                     {tab === "details" && (
-                      <span className=" text-sm sm:text-base font-semibold tracking-wide">
+                      <span className="text-sm sm:text-base font-semibold tracking-wide">
                         Details
                       </span>
                     )}
@@ -532,20 +531,21 @@ function Customerdetailmodal() {
                   </button>
                 ))}
               </div>
+
               {activeTab === "personal" && (
-                <div className="bg-white rounded-2xl rounded-t-[0] shadow-md border border-gray-200 p-6  space-y-6">
+                <div className="bg-[#141414] rounded-2xl rounded-t-[0] shadow-md border border-[#262626] p-6 space-y-6">
                   {/* Info Section */}
-                  <div className="grid grid-cols-1transition-transform duration-200 hover:scale-[1.02] sm:grid-cols-2 gap-6 bg-white shadow-md rounded-xl p-5">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 bg-[#181818] border border-[#262626] shadow-md rounded-xl p-5">
                     {/* Left Section */}
                     <div className="space-y-4">
                       <div className="flex items-center gap-3 text-sm">
                         <FontAwesomeIcon
                           icon={faUser}
-                          className="text-[#00B5A6] w-5 h-5"
+                          className="text-[#FF8A00] w-5 h-5"
                         />
                         <div>
-                          <p className="text-gray-500 text-xs">Created By</p>
-                          <p className="font-semibold text-gray-800">
+                          <p className="text-gray-400 text-xs">Created By</p>
+                          <p className="font-semibold text-white">
                             {selectedlead?.createdBy?.name || "N/A"}
                           </p>
                         </div>
@@ -554,11 +554,11 @@ function Customerdetailmodal() {
                       <div className="flex items-center gap-3 text-sm mb-6">
                         <FontAwesomeIcon
                           icon={faTag}
-                          className="text-[#00B5A6] w-5 h-5"
+                          className="text-[#FF8A00] w-5 h-5"
                         />
                         <div>
-                          <p className="text-gray-500 text-xs">Source</p>
-                          <p className="font-semibold text-gray-800">
+                          <p className="text-gray-400 text-xs">Source</p>
+                          <p className="font-semibold text-white">
                             {selectedlead?.source?.title || "N/A"}
                           </p>
                         </div>
@@ -566,15 +566,15 @@ function Customerdetailmodal() {
                     </div>
 
                     {/* Right Section */}
-                    <div className="flex-col  sm:justify-end items-center gap-3 text-sm">
+                    <div className="flex-col sm:justify-end items-center gap-3 text-sm">
                       <div className="flex items-center gap-3 text-sm mb-6">
                         <FontAwesomeIcon
                           icon={faDollarSign}
-                          className="text-[#00B5A6] w-5 h-5"
+                          className="text-[#FF8A00] w-5 h-5"
                         />
                         <div>
-                          <p className="text-gray-500 text-xs">Lead Value</p>
-                          <p className="font-semibold text-gray-800">
+                          <p className="text-gray-400 text-xs">Lead Value</p>
+                          <p className="font-semibold text-white">
                             {selectedlead?.leadvalue || "Not Given"}
                           </p>
                         </div>
@@ -582,11 +582,11 @@ function Customerdetailmodal() {
                       <div className="flex gap-2">
                         <FontAwesomeIcon
                           icon={faCalendar}
-                          className="text-[#00B5A6] w-5 h-5"
+                          className="text-[#FF8A00] w-5 h-5"
                         />
                         <div>
-                          <p className="text-gray-500 text-xs">Date</p>
-                          <p className="font-semibold text-gray-800">
+                          <p className="text-gray-400 text-xs">Date</p>
+                          <p className="font-semibold text-white">
                             {selectedlead?.createdAt
                               ? new Date(
                                   selectedlead.createdAt
@@ -597,22 +597,17 @@ function Customerdetailmodal() {
                       </div>
                     </div>
                   </div>
-
-                  {/* Follow-up Section */}
-
-                  {/* Update Toggle */}
-
-                  {/* Update Form */}
                 </div>
               )}
+
               {activeTab === "details" && (
-                <div className=" bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl border border-gray-200 p-6 max-h-[600px] overflow-y-auto transition-all duration-300">
+                <div className="bg-[#141414] rounded-2xl rounded-t-[0] shadow-xl border border-[#262626] p-6 max-h-[600px] overflow-y-auto transition-all duration-300">
                   {selectedlead ? (
                     <div className="overflow-x-auto">
-                      <table className="min-w-full border border-gray-100 text-sm text-gray-800 rounded-lg overflow-hidden">
+                      <table className="min-w-full border border-[#262626] text-sm text-gray-200 rounded-lg overflow-hidden">
                         {/* Table Header */}
-                        <thead className="bg-gradient-to-r from-[#00B5A6]/30 to-[#0077B6]/30">
-                          <tr className="text-[#004E48] font-semibold uppercase tracking-wide text-[13px]">
+                        <thead className="bg-[#1E1E1E] border-b border-[#2E2E2E]">
+                          <tr className="text-[#FF8A00] font-bold uppercase tracking-wider text-[12px]">
                             <th className="px-6 py-4 text-left">Agent</th>
                             <th className="px-6 py-4 text-left">Description</th>
                             <th className="px-6 py-4 text-left">
@@ -627,20 +622,15 @@ function Customerdetailmodal() {
                         </thead>
 
                         {/* Table Body */}
-                        <tbody className="divide-y divide-gray-200">
-                          <tr className=" transition-all duration-200 even:bg-gray-50">
+                        <tbody className="divide-y divide-[#262626]">
+                          <tr className="transition-all duration-200 hover:bg-[#181818]">
                             {/* Agent */}
-                            <td className="px-6 py-3 text-[#0077B6] font-semibold whitespace-nowrap">
-                              {/* {selectedlead.nextfollowupupdatedBy?.name ||
-                                selectedlead.nextfollowupupdatedBy ||
-                                "Not updated"} */}
-                                 {selectedlead.assignedTo?.name ||
-                                "N/A"}
-                                {console.log("selecteedLEad",selectedlead)}
+                            <td className="px-6 py-3 text-[#FF8A00] font-semibold whitespace-nowrap">
+                              {selectedlead.assignedTo?.name || "N/A"}
                             </td>
 
                             {/* Description */}
-                            <td className="px-6 py-3 text-gray-700 max-w-[250px] break-words leading-relaxed">
+                            <td className="px-6 py-3 text-gray-300 max-w-[250px] break-words leading-relaxed">
                               {selectedlead.userDetails?.[2]?.value &&
                               selectedlead.userDetails?.[2]?.value !==
                                 "undefined"
@@ -649,7 +639,7 @@ function Customerdetailmodal() {
                             </td>
 
                             {/* Enquiry Program */}
-                            <td className="px-6 py-3 text-[#2563EB] font-semibold">
+                            <td className="px-6 py-3 text-white font-medium">
                               {selectedlead.userDetails?.[4]?.value &&
                               selectedlead.userDetails?.[4]?.value !==
                                 "undefined"
@@ -658,7 +648,7 @@ function Customerdetailmodal() {
                             </td>
 
                             {/* Required Program */}
-                            <td className="px-6 py-3 text-[#2563EB]  font-semibold">
+                            <td className="px-6 py-3 text-white font-medium">
                               {selectedlead.userDetails?.[1]?.value &&
                               selectedlead.userDetails?.[1]?.value !==
                                 "undefined"
@@ -667,7 +657,7 @@ function Customerdetailmodal() {
                             </td>
 
                             {/* WhatsApp */}
-                            <td className="px-6 py-3 text-[#059669] font-semibold">
+                            <td className="px-6 py-3 text-[#FF8A00] font-medium">
                               {selectedlead.userDetails?.[0]?.value &&
                               selectedlead.userDetails?.[0]?.value !==
                                 "undefined"
@@ -681,12 +671,12 @@ function Customerdetailmodal() {
                                 className={`px-3 py-1.5 rounded-full text-xs font-semibold border shadow-sm
                     ${
                       selectedlead.status === "completed"
-                        ? "bg-green-100 text-green-700 border-green-300"
+                        ? "bg-green-500/20 text-green-400 border-green-500/30"
                         : selectedlead.status === "pending"
-                        ? "bg-yellow-100 text-yellow-700 border-yellow-300"
+                        ? "bg-yellow-500/20 text-yellow-400 border-yellow-500/30"
                         : selectedlead.status === "cancelled"
-                        ? "bg-red-100 text-red-700 border-red-300"
-                        : "bg-gray-100 text-gray-700 border-gray-300"
+                        ? "bg-red-500/20 text-red-400 border-red-500/30"
+                        : "bg-[#262626] text-gray-300 border-[#333333]"
                     }`}
                               >
                                 {selectedlead.status || "N/A"}
@@ -697,17 +687,18 @@ function Customerdetailmodal() {
                       </table>
                     </div>
                   ) : (
-                    <p className="text-gray-500 text-center py-8 italic">
+                    <p className="text-gray-400 text-center py-8 italic">
                       No follow-up data available
                     </p>
                   )}
                 </div>
               )}
+
               {activeTab === "followups" && (
-                <div className="bg-gradient-to-b from-white to-gray-50 rounded-2xl rounded-t-[0px] shadow-lg border border-gray-200 p-6  transition-all duration-300">
-                  <div className="mt-[10px] ml-[500px] mb-[10px] ">
+                <div className="bg-[#141414] rounded-2xl rounded-t-[0px] shadow-lg border border-[#262626] p-6 transition-all duration-300">
+                  <div className="flex justify-end mb-4">
                     <button
-                      className="w-[150px] inline-flex items-center justify-center gap-2 bg-[#00B5A6] hover:bg-[#1E6DB0] text-white text-sm px-5 py-2.5 rounded-lg font-semibold shadow-md transition-all duration-300 hover:scale-105"
+                      className="inline-flex items-center justify-center gap-2 bg-[#FF8A00] hover:bg-[#E67A00] text-black text-sm px-5 py-2.5 rounded-lg font-bold shadow-md transition-all duration-300 hover:scale-105"
                       onClick={() => setShowFollowup(true)}
                     >
                       Follow-up
@@ -717,18 +708,18 @@ function Customerdetailmodal() {
                   {fetchnextfollowup?.data?.setting?.isnextfollowupActive &&
                     (selectedlead?.status === "new" ||
                       selectedlead?.status === "open") && (
-                      <div className="bg-gradient-to-r from-[#F9FAFB] to-[#F3F4F6] p-6 transition-transform duration-200 hover:scale-[1.02] rounded-2xl shadow-lg border border-gray-200 text-center">
+                      <div className="bg-[#181818] p-6 transition-transform duration-200 rounded-2xl shadow-lg border border-[#262626] text-center mb-6">
                         {/* Heading */}
-                        <h3 className="text-lg sm:text-xl font-semibold text-gray-900 flex items-center justify-center gap-2 mb-3">
+                        <h3 className="text-lg sm:text-xl font-bold text-white flex items-center justify-center gap-2 mb-3">
                           <FontAwesomeIcon
                             icon={faCalendarCheck}
-                            className="text-[#00B5A6]"
+                            className="text-[#FF8A00]"
                           />
                           Next Follow-up Date
                         </h3>
 
                         {/* Date Info */}
-                        <p className="text-xl font-bold text-gray-800 mb-4">
+                        <p className="text-xl font-bold text-[#FF8A00] mb-4">
                           {selectedlead?.nextFollowUp?.length > 0
                             ? new Date(
                                 selectedlead.nextFollowUp[
@@ -752,14 +743,14 @@ function Customerdetailmodal() {
                             onChange={(e) =>
                               setnextFollowupdate(e.target.value)
                             }
-                            className="px-4 py-2 w-44 text-sm border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-[#00B5A6] focus:border-[#00B5A6] disabled:bg-gray-100 transition-transform duration-200 hover:scale-[1.02]"
+                            className="px-4 py-2 w-44 text-sm bg-[#121212] text-white border border-[#333333] rounded-lg shadow-sm focus:ring-2 focus:ring-[#FF8A00] focus:border-[#FF8A00] disabled:bg-[#1E1E1E] transition-all"
                           />
 
                           {!isdisabled && (
                             <button
                               type="button"
                               onClick={handlenextfollowup}
-                              className="inline-flex items-center justify-center gap-2 bg-[#00B5A6] hover:bg-[#1E6DB0] text-white text-sm px-5 py-2.5 rounded-lg font-semibold shadow-md transition-all duration-300 hover:scale-105"
+                              className="inline-flex items-center justify-center gap-2 bg-[#FF8A00] hover:bg-[#E67A00] text-black text-sm px-5 py-2.5 rounded-lg font-bold shadow-md transition-all duration-300 hover:scale-105"
                             >
                               <FontAwesomeIcon icon={faCalendarCheck} />
                               Set
@@ -769,14 +760,14 @@ function Customerdetailmodal() {
 
                         {/* Error */}
                         {dateerror && (
-                          <p className="text-red-600 text-xs mt-3 font-medium">
+                          <p className="text-red-400 text-xs mt-3 font-medium">
                             {dateerror}
                           </p>
                         )}
 
                         {/* Success */}
                         {followupsuccess && (
-                          <p className="text-green-600 text-sm mt-3 font-medium">
+                          <p className="text-green-400 text-sm mt-3 font-medium">
                             Follow-up date set successfully!
                           </p>
                         )}
@@ -784,9 +775,9 @@ function Customerdetailmodal() {
                     )}
 
                   <div className="overflow-x-auto mt-[10px]">
-                    <table className="min-w-full border border-gray-200 text-sm text-gray-800">
-                      <thead className="bg-gradient-to-r from-[#00B5A6]/20 to-[#0077B6]/20 border-b border-gray-300">
-                        <tr className="text-[#004e48] font-semibold tracking-wide">
+                    <table className="min-w-full border border-[#262626] text-sm text-gray-200">
+                      <thead className="bg-[#1E1E1E] border-b border-[#2E2E2E]">
+                        <tr className="text-[#FF8A00] font-bold tracking-wide">
                           <th className="px-5 py-3 text-left">
                             Next Follow-Up
                           </th>
@@ -796,27 +787,27 @@ function Customerdetailmodal() {
                         </tr>
                       </thead>
 
-                      <tbody className="divide-y divide-gray-200">
+                      <tbody className="divide-y divide-[#262626]">
                         {followups?.length > 0 ? (
                           followups.map((f, i) => (
                             <tr
                               key={i}
-                              className="transition-all duration-200 even:bg-gray-50 hover:bg-gray-100"
+                              className="transition-all duration-200 even:bg-[#161616] hover:bg-[#1E1E1E]"
                             >
-                              <td className="px-6 py-3 text-gray-700 font-medium whitespace-nowrap">
+                              <td className="px-6 py-3 text-gray-300 font-medium whitespace-nowrap">
                                 {f.nextFollowUpDate
                                   ? new Date(
                                       f.nextFollowUpDate
                                     ).toLocaleDateString("en-GB")
                                   : "-"}
                               </td>
-                              <td className="px-6 py-3 text-[#0077B6] font-semibold whitespace-nowrap">
+                              <td className="px-6 py-3 text-[#FF8A00] font-semibold whitespace-nowrap">
                                 {selectedlead?.createdBy?.name || "N/A"}
                               </td>
-                              <td className="px-6 py-3 text-gray-700 text-left">
+                              <td className="px-6 py-3 text-gray-300 text-left">
                                 {f.description || "-"}
                               </td>
-                              <td className="px-6 py-3 text-gray-700 font-medium whitespace-nowrap">
+                              <td className="px-6 py-3 text-gray-300 font-medium whitespace-nowrap">
                                 {new Date(f.createdAt).toLocaleDateString(
                                   "en-GB"
                                 )}
@@ -827,7 +818,7 @@ function Customerdetailmodal() {
                           <tr>
                             <td
                               colSpan="4"
-                              className="text-center py-5 text-gray-500 font-medium"
+                              className="text-center py-5 text-gray-400 font-medium"
                             >
                               No follow-up records available
                             </td>
@@ -836,20 +827,17 @@ function Customerdetailmodal() {
                       </tbody>
                     </table>
                   </div>
-
-                  {/* Follow-up Modal */}
                 </div>
-              )}{" "}
-              {/* Left Column */}
+              )}
             </div>
           </div>
 
           {showFollowup && (
-            <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[9999]">
-              <div className="bg-white p-6 rounded-xl shadow-lg relative max-w-lg w-full">
+            <div className="fixed inset-0 flex items-center justify-center bg-black/80 backdrop-blur-sm z-[9999]">
+              <div className="bg-[#141414] border border-[#262626] text-white p-6 rounded-xl shadow-2xl relative max-w-lg w-full">
                 <button
                   onClick={() => setShowFollowup(false)}
-                  className="absolute top-2 right-3 text-gray-500 hover:text-gray-800 text-xl font-bold"
+                  className="absolute top-2 right-3 text-gray-400 hover:text-white text-2xl font-bold"
                 >
                   ×
                 </button>
@@ -866,24 +854,24 @@ function Customerdetailmodal() {
           <AnimatePresence>
             {showconfirm && (
               <motion.div
-                className="absolute inset-0 bg-black/80 flex items-center justify-center z-50"
+                className="absolute inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
               >
                 <motion.div
-                  className="bg-white rounded-2xl p-5 sm:p-6 shadow-xl text-center w-full max-w-xs"
+                  className="bg-[#141414] border border-[#262626] text-white rounded-2xl p-5 sm:p-6 shadow-2xl text-center w-full max-w-xs"
                   initial={{ scale: 0.9, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
                   exit={{ scale: 0.9, opacity: 0 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <h3 className="text-base sm:text-lg font-bold text-gray-800 mb-3 flex items-center justify-center gap-1.5">
-                    <FontAwesomeIcon icon={faTrash} className="text-red-600" />
+                  <h3 className="text-base sm:text-lg font-bold text-white mb-3 flex items-center justify-center gap-1.5">
+                    <FontAwesomeIcon icon={faTrash} className="text-red-500" />
                     Confirm Deletion
                   </h3>
-                  <p className="text-xs text-gray-600 mb-4">
+                  <p className="text-xs text-gray-400 mb-4">
                     Are you sure you want to delete this lead?
                   </p>
                   <div className="flex gap-3 justify-center">
@@ -900,7 +888,7 @@ function Customerdetailmodal() {
                     </button>
                     <button
                       onClick={closeconfirm}
-                      className="inline-flex items-center gap-1.5 bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded-full font-semibold shadow-lg transition-all duration-300 transform hover:scale-105"
+                      className="inline-flex items-center gap-1.5 bg-[#262626] hover:bg-[#333333] text-white px-4 py-2 rounded-full font-semibold shadow-lg transition-all duration-300 transform hover:scale-105"
                     >
                       <FontAwesomeIcon icon={faTimesCircle} />
                       No
@@ -917,9 +905,9 @@ function Customerdetailmodal() {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
               >
-                <motion.div className="absolute inset-0 bg-black/40" />
+                <motion.div className="absolute inset-0 bg-black/60" />
                 <motion.div
-                  className="relative z-10 bg-green-100 text-green-800 px-5 py-3 rounded-2xl shadow-xl text-xs font-semibold w-full max-w-xs flex items-center justify-center gap-1.5"
+                  className="relative z-10 bg-[#181818] border border-[#FF8A00] text-[#FF8A00] px-5 py-3 rounded-2xl shadow-xl text-xs font-semibold w-full max-w-xs flex items-center justify-center gap-1.5"
                   initial={{ scale: 0.7 }}
                   animate={{ scale: 1 }}
                   exit={{ scale: 0.7 }}
@@ -927,7 +915,7 @@ function Customerdetailmodal() {
                 >
                   <FontAwesomeIcon
                     icon={faCheckCircle}
-                    className="text-green-600"
+                    className="text-[#FF8A00]"
                   />
                   Lead deleted successfully!
                 </motion.div>
@@ -941,9 +929,9 @@ function Customerdetailmodal() {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
               >
-                <motion.div className="absolute inset-0 bg-black/40" />
+                <motion.div className="absolute inset-0 bg-black/60" />
                 <motion.div
-                  className="relative z-10 bg-green-100 text-green-800 px-5 py-3 rounded-2xl shadow-xl text-xs font-semibold w-full max-w-xs flex items-center justify-center gap-1.5"
+                  className="relative z-10 bg-[#181818] border border-[#FF8A00] text-[#FF8A00] px-5 py-3 rounded-2xl shadow-xl text-xs font-semibold w-full max-w-xs flex items-center justify-center gap-1.5"
                   initial={{ scale: 0.7 }}
                   animate={{ scale: 1 }}
                   exit={{ scale: 0.7 }}
@@ -951,7 +939,7 @@ function Customerdetailmodal() {
                 >
                   <FontAwesomeIcon
                     icon={faCheckCircle}
-                    className="text-green-600"
+                    className="text-[#FF8A00]"
                   />
                   Lead converted successfully!
                 </motion.div>
@@ -965,9 +953,9 @@ function Customerdetailmodal() {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
               >
-                <motion.div className="absolute inset-0 bg-black/40" />
+                <motion.div className="absolute inset-0 bg-black/60" />
                 <motion.div
-                  className="relative z-10 bg-green-100 text-green-800 px-5 py-3 rounded-2xl shadow-xl text-xs font-semibold w-full max-w-xs flex items-center justify-center gap-1.5"
+                  className="relative z-10 bg-[#181818] border border-[#FF8A00] text-[#FF8A00] px-5 py-3 rounded-2xl shadow-xl text-xs font-semibold w-full max-w-xs flex items-center justify-center gap-1.5"
                   initial={{ scale: 0.7 }}
                   animate={{ scale: 1 }}
                   exit={{ scale: 0.7 }}
@@ -975,7 +963,7 @@ function Customerdetailmodal() {
                 >
                   <FontAwesomeIcon
                     icon={faCheckCircle}
-                    className="text-green-600"
+                    className="text-[#FF8A00]"
                   />
                   Form updated successfully!
                 </motion.div>
@@ -989,9 +977,9 @@ function Customerdetailmodal() {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
               >
-                <motion.div className="absolute inset-0 bg-black/40" />
+                <motion.div className="absolute inset-0 bg-black/60" />
                 <motion.div
-                  className="relative z-10 bg-green-100 text-green-800 px-5 py-3 rounded-2xl shadow-xl text-xs font-semibold w-full max-w-xs flex items-center justify-center gap-1.5"
+                  className="relative z-10 bg-[#181818] border border-[#FF8A00] text-[#FF8A00] px-5 py-3 rounded-2xl shadow-xl text-xs font-semibold w-full max-w-xs flex items-center justify-center gap-1.5"
                   initial={{ scale: 0.7 }}
                   animate={{ scale: 1 }}
                   exit={{ scale: 0.7 }}
@@ -999,7 +987,7 @@ function Customerdetailmodal() {
                 >
                   <FontAwesomeIcon
                     icon={faCheckCircle}
-                    className="text-green-600"
+                    className="text-[#FF8A00]"
                   />
                   Next followup updated!
                 </motion.div>

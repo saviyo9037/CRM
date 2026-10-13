@@ -418,25 +418,26 @@ const ProductPaymentDetails = ({ startDate, endDate }) => {
   // 🔥 Render
   // ----------------------------------------------------------------
   return (
-    <div className="bg-white shadow-xl rounded-2xl p-6 mt-8 border border-gray-200">
-      <h1 className="text-3xl font-bold text-gray-800 mb-4">
+    <div className="bg-[#141414] shadow-xl rounded-2xl p-6 mt-8 border border-[#262626]">
+      <h1 className="text-2xl sm:text-3xl font-bold text-white mb-2 flex items-center gap-3">
+        <span className="w-2.5 h-2.5 rounded-full bg-[#FF8A00]"></span>
         Product Payment Summary
       </h1>
-      <p className="text-sm text-gray-500 mb-6">
+      <p className="text-sm text-gray-400 mb-6">
         Click on a product to view its customer-wise breakdown.
       </p>
 
-      <div className="overflow-x-auto rounded-lg border border-gray-200">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
+      <div className="overflow-x-auto rounded-xl border border-[#262626]">
+        <table className="min-w-full divide-y divide-[#262626]">
+          <thead className="bg-gradient-to-r from-[#FF8A00] to-[#E67A00]">
             <tr>
               {["Product", "Total Amount", "Total Paid", "Due Amount", "Paid Customers"]
                 .map((t, i) => (
                   <th
                     key={i}
-                    className={`px-6 py-3 text-xs font-medium uppercase ${
+                    className={`px-6 py-3.5 text-xs font-bold uppercase ${
                       i === 0 ? "text-left" : "text-right"
-                    } text-gray-500`}
+                    } text-black tracking-wider`}
                   >
                     {t}
                   </th>
@@ -444,77 +445,78 @@ const ProductPaymentDetails = ({ startDate, endDate }) => {
             </tr>
           </thead>
 
-          <tbody className="bg-white divide-y divide-gray-200">
+          <tbody className="divide-y divide-[#262626]">
             {productSummary.map((p) => {
               const due = p.total_payment - p.payment_paid;
 
               return (
                 <React.Fragment key={p.productId}>
                   <tr
-                    className="hover:bg-gray-50 cursor-pointer"
+                    className="bg-[#141414] even:bg-[#181818] hover:bg-[#202020] cursor-pointer transition-colors"
                     onClick={() => toggleExpand(p.productId)}
                   >
-                    <td className="px-6 py-4 text-blue-600 underline font-semibold">
+                    <td className="px-6 py-4 text-[#FF8A00] underline font-semibold">
                       {p.title}
                     </td>
-                    <td className="px-6 py-4 text-right text-gray-600">
+                    <td className="px-6 py-4 text-right text-gray-200 font-medium">
                       {formatCurrency(p.total_payment)}
                     </td>
-                    <td className="px-6 py-4 text-right text-green-600 font-semibold">
+                    <td className="px-6 py-4 text-right text-green-400 font-bold">
                       {formatCurrency(p.payment_paid)}
                     </td>
                     <td
-                      className={`px-6 py-4 text-right font-semibold ${
-                        due > 0 ? "text-red-600" : "text-green-600"
+                      className={`px-6 py-4 text-right font-bold ${
+                        due > 0 ? "text-red-400" : "text-green-400"
                       }`}
                     >
                       {formatCurrency(due)}
                     </td>
-                    <td className="px-6 py-4 text-right text-gray-700">
+                    <td className="px-6 py-4 text-right text-gray-300 font-semibold">
                       {p.customersPaid}
                     </td>
                   </tr>
 
                   {expandedProduct === p.productId && (
                     <tr>
-                      <td colSpan={5} className="bg-gray-50 px-4 py-4">
-                        <h3 className="text-sm font-semibold text-gray-700 mb-3">
+                      <td colSpan={5} className="bg-[#181818] px-4 py-4 border-y border-[#262626]">
+                        <h3 className="text-sm font-bold text-white mb-3 flex items-center gap-2">
+                          <span className="w-2 h-2 rounded-full bg-[#FF8A00]"></span>
                           Customers for {p.title}
                         </h3>
 
-                        <table className="w-full text-sm border">
-                          <thead className="bg-gray-100">
+                        <table className="w-full text-sm border border-[#262626] rounded-lg overflow-hidden">
+                          <thead className="bg-[#222222] text-gray-300">
                             <tr>
-                              <th className="px-4 py-2 border text-left">
+                              <th className="px-4 py-2 border border-[#262626] text-left">
                                 Customer
                               </th>
-                              <th className="px-4 py-2 border text-right">
+                              <th className="px-4 py-2 border border-[#262626] text-right">
                                 Total
                               </th>
-                              <th className="px-4 py-2 border text-right">
+                              <th className="px-4 py-2 border border-[#262626] text-right">
                                 Paid
                               </th>
-                              <th className="px-4 py-2 border text-right">
+                              <th className="px-4 py-2 border border-[#262626] text-right">
                                 Due
                               </th>
                             </tr>
                           </thead>
 
-                          <tbody>
+                          <tbody className="divide-y divide-[#262626]">
                             {productCustomers[p.productId].map((c, i) => (
-                              <tr key={i} className="hover:bg-white">
-                                <td className="px-4 py-2 border">
+                              <tr key={i} className="bg-[#141414] hover:bg-[#1E1E1E]">
+                                <td className="px-4 py-2 border border-[#262626] text-white">
                                   {c.customerName}
                                 </td>
-                                <td className="px-4 py-2 border text-right">
+                                <td className="px-4 py-2 border border-[#262626] text-right text-gray-300">
                                   {formatCurrency(c.totalAmount)}
                                 </td>
-                                <td className="px-4 py-2 border text-green-600 text-right">
+                                <td className="px-4 py-2 border border-[#262626] text-green-400 font-semibold text-right">
                                   {formatCurrency(c.totalPaid)}
                                 </td>
                                 <td
-                                  className={`px-4 py-2 border text-right ${
-                                    c.due > 0 ? "text-red-600" : "text-green-600"
+                                  className={`px-4 py-2 border border-[#262626] text-right font-bold ${
+                                    c.due > 0 ? "text-red-400" : "text-green-400"
                                   }`}
                                 >
                                   {formatCurrency(c.due)}
@@ -531,27 +533,27 @@ const ProductPaymentDetails = ({ startDate, endDate }) => {
             })}
           </tbody>
 
-          <tfoot className="bg-gray-100">
-            <tr className="font-semibold text-gray-700">
+          <tfoot className="bg-[#181818] border-t border-[#262626]">
+            <tr className="font-bold text-white">
               <td className="px-6 py-4">Grand Total</td>
-              <td className="px-6 py-4 text-right">
+              <td className="px-6 py-4 text-right text-gray-200">
                 {formatCurrency(grandTotals.totalPayment)}
               </td>
-              <td className="px-6 py-4 text-right">
+              <td className="px-6 py-4 text-right text-green-400">
                 {formatCurrency(grandTotals.totalPaid)}
               </td>
               <td
                 className={`px-6 py-4 text-right ${
                   grandTotals.totalPayment - grandTotals.totalPaid > 0
-                    ? "text-red-600"
-                    : "text-green-600"
+                    ? "text-red-400"
+                    : "text-green-400"
                 }`}
               >
                 {formatCurrency(
                   grandTotals.totalPayment - grandTotals.totalPaid
                 )}
               </td>
-              <td className="px-6 py-4 text-right text-blue-600">
+              <td className="px-6 py-4 text-right text-[#FF8A00]">
                 {grandTotals.totalCustomersPaid}
               </td>
             </tr>

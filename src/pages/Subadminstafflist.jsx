@@ -27,12 +27,12 @@ function Subadminstafflist() {
     const filteredStaffs = fetchstaffs?.data?.filter((staff) => staff.assignedTo === userId)
 
     return (
-        <div className="flex h-screen w-screen bg-gray-100 overflow-x-hidden">
+        <div className="flex h-screen w-screen bg-[#0A0A0A] text-white overflow-x-hidden">
             <div className="fixed inset-y-0 left-0 z-40">
                 <motion.div
                     animate={{ x: sidebarVisible ? 0 : -260 }}
                     transition={{ duration: 0.3 }}
-                    className="w-64 h-full fixed top-0 left-0 z-50"
+                    className="w-64 h-full fixed top-0 left-0 z-50 bg-[#0A0A0A] border-r border-[#262626]"
                 >
                     <Sidebar />
                 </motion.div>
@@ -40,16 +40,16 @@ function Subadminstafflist() {
             <motion.div
                 animate={{ marginLeft: sidebarVisible ? 256 : 0 }}
                 transition={{ duration: 0.3 }}
-                className="flex-1 h-screen overflow-hidden"
+                className="flex-1 h-screen overflow-hidden bg-[#0A0A0A]"
             >
                 {fetchstaffs.isLoading &&
                     <Spinner />
                 }
                 <div className="flex flex-col h-full">
-                    <div className="p-4 sm:p-8 pb-4 mb-5 relative">
-                        <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 flex items-center">
+                    <div className="p-4 sm:p-8 pb-4 mb-5 relative border-b border-[#262626]">
+                        <h3 className="text-2xl sm:text-3xl font-bold text-white flex items-center">
                             <button
-                                className='mr-4 text-blue-600 hover:text-blue-800 transition'
+                                className='mr-4 text-[#FF8A00] hover:text-[#E67A00] p-2 rounded-lg hover:bg-[#181818] transition'
                                 onClick={() => setsidebarVisible(!sidebarVisible)}
                             >
                                 <FaBars className="text-lg sm:text-xl" />
@@ -63,30 +63,30 @@ function Subadminstafflist() {
                     <div className="flex-1 overflow-y-auto px-4 sm:px-8 pb-8">
                         <div className="pt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                             {fetchstaffs.isLoading ? (
-                                <p className="text-center text-blue-600 font-medium col-span-full text-sm sm:text-base">Loading staff...</p>
+                                <p className="text-center text-[#FF8A00] font-medium col-span-full text-sm sm:text-base">Loading staff...</p>
                             ) : filteredStaffs?.length > 0 ? (
                                 filteredStaffs?.map((staff, index) => (
                                     <motion.div
                                         key={staff._id}
-                                        className="bg-white rounded-2xl shadow-lg p-4 sm:p-6 relative hover:shadow-xl transition transform hover:-translate-y-1"
+                                        className="bg-[#141414] rounded-2xl shadow-xl p-5 sm:p-6 border border-[#262626] hover:border-[#FF8A00]/50 transition duration-300 transform hover:-translate-y-1"
                                         initial={{ opacity: 0, y: 20 }}
                                         animate={{ opacity: 1, y: 0 }}
                                         transition={{ delay: index * 0.1 }}
                                     >
-                                        <div className="flex items-center space-x-4 mt-4 sm:mt-6">
-                                            <div className="text-blue-600 text-[80px] sm:text-[120px]">
+                                        <div className="flex items-center space-x-4 mt-2">
+                                            <div className="text-[#FF8A00] text-[80px] sm:text-[100px]">
                                                 <FaUserCircle />
                                             </div>
                                             <div>
-                                                <h4 className="text-lg sm:text-xl font-semibold text-gray-800">{staff.name}</h4>
-                                                <p className="text-gray-500 mt-1 text-sm sm:text-base">{staff.role}</p>
+                                                <h4 className="text-lg sm:text-xl font-bold text-white">{staff.name}</h4>
+                                                <p className="text-gray-400 mt-1 text-sm sm:text-base capitalize">{staff.role}</p>
                                             </div>
                                         </div>
                                         {!metadata && (
-                                            <div className="mt-4 sm:mt-6 flex flex-col gap-2">
+                                            <div className="mt-6 flex flex-col gap-2">
                                                 <button
                                                     onClick={() => dispatch(toggleAssignleadsmodal(staff._id))}
-                                                    className="w-full border border-blue-500 text-blue-600 px-4 py-2 rounded-lg hover:bg-blue-500 hover:text-white transition text-sm sm:text-base"
+                                                    className="w-full border border-[#FF8A00] text-[#FF8A00] hover:bg-[#FF8A00] hover:text-black font-semibold px-4 py-2.5 rounded-xl transition text-sm sm:text-base"
                                                 >
                                                     Assign Leads
                                                 </button>
@@ -95,7 +95,7 @@ function Subadminstafflist() {
                                     </motion.div>
                                 ))
                             ) : (
-                                <p className="text-center text-gray-500 col-span-full text-base sm:text-lg">No staff members assigned to you</p>
+                                <p className="text-center text-gray-400 col-span-full text-base sm:text-lg">No staff members assigned to you</p>
                             )}
                         </div>
                     </div>
@@ -115,10 +115,10 @@ function Subadminstafflist() {
                     >
                         <motion.div
                             initial={{ opacity: 0 }}
-                            animate={{ opacity: 0.5 }}
+                            animate={{ opacity: 0.7 }}
                             exit={{ opacity: 0 }}
                             transition={{ duration: 0.3 }}
-                            className="absolute inset-0 bg-black"
+                            className="absolute inset-0 bg-black/80 backdrop-blur-sm"
                         />
                         <div className="relative z-10 w-full max-w-4xl mx-4 my-8 sm:my-0">
                             <Assignleadsmodal />

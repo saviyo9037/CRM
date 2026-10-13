@@ -129,7 +129,7 @@ const updateuserleadsform = useFormik({
   };
 
   return (
-    <div className="bg-white p-6 rounded-xl shadow-lg transition-transform duration-200 hover:scale-[1.01] mt-4">
+    <div className="bg-[#181818] p-6 rounded-xl shadow-lg border border-[#262626] mt-4 text-white">
       <form
         className="grid grid-cols-1 sm:grid-cols-2 gap-6"
         onSubmit={updateuserleadsform.handleSubmit}
@@ -138,7 +138,7 @@ const updateuserleadsform = useFormik({
           <div className="sm:col-span-2 flex justify-end">
             <button
               type="submit"
-              className="inline-flex items-center gap-2 bg-[#00B5A6] hover:bg-[#1E6DB0] text-white font-semibold py-2 px-5 rounded-full shadow-md transition-transform transform hover:scale-105"
+              className="inline-flex items-center gap-2 bg-[#FF8A00] hover:bg-[#E67A00] text-black font-bold py-2 px-5 rounded-full shadow-md transition-transform transform hover:scale-105"
             >
               <FontAwesomeIcon icon={faCheckCircle} />
               Update
@@ -151,14 +151,14 @@ const updateuserleadsform = useFormik({
             const inputType = leadform.type;
             return (
               <div key={index} className="space-y-2">
-                <label className="text-sm font-semibold text-gray-700 flex items-center gap-2">
+                <label className="text-sm font-semibold text-gray-300 flex items-center gap-2">
                   <FontAwesomeIcon
                     icon={
                       inputType === "file" || inputType === "image"
                         ? faFileDownload
                         : faTag
                     }
-                    className="text-[#2c1ef4]"
+                    className="text-[#FF8A00]"
                     required
                   />
                   {leadform?.name}
@@ -172,7 +172,7 @@ const updateuserleadsform = useFormik({
                       updateuserleadsform.values.userDetails[index]?.value || ""
                     }
                     onChange={updateuserleadsform.handleChange}
-                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00B5A6] shadow-sm text-sm h-24 resize-none"
+                    className="w-full p-3 bg-[#121212] border border-[#2E2E2E] text-white rounded-lg focus:ring-2 focus:ring-[#FF8A00] shadow-sm text-sm h-24 resize-none placeholder-gray-500"
                     required
                   />
                 ) : inputType === "checkbox" ? (
@@ -184,7 +184,7 @@ const updateuserleadsform = useFormik({
                       return (
                         <label
                           key={optIndex}
-                          className="flex items-center gap-2 p-2 border rounded-lg cursor-pointer hover:bg-gray-50"
+                          className="flex items-center gap-2 p-2 border border-[#2E2E2E] bg-[#141414] rounded-lg cursor-pointer hover:bg-[#202020]"
                         >
                           <input
                             type="checkbox"
@@ -206,9 +206,9 @@ const updateuserleadsform = useFormik({
                                 updated
                               );
                             }}
-                            className="h-4 w-4 text-[#00B5A6] border-gray-300 rounded"
+                            className="h-4 w-4 accent-[#FF8A00] rounded"
                           />
-                          <span className="text-sm text-gray-700">
+                          <span className="text-sm text-gray-300">
                             {option}
                           </span>
                         </label>
@@ -222,14 +222,14 @@ const updateuserleadsform = useFormik({
                       updateuserleadsform.values.userDetails[index]?.value || ""
                     }
                     onChange={updateuserleadsform.handleChange}
-                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00B5A6] shadow-sm text-sm"
+                    className="w-full p-3 bg-[#121212] border border-[#2E2E2E] text-white rounded-lg focus:ring-2 focus:ring-[#FF8A00] shadow-sm text-sm"
                     required
                   >
-                    <option value="">Select an option</option>
+                    <option value="" className="bg-[#181818] text-gray-400">Select an option</option>
                     {getSelectedProduct?.length > 0 &&
                       getSelectedProduct.map((product) => {
                         return (
-                          <option key={product._id} value={product.title}>
+                          <option key={product._id} value={product.title} className="bg-[#181818] text-white">
                             {product.title}
                           </option>
                         );
@@ -246,7 +246,7 @@ const updateuserleadsform = useFormik({
                         )
                       }
                       accept={inputType === "image" ? "image/*" : undefined}
-                      className="flex-1 p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00B5A6] shadow-sm text-sm"
+                      className="flex-1 p-2 bg-[#121212] border border-[#2E2E2E] text-gray-300 rounded-lg focus:ring-2 focus:ring-[#FF8A00] shadow-sm text-sm"
                       required
                     />
                     {updateuserleadsform.values.userDetails[index]?.value && (
@@ -257,7 +257,7 @@ const updateuserleadsform = useFormik({
                             updateuserleadsform.values.userDetails[index]?.value
                           )
                         }
-                        className="inline-flex items-center gap-2 bg-[#00B5A6] hover:bg-[#1E6DB0] text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-transform hover:scale-105"
+                        className="inline-flex items-center gap-2 bg-[#FF8A00] hover:bg-[#E67A00] text-black font-bold py-2 px-4 rounded-lg shadow-md transition-transform hover:scale-105"
                       >
                         <FontAwesomeIcon icon={faFileDownload} />
                         Download
@@ -272,14 +272,14 @@ const updateuserleadsform = useFormik({
                       updateuserleadsform.values.userDetails[index]?.value || ""
                     }
                     onChange={updateuserleadsform.handleChange}
-                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00B5A6] shadow-sm text-sm"
+                    className="w-full p-3 bg-[#121212] border border-[#2E2E2E] text-white rounded-lg focus:ring-2 focus:ring-[#FF8A00] shadow-sm text-sm"
                   />
                 )}
               </div>
             );
           })
         ) : (
-          <div className="col-span-full text-center text-gray-500 text-sm py-6">
+          <div className="col-span-full text-center text-gray-400 text-sm py-6">
             No lead form data available
           </div>
         )}

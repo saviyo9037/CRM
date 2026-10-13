@@ -181,8 +181,8 @@ const PaymentAddModel = ({ customerId, productId }) => {
   const balance = totalAmount - totalPaid;
 
   return (
-    <div className="m-6 bg-gradient-to-br from-blue-50 to-white p-6 rounded-2xl shadow-lg border border-gray-100">
-      <h1 className="text-2xl font-bold text-blue-600 mb-4">💰 Add Payment</h1>
+    <div className="m-2 sm:m-4 bg-[#141414] p-5 rounded-2xl shadow-lg border border-[#262626] text-white">
+      <h1 className="text-xl font-bold text-[#FF8A00] mb-4">💰 Add Payment</h1>
 
       {/* Payment Form */}
       <form
@@ -194,7 +194,7 @@ const PaymentAddModel = ({ customerId, productId }) => {
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
           placeholder="Amount (₹)"
-          className="p-3 border rounded-xl"
+          className="p-3 bg-[#121212] border border-[#2E2E2E] text-white rounded-xl focus:ring-2 focus:ring-[#FF8A00] focus:border-[#FF8A00] focus:outline-none placeholder-gray-500"
           min="1"
           required
         />
@@ -203,14 +203,14 @@ const PaymentAddModel = ({ customerId, productId }) => {
           type="date"
           value={date}
           onChange={(e) => setDate(e.target.value)}
-          className="p-3 border rounded-xl"
+          className="p-3 bg-[#121212] border border-[#2E2E2E] text-white rounded-xl focus:ring-2 focus:ring-[#FF8A00] focus:border-[#FF8A00] focus:outline-none"
           required
         />
 
         <select
           value={paymentMode}
           onChange={(e) => setPaymentMode(e.target.value)}
-          className="p-3 border rounded-xl"
+          className="p-3 bg-[#121212] border border-[#2E2E2E] text-white rounded-xl focus:ring-2 focus:ring-[#FF8A00] focus:border-[#FF8A00] focus:outline-none"
           required
         >
           <option value="">Select Payment Mode</option>
@@ -222,20 +222,20 @@ const PaymentAddModel = ({ customerId, productId }) => {
 
         {paymentMode && (
           <div className="col-span-2">
-            <div className="bg-gray-50 p-4 rounded-xl border border-gray-200">
+            <div className="bg-[#181818] p-4 rounded-xl border border-[#262626]">
               {paymentMode === "cash" ? (
                 <div className="space-y-2">
-                  <p className="text-sm text-gray-600">
+                  <p className="text-sm text-gray-300">
                     📝 For cash payments, please upload:
                   </p>
-                  <ul className="list-disc list-inside text-sm text-gray-600 ml-2">
+                  <ul className="list-disc list-inside text-sm text-gray-400 ml-2">
                     <li>Written receipt or acknowledgment</li>
                     <li>Cash counting photo (optional)</li>
                     <li>Any supporting documents</li>
                   </ul>
                 </div>
               ) : (
-                <p className="text-sm text-gray-600">
+                <p className="text-sm text-gray-300">
                   📱 Please upload a screenshot of the{" "}
                   {paymentMode.replace("_", " ")} payment
                 </p>
@@ -244,11 +244,11 @@ const PaymentAddModel = ({ customerId, productId }) => {
                 type="file"
                 accept="image/*"
                 onChange={handleFileChange}
-                className="mt-3 p-2 w-full border rounded-lg text-sm"
+                className="mt-3 p-2 w-full bg-[#121212] border border-[#2E2E2E] rounded-lg text-sm text-gray-300"
               />
               {receiptFile && (
                 <div className="mt-2 flex items-center gap-3">
-                  <p className="text-sm text-green-600">
+                  <p className="text-sm text-green-400">
                     ✓ {receiptFile.name} selected
                   </p>
                   <button
@@ -258,7 +258,7 @@ const PaymentAddModel = ({ customerId, productId }) => {
                         (prev) => prev ?? URL.createObjectURL(receiptFile)
                       )
                     }
-                    className="text-sm text-blue-600 hover:underline"
+                    className="text-sm text-[#FF8A00] hover:underline"
                   >
                     👁 Preview
                   </button>
@@ -269,9 +269,9 @@ const PaymentAddModel = ({ customerId, productId }) => {
         )}
 
         {nextPaymentDate && (
-          <div className="bg-blue-50 border-l-4 border-blue-500 p-3 rounded-lg mt-1 md:col-span-2">
+          <div className="bg-[#FF8A00]/10 border-l-4 border-[#FF8A00] p-3 rounded-lg mt-1 md:col-span-2 text-gray-300">
             📅 Suggested Next Payment:{" "}
-            <span className="font-semibold text-blue-700">
+            <span className="font-bold text-[#FF8A00]">
               {nextPaymentDate.toLocaleDateString()}
             </span>
           </div>
@@ -280,11 +280,11 @@ const PaymentAddModel = ({ customerId, productId }) => {
         <button
           type="submit"
           disabled={isUploading}
-          className="col-span-2 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+          className="col-span-2 py-3 bg-[#FF8A00] hover:bg-[#E67A00] text-black rounded-xl font-bold transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center shadow-lg"
         >
           {isUploading ? (
             <>
-              <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
+              <div className="w-5 h-5 border-2 border-black border-t-transparent rounded-full animate-spin mr-2"></div>
               Uploading...
             </>
           ) : (
@@ -296,39 +296,39 @@ const PaymentAddModel = ({ customerId, productId }) => {
       {/* Payment Summary */}
       {paymentLoading ? (
         <div className="flex justify-center py-6">
-          <div className="w-6 h-6 border-4 border-blue-400 border-t-transparent rounded-full animate-spin"></div>
+          <div className="w-6 h-6 border-4 border-[#FF8A00] border-t-transparent rounded-full animate-spin"></div>
         </div>
       ) : paymentInfo ? (
-        <div className="mt-6 overflow-x-auto rounded-xl border border-gray-200 bg-white shadow-sm">
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
+        <div className="mt-6 overflow-x-auto rounded-xl border border-[#262626] bg-[#141414] shadow-sm">
+          <table className="min-w-full divide-y divide-[#262626]">
+            <thead className="bg-[#1E1E1E]">
               <tr>
-                <th className="px-4 py-3 text-left text-sm font-medium text-gray-600">
+                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-300">
                   Product
                 </th>
-                <th className="px-4 py-3 text-right text-sm font-medium text-gray-600">
+                <th className="px-4 py-3 text-right text-sm font-semibold text-gray-300">
                   Total Amount
                 </th>
-                <th className="px-4 py-3 text-right text-sm font-medium text-gray-600">
+                <th className="px-4 py-3 text-right text-sm font-semibold text-gray-300">
                   Total Paid
                 </th>
-                <th className="px-4 py-3 text-right text-sm font-medium text-gray-600">
+                <th className="px-4 py-3 text-right text-sm font-semibold text-gray-300">
                   Balance
                 </th>
               </tr>
             </thead>
-            <tbody className="bg-white divide-y divide-gray-100">
+            <tbody className="bg-[#141414] divide-y divide-[#262626]">
               <tr>
-                <td className="px-4 py-3 text-sm text-gray-700">
+                <td className="px-4 py-3 text-sm text-gray-300">
                   {paymentInfo?.allPayment?.product?.title ?? "N/A"}
                 </td>
-                <td className="px-4 py-3 text-sm text-right text-gray-700">
+                <td className="px-4 py-3 text-sm text-right text-gray-300">
                   {formatCurrency(totalAmount)}
                 </td>
-                <td className="px-4 py-3 text-sm text-right text-green-600 font-semibold">
+                <td className="px-4 py-3 text-sm text-right text-green-400 font-bold">
                   {formatCurrency(totalPaid)}
                 </td>
-                <td className="px-4 py-3 text-sm text-right text-gray-700">
+                <td className="px-4 py-3 text-sm text-right text-[#FF8A00] font-bold">
                   {formatCurrency(balance)}
                 </td>
               </tr>
@@ -336,23 +336,23 @@ const PaymentAddModel = ({ customerId, productId }) => {
           </table>
         </div>
       ) : (
-        <p className="text-gray-500 mt-4">No payment details available.</p>
+        <p className="text-gray-400 mt-4">No payment details available.</p>
       )}
 
       {/* Transactions Table */}
       <div className="mt-8">
-        <h2 className="text-xl font-semibold text-blue-600 mb-3">
+        <h2 className="text-lg font-bold text-white mb-3">
           💳 Payment Transactions
         </h2>
 
         {isLoading ? (
           <div className="flex justify-center py-6">
-            <div className="w-6 h-6 border-4 border-blue-400 border-t-transparent rounded-full animate-spin"></div>
+            <div className="w-6 h-6 border-4 border-[#FF8A00] border-t-transparent rounded-full animate-spin"></div>
           </div>
         ) : transactions?.transactions?.length > 0 ? (
-          <div className="overflow-x-auto rounded-xl border">
+          <div className="overflow-x-auto rounded-xl border border-[#262626]">
             <table className="min-w-full text-sm">
-              <thead className="bg-blue-100 text-blue-900">
+              <thead className="bg-[#1E1E1E] text-[#FF8A00]">
                 <tr>
                   <th className="p-3 text-left">#</th>
                   <th className="p-3 text-left">Date</th>
@@ -362,17 +362,17 @@ const PaymentAddModel = ({ customerId, productId }) => {
                   <th className="p-3 text-left">Actions</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="divide-y divide-[#262626]">
                 {transactions.transactions.map((item, i) => (
-                  <tr key={item._id} className="border-t hover:bg-gray-50">
-                    <td className="p-3">{i + 1}</td>
-                    <td className="p-3">
+                  <tr key={item._id} className="hover:bg-[#181818] transition-colors">
+                    <td className="p-3 text-gray-400">{i + 1}</td>
+                    <td className="p-3 text-gray-300">
                       {new Date(item.transactionDate).toLocaleDateString()}
                     </td>
-                    <td className="p-3 font-semibold text-green-600">
+                    <td className="p-3 font-semibold text-green-400">
                       {formatCurrency(item.paidAmount)}
                     </td>
-                    <td className="p-3 capitalize">{item.paymentMode}</td>
+                    <td className="p-3 capitalize text-gray-300">{item.paymentMode}</td>
                     <td className="p-3">
                       {item.receiptUrl ? (
                         <div className="flex items-center justify-center">
@@ -380,16 +380,16 @@ const PaymentAddModel = ({ customerId, productId }) => {
                             onClick={() => setPreviewImage(item)}
                             className={`
           relative group rounded-lg overflow-hidden 
-          shadow-md border bg-white transition 
+          shadow-md border bg-[#181818] transition 
           hover:shadow-lg hover:scale-105
           ${
             item.paymentMode === "cash"
-              ? "border-yellow-400"
+              ? "border-yellow-500/50"
               : item.paymentMode === "upi"
-              ? "border-green-400"
+              ? "border-green-500/50"
               : item.paymentMode === "card"
-              ? "border-blue-400"
-              : "border-purple-400"
+              ? "border-blue-500/50"
+              : "border-purple-500/50"
           }
         `}
                           >
@@ -402,12 +402,12 @@ const PaymentAddModel = ({ customerId, productId }) => {
                             {/* Hover Overlay */}
                             <div
                               className="
-          absolute inset-0 bg-black/40 opacity-0 
+          absolute inset-0 bg-black/60 opacity-0 
           group-hover:opacity-100 transition flex 
           items-center justify-center
         "
                             >
-                              <span className="text-white text-sm font-medium">
+                              <span className="text-white text-xs font-semibold">
                                 👁 View
                               </span>
                             </div>
@@ -415,10 +415,10 @@ const PaymentAddModel = ({ customerId, productId }) => {
                         </div>
                       ) : (
                         <span
-                          className={`text-sm px-3 py-2 rounded-full ${
+                          className={`text-xs px-2.5 py-1 rounded-full ${
                             item.paymentMode === "cash"
-                              ? "bg-yellow-50 text-yellow-600"
-                              : "bg-green-50 text-green-600"
+                              ? "bg-yellow-500/10 text-yellow-400 border border-yellow-500/30"
+                              : "bg-green-500/10 text-green-400 border border-green-500/30"
                           }`}
                         >
                           {item.paymentMode === "cash"
@@ -430,13 +430,13 @@ const PaymentAddModel = ({ customerId, productId }) => {
 
                     <td className="p-3 flex gap-3">
                       <button
-                        className="text-blue-600 hover:text-blue-800"
+                        className="text-[#FF8A00] hover:text-[#E67A00]"
                         onClick={() => setEditPayment(item)}
                       >
                         <FaEdit />
                       </button>
                       <button
-                        className="text-red-600 hover:text-red-800"
+                        className="text-red-400 hover:text-red-300"
                         onClick={() => handleDelete(item._id)}
                       >
                         <FaTrash />
@@ -448,7 +448,7 @@ const PaymentAddModel = ({ customerId, productId }) => {
             </table>
           </div>
         ) : (
-          <p className="text-gray-500 text-sm">No transactions found.</p>
+          <p className="text-gray-400 text-sm">No transactions found.</p>
         )}
       </div>
 

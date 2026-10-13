@@ -254,14 +254,14 @@ function ConvertedCustomerdetailModal() {
   return (
     <AnimatePresence>
       <motion.div
-        className="fixed inset-0 flex items-center justify-center  bg-black/70 z-50 p-2 sm:p-0 h-full"
+        className="fixed inset-0 flex items-center justify-center bg-black/80 backdrop-blur-sm z-50 p-2 sm:p-0 h-full"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.4, ease: "easeOut" }}
       >
         <motion.div
-          className="bg-white rounded-2xl shadow-2xl h-[620px] max-w-md sm:max-w-lg md:max-w-3xl border border-gray-200 font-['Inter',sans-serif]"
+          className="bg-[#141414] text-white rounded-2xl shadow-2xl h-[620px] max-w-md sm:max-w-lg md:max-w-3xl border border-[#262626] font-['Inter',sans-serif]"
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.9, opacity: 0 }}
@@ -272,27 +272,29 @@ function ConvertedCustomerdetailModal() {
             updatinguserleadform.isPending ||
             addPaymentStatus.isPending ||
             paymentLoading) && (
-            <div className="absolute inset-0 flex items-center  justify-center bg-white/80 z-50">
+            <div className="absolute inset-0 flex items-center justify-center bg-black/70 backdrop-blur-sm z-50 rounded-2xl">
               <Spinner />
             </div>
           )}
           <div
             ref={scrollContainerRef}
-            className="  max-h-[600px] overflow-y-auto !important scroll-smooth  -webkit-overflow-scrolling-touch"
+            className="max-h-[600px] overflow-y-auto !important scroll-smooth -webkit-overflow-scrolling-touch"
           >
             {/* Header */}
-            <div className="sticky top-0 z-20 bg-gradient-to-r from-[#00B5A6] to-[#4e8f4c] text-white p-4 sm:p-5 rounded-t-2xl shadow-md flex flex-col sm:flex-row justify-between items-start sm:items-center">
+            <div className="sticky top-0 z-20 bg-gradient-to-r from-[#FF8A00] to-[#E67A00] text-black p-4 sm:p-5 rounded-t-2xl shadow-md flex flex-col sm:flex-row justify-between items-start sm:items-center">
               {/* Left: Customer details */}
-              <div className="flex items-center gap-2">
-                <FontAwesomeIcon
-                  icon={faUser}
-                  className="text-xl sm:text-2xl"
-                />
+              <div className="flex items-center gap-3">
+                <div className="bg-black/20 text-black p-2.5 rounded-full">
+                  <FontAwesomeIcon
+                    icon={faUser}
+                    className="text-xl sm:text-2xl"
+                  />
+                </div>
                 <div>
-                  <h2 className="text-xl sm:text-2xl font-bold tracking-tight">
+                  <h2 className="text-xl sm:text-2xl font-black tracking-tight text-black">
                     {selectedcustomer?.name || "Converted Customer Details"}
                   </h2>
-                  <p className="text-sm sm:text-base mt-1 flex items-center gap-1">
+                  <p className="text-sm sm:text-base mt-1 flex items-center gap-1.5 text-black/80 font-medium">
                     <FontAwesomeIcon icon={faPhone} className="text-sm" />
                     {selectedcustomer?.mobile || "N/A"}
                   </p>
@@ -305,7 +307,7 @@ function ConvertedCustomerdetailModal() {
                   <button
                     onClick={handleconfirm}
                     title="Delete"
-                    className="text-white hover:bg-white/20 p-1.5 rounded-full transition-all duration-300 transform hover:scale-110"
+                    className="text-black hover:bg-black/20 p-2 rounded-full transition-all duration-300 transform hover:scale-110"
                   >
                     <FontAwesomeIcon icon={faTrash} className="text-base" />
                   </button>
@@ -317,7 +319,7 @@ function ConvertedCustomerdetailModal() {
                       dispatch(toggleconvertedleadeditModal(selectedcustomer))
                     }
                     title="Edit"
-                    className="text-white hover:bg-white/20 p-1.5 rounded-full transition-all duration-300 transform hover:scale-110"
+                    className="text-black hover:bg-black/20 p-2 rounded-full transition-all duration-300 transform hover:scale-110"
                   >
                     <FontAwesomeIcon icon={faEdit} className="text-base" />
                   </button>
@@ -327,62 +329,63 @@ function ConvertedCustomerdetailModal() {
                   onClick={() =>
                     dispatch(toggleConvertedcustomerdetailmodal(null))
                   }
-                  className="text-white hover:bg-white/20 p-1.5 rounded-full transition-all duration-300 transform hover:scale-110"
+                  className="text-black hover:bg-black/20 p-2 rounded-full transition-all duration-300 transform hover:scale-110"
                 >
-                  <FontAwesomeIcon icon={faTimesCircle} className="text-lg" />
+                  <FontAwesomeIcon icon={faTimesCircle} className="text-xl" />
                 </button>
               </div>
             </div>
+
             {/* Lead Info */}
-            <div className="px-4 sm:px-6 pt-4 pb-3 bg-white">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm sm:text-base text-gray-700 mb-4">
+            <div className="px-4 sm:px-6 pt-4 pb-3 bg-[#141414]">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm sm:text-base text-gray-300 mb-4 bg-[#181818] p-5 rounded-xl border border-[#262626]">
                 {/* Left Column */}
                 <div className="space-y-3">
                   <p className="flex items-center gap-2">
                     <FontAwesomeIcon
                       icon={faUser}
-                      className="text-[#00B5A6] w-4"
+                      className="text-[#FF8A00] w-4"
                     />
-                    <strong className="font-semibold text-gray-800">
+                    <strong className="font-semibold text-gray-400">
                       Created By:
                     </strong>
-                    <span className="text-gray-600">
+                    <span className="text-white">
                       {selectedcustomer?.createdBy?.name || "N/A"}
                     </span>
                   </p>
                   <p className="flex items-center gap-2">
                     <FontAwesomeIcon
                       icon={faTag}
-                      className="text-[#00B5A6] w-4"
+                      className="text-[#FF8A00] w-4"
                     />
-                    <strong className="font-semibold text-gray-800">
+                    <strong className="font-semibold text-gray-400">
                       Source:
                     </strong>
-                    <span className="text-gray-600">
+                    <span className="text-white">
                       {selectedcustomer?.leadId?.source?.title || "N/A"}
                     </span>
                   </p>
                   <p className="flex items-center gap-2">
                     <FontAwesomeIcon
                       icon={faDollarSign}
-                      className="text-[#00B5A6] w-4"
+                      className="text-[#FF8A00] w-4"
                     />
-                    <strong className="font-semibold text-gray-800">
+                    <strong className="font-semibold text-gray-400">
                       Lead Value:
                     </strong>
-                    <span className="text-gray-600">
+                    <span className="text-white">
                       {selectedcustomer?.leadId?.leadvalue || "Not Given"}
                     </span>
                   </p>
                   <p className="flex items-center gap-2">
                     <FontAwesomeIcon
                       icon={faPhone}
-                      className="text-[#00B5A6] w-4"
+                      className="text-[#FF8A00] w-4"
                     />
-                    <strong className="font-semibold text-gray-800">
+                    <strong className="font-semibold text-gray-400">
                       Mobile:
                     </strong>
-                    <span className="text-gray-600">
+                    <span className="text-white">
                       {selectedcustomer?.mobile || "Not Given"}
                     </span>
                   </p>
@@ -393,12 +396,12 @@ function ConvertedCustomerdetailModal() {
                   <p className="flex sm:justify-end items-center gap-2">
                     <FontAwesomeIcon
                       icon={faCalendar}
-                      className="text-[#00B5A6] w-4"
+                      className="text-[#FF8A00] w-4"
                     />
-                    <strong className="font-semibold text-gray-800">
+                    <strong className="font-semibold text-gray-400">
                       Date:
                     </strong>
-                    <span className="text-gray-600 ml-1">
+                    <span className="text-white ml-1">
                       {selectedcustomer?.createdAt
                         ? new Date(
                             selectedcustomer.createdAt
@@ -409,23 +412,24 @@ function ConvertedCustomerdetailModal() {
                   <p className="flex sm:justify-end items-center gap-2">
                     <FontAwesomeIcon
                       icon={faMailBulk}
-                      className="text-[#00B5A6] w-4"
+                      className="text-[#FF8A00] w-4"
                     />
-                    <strong className="font-semibold text-gray-800">
+                    <strong className="font-semibold text-gray-400">
                       Email:
                     </strong>
-                    <span className="text-gray-600">
+                    <span className="text-white">
                       {selectedcustomer?.email || "N/A"}
                     </span>
                   </p>
                 </div>
               </div>
+
               {/* Form Container */}
-              <div className="bg-white p-4 sm:p-6 rounded-b-2xl shadow-lg relative">
-                  <PaymentAddModel
-                    customerId={selectedcustomer?._id}
-                    productId={selectedcustomer?.product}
-                  />
+              <div className="bg-[#181818] border border-[#262626] p-4 sm:p-6 rounded-2xl shadow-lg relative">
+                <PaymentAddModel
+                  customerId={selectedcustomer?._id}
+                  productId={selectedcustomer?.product}
+                />
               </div>
             </div>
           </div>
@@ -434,24 +438,24 @@ function ConvertedCustomerdetailModal() {
           <AnimatePresence>
             {showconfirm && (
               <motion.div
-                className="absolute inset-0 bg-black/80 flex items-center justify-center z-50"
+                className="absolute inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
               >
                 <motion.div
-                  className="bg-white rounded-2xl p-5 sm:p-6 shadow-xl text-center w-full max-w-xs"
+                  className="bg-[#141414] border border-[#262626] text-white rounded-2xl p-5 sm:p-6 shadow-2xl text-center w-full max-w-xs"
                   initial={{ scale: 0.9, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
                   exit={{ scale: 0.9, opacity: 0 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <h3 className="text-base sm:text-lg font-bold text-gray-800 mb-3 flex items-center justify-center gap-1.5">
-                    <FontAwesomeIcon icon={faTrash} className="text-red-600" />
+                  <h3 className="text-base sm:text-lg font-bold text-white mb-3 flex items-center justify-center gap-1.5">
+                    <FontAwesomeIcon icon={faTrash} className="text-red-500" />
                     Confirm Deletion
                   </h3>
-                  <p className="text-xs text-gray-600 mb-4">
+                  <p className="text-xs text-gray-400 mb-4">
                     Are you sure you want to delete this customer?
                   </p>
                   <div className="flex gap-3 justify-center">
@@ -464,7 +468,7 @@ function ConvertedCustomerdetailModal() {
                     </button>
                     <button
                       onClick={closeconfirm}
-                      className="inline-flex items-center gap-1.5 bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded-full font-semibold shadow-lg transition-all duration-300 transform hover:scale-105"
+                      className="inline-flex items-center gap-1.5 bg-[#262626] hover:bg-[#333333] text-white px-4 py-2 rounded-full font-semibold shadow-lg transition-all duration-300 transform hover:scale-105"
                     >
                       <FontAwesomeIcon icon={faTimesCircle} />
                       No
@@ -481,9 +485,9 @@ function ConvertedCustomerdetailModal() {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
               >
-                <motion.div className="absolute inset-0 bg-black/40" />
+                <motion.div className="absolute inset-0 bg-black/60" />
                 <motion.div
-                  className="relative z-10 bg-green-100 text-green-800 px-5 py-3 rounded-2xl shadow-xl text-xs font-semibold w-full max-w-xs flex items-center justify-center gap-1.5"
+                  className="relative z-10 bg-[#181818] border border-[#FF8A00] text-[#FF8A00] px-5 py-3 rounded-2xl shadow-xl text-xs font-semibold w-full max-w-xs flex items-center justify-center gap-1.5"
                   initial={{ scale: 0.7 }}
                   animate={{ scale: 1 }}
                   exit={{ scale: 0.7 }}
@@ -491,7 +495,7 @@ function ConvertedCustomerdetailModal() {
                 >
                   <FontAwesomeIcon
                     icon={faCheckCircle}
-                    className="text-green-600"
+                    className="text-[#FF8A00]"
                   />
                   Customer deleted successfully!
                 </motion.div>
@@ -505,9 +509,9 @@ function ConvertedCustomerdetailModal() {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
               >
-                <motion.div className="absolute inset-0 bg-black/40" />
+                <motion.div className="absolute inset-0 bg-black/60" />
                 <motion.div
-                  className="relative z-10 bg-green-100 text-green-800 px-5 py-3 rounded-2xl shadow-xl text-xs font-semibold w-full max-w-xs flex items-center justify-center gap-1.5"
+                  className="relative z-10 bg-[#181818] border border-[#FF8A00] text-[#FF8A00] px-5 py-3 rounded-2xl shadow-xl text-xs font-semibold w-full max-w-xs flex items-center justify-center gap-1.5"
                   initial={{ scale: 0.7 }}
                   animate={{ scale: 1 }}
                   exit={{ scale: 0.7 }}
@@ -515,7 +519,7 @@ function ConvertedCustomerdetailModal() {
                 >
                   <FontAwesomeIcon
                     icon={faCheckCircle}
-                    className="text-green-600"
+                    className="text-[#FF8A00]"
                   />
                   Form updated successfully!
                 </motion.div>
@@ -529,9 +533,9 @@ function ConvertedCustomerdetailModal() {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
               >
-                <motion.div className="absolute inset-0 bg-black/40" />
+                <motion.div className="absolute inset-0 bg-black/60" />
                 <motion.div
-                  className="relative z-10 bg-blue-100 text-blue-800 px-5 py-3 rounded-2xl shadow-xl text-xs font-semibold w-full max-w-xs flex items-center justify-center gap-1.5"
+                  className="relative z-10 bg-[#181818] border border-[#FF8A00] text-[#FF8A00] px-5 py-3 rounded-2xl shadow-xl text-xs font-semibold w-full max-w-xs flex items-center justify-center gap-1.5"
                   initial={{ scale: 0.7 }}
                   animate={{ scale: 1 }}
                   exit={{ scale: 0.7 }}
@@ -539,7 +543,7 @@ function ConvertedCustomerdetailModal() {
                 >
                   <FontAwesomeIcon
                     icon={faCheckCircle}
-                    className="text-blue-600"
+                    className="text-[#FF8A00]"
                   />
                   Payment updated successfully!
                 </motion.div>

@@ -51,47 +51,56 @@ function Adminassignteams() {
   })
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black/60 z-50 backdrop-blur-sm p-4 sm:p-0">
+    <div className="fixed inset-0 flex items-center justify-center bg-black/80 z-50 backdrop-blur-md p-4 sm:p-0">
       <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
+        initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
-        exit={{ opacity: 0, scale: 0.9 }}
-        transition={{ duration: 0.4 }}
-        className="bg-white p-4 sm:p-6 md:p-8 rounded-2xl shadow-2xl w-full max-w-md sm:max-w-3xl md:max-w-4xl text-center relative max-h-[90vh] overflow-hidden border border-gray-300"
+        exit={{ opacity: 0, scale: 0.95 }}
+        transition={{ duration: 0.3 }}
+        className="bg-[#141414] border border-[#262626] p-4 sm:p-6 md:p-8 rounded-2xl shadow-2xl w-full max-w-md sm:max-w-3xl md:max-w-4xl text-center relative max-h-[90vh] overflow-hidden text-white"
       >
-        {assigningteams.isPending &&
-          <Spinner />
-        }
-        {unassignteam.isPending &&
-          <Spinner />
-        }
+        {assigningteams.isPending && (
+          <div className="absolute inset-0 bg-[#141414]/80 backdrop-blur-sm flex items-center justify-center z-20">
+            <Spinner />
+          </div>
+        )}
+        {unassignteam.isPending && (
+          <div className="absolute inset-0 bg-[#141414]/80 backdrop-blur-sm flex items-center justify-center z-20">
+            <Spinner />
+          </div>
+        )}
         <button
-          className="absolute top-3 right-3 sm:top-4 sm:right-6 text-xl sm:text-2xl md:text-3xl font-bold text-gray-400 hover:text-red-500 transition"
+          className="absolute top-3 right-3 sm:top-4 sm:right-6 text-xl sm:text-2xl md:text-3xl font-bold text-gray-400 hover:text-white transition w-9 h-9 rounded-lg flex items-center justify-center hover:bg-[#222222]"
           onClick={() => dispatch(toggleAssignteamsmodal(null))}
         >
           &times;
         </button>
-        <h3 className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-800 mb-4 sm:mb-6 tracking-tight">Assign Agents</h3>
+        <h3 className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4 sm:mb-6 tracking-tight flex justify-center items-center gap-2">
+          <span className="w-2.5 h-2.5 rounded-full bg-[#FF8A00]"></span>
+          Assign Agents
+        </h3>
 
         <div className="flex justify-end mb-3 sm:mb-4">
           <select
-            className="px-3 sm:px-4 py-1.5 sm:py-2 border border-gray-300 rounded-md shadow-sm text-gray-700 font-medium bg-white focus:ring-2 focus:ring-blue-500 text-sm sm:text-base w-full sm:w-auto"
+            className="px-3 sm:px-4 py-1.5 sm:py-2 border border-[#2E2E2E] rounded-xl shadow-sm text-white font-medium bg-[#181818] focus:ring-2 focus:ring-[#FF8A00] outline-none text-sm sm:text-base w-full sm:w-auto"
             value={filteragents}
             onChange={(e) => setfilteragents(e.target.value)}
           >
-            <option>All</option>
-            <option value='Assigned'>Assigned</option>
-            <option value='Unassigned'>Unassigned</option>
+            <option value="All" className="bg-[#181818] text-white">All Agents</option>
+            <option value="Assigned" className="bg-[#181818] text-white">Assigned</option>
+            <option value="Unassigned" className="bg-[#181818] text-white">Unassigned</option>
           </select>
         </div>
 
-        <div className="overflow-auto max-h-[60vh] sm:max-h-[65vh] rounded-xl border border-gray-200">
+        <div className="overflow-auto max-h-[60vh] sm:max-h-[65vh] rounded-xl border border-[#262626] bg-[#121212] custom-scrollbar">
           {getagents.isLoading ? (
-            <Spinner />
+            <div className="py-12 flex justify-center">
+              <Spinner />
+            </div>
           ) : filteredagents?.length > 0 ? (
             <div className="overflow-x-auto">
-              <table className="w-full text-xs sm:text-sm text-left text-gray-700 min-w-[400px]">
-                <thead className="text-xs uppercase bg-gradient-to-r from-[#00B5A6] to-[#1E6DB0] text-white sticky top-0 z-10 shadow">
+              <table className="w-full text-xs sm:text-sm text-left text-gray-300 min-w-[400px]">
+                <thead className="text-xs uppercase bg-gradient-to-r from-[#FF8A00] to-[#E67A00] text-black font-bold tracking-wider sticky top-0 z-10 shadow">
                   <tr>
                     <th className="px-3 sm:px-6 py-2 sm:py-4 text-xs sm:text-sm">#</th>
                     <th className="px-3 sm:px-6 py-2 sm:py-4 text-xs sm:text-sm">Name</th>
@@ -99,15 +108,15 @@ function Adminassignteams() {
                     <th className="px-3 sm:px-6 py-2 sm:py-4 text-xs sm:text-sm text-center">Assign</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-200">
+                <tbody className="divide-y divide-[#262626]">
                   {filteredagents.map((agent, index) => (
                     <tr
                       key={agent._id}
-                      className={`${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}`}
+                      className="bg-[#181818] hover:bg-[#202020] transition"
                     >
-                      <td className="px-3 sm:px-6 py-3 sm:py-5 font-semibold text-gray-800 text-xs sm:text-sm">{index + 1}</td>
-                      <td className="px-3 sm:px-6 py-3 sm:py-5 font-medium text-xs sm:text-sm">{agent.name}</td>
-                      <td className="px-3 sm:px-6 py-3 sm:py-5 text-xs sm:text-sm">{agent.mobile}</td>
+                      <td className="px-3 sm:px-6 py-3 sm:py-5 font-bold text-white text-xs sm:text-sm">{index + 1}</td>
+                      <td className="px-3 sm:px-6 py-3 sm:py-5 font-medium text-white text-xs sm:text-sm">{agent.name}</td>
+                      <td className="px-3 sm:px-6 py-3 sm:py-5 text-gray-400 text-xs sm:text-sm">{agent.mobile}</td>
                       <td className="px-3 sm:px-6 py-3 sm:py-5 text-center">
                         <label className="relative inline-flex items-center cursor-pointer">
                           <input
@@ -119,8 +128,8 @@ function Adminassignteams() {
                           />
                           <div
                             className={`w-9 sm:w-11 h-5 sm:h-6 rounded-full transition-colors duration-300 
-                              ${agent?.assignedTo && agent?.assignedTo !== subadmin?._id ? 'bg-gray-300' : 'peer-checked:bg-green-500 bg-red-500'}
-                              relative after:absolute after:top-[1px] sm:after:top-[2px] after:left-[1px] sm:after:left-[2px] after:bg-white after:border 
+                              ${agent?.assignedTo && agent?.assignedTo !== subadmin?._id ? 'bg-[#2a2a2a] opacity-40 cursor-not-allowed' : 'peer-checked:bg-[#FF8A00] bg-[#2a2a2a]'}
+                              relative after:absolute after:top-[1px] sm:after:top-[2px] after:left-[1px] sm:after:left-[2px] after:bg-white 
                               after:rounded-full after:h-4 sm:after:h-5 after:w-4 sm:after:w-5 after:transition-all 
                               peer-checked:after:translate-x-full`}
                           ></div>
@@ -132,7 +141,7 @@ function Adminassignteams() {
               </table>
             </div>
           ) : (
-            <p className="text-gray-400 text-sm sm:text-lg py-6 sm:py-10">No agents available.</p>
+            <p className="text-gray-400 text-sm sm:text-base py-12">No agents available.</p>
           )}
         </div>
       </motion.div>

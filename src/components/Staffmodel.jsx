@@ -64,40 +64,40 @@ function Staffmodel() {
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-50 p-4 sm:p-0">
+    <div className="fixed inset-0 flex items-center justify-center z-50 bg-black/80 backdrop-blur-sm p-4 sm:p-0">
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.9 }}
         transition={{ duration: 0.4 }}
-        className="bg-white w-full max-w-md sm:max-w-lg md:max-w-3xl mx-auto rounded-2xl shadow-2xl flex flex-col md:flex-row overflow-hidden"
+        className="bg-[#141414] border border-[#262626] text-white w-full max-w-md sm:max-w-lg md:max-w-3xl mx-auto rounded-2xl shadow-2xl flex flex-col md:flex-row overflow-hidden"
       >
         {staff.isPending && <Spinner />}
 
         {/* LEFT SECTION */}
-        <div className="bg-gradient-to-b from-[#00B5A6] to-[#1E6DB0] w-full md:w-1/3 flex flex-col items-center justify-center p-6 text-white">
-          <FaUserPlus className="text-6xl mb-3" />
-          <h2 className="text-2xl font-bold">Add New Staff</h2>
-          <p className="text-sm mt-2 text-center">
+        <div className="bg-gradient-to-b from-[#FF8A00] to-[#E67A00] w-full md:w-1/3 flex flex-col items-center justify-center p-6 text-black">
+          <FaUserPlus className="text-6xl mb-3 text-black" />
+          <h2 className="text-2xl font-black text-black">Add New Staff</h2>
+          <p className="text-sm mt-2 text-center text-black/80 font-medium">
             Register Sub-admins or Agents to manage your leads & team.
           </p>
         </div>
 
         {/* RIGHT SECTION */}
-        <div className="relative w-full md:w-2/3 p-6 md:p-8">
+        <div className="relative w-full md:w-2/3 p-6 md:p-8 bg-[#141414]">
           <button
             onClick={() => dispatch(togglestaffmodal())}
-            className="absolute top-4 right-4 text-2xl text-gray-400 hover:text-red-500 transition"
+            className="absolute top-4 right-4 text-2xl text-gray-400 hover:text-white transition"
           >
             &times;
           </button>
 
-          <h3 className="text-xl md:text-2xl font-semibold text-gray-800 mb-4">
+          <h3 className="text-xl md:text-2xl font-bold text-white mb-4">
             Enter Staff Details
           </h3>
 
           {staff.isError && (
-            <p className="text-red-600 bg-red-100 p-3 rounded-md mb-4">
+            <p className="text-red-400 bg-red-950/40 border border-red-500/40 p-3 rounded-md mb-4 text-sm">
               {staff.error?.response?.data?.message}
             </p>
           )}
@@ -105,70 +105,71 @@ function Staffmodel() {
           <form onSubmit={createStaffform.handleSubmit} className="space-y-4">
             {/* NAME */}
             <div>
-              <label className="block font-medium text-gray-700 mb-1">Full Name</label>
+              <label className="block font-medium text-gray-300 mb-1 text-sm">Full Name</label>
               <input
                 type="text"
                 {...createStaffform.getFieldProps("name")}
-                className="border border-gray-300 p-3 w-full rounded-lg focus:ring-2 focus:ring-blue-400 placeholder-gray-400"
+                className="bg-[#121212] border border-[#2E2E2E] text-white p-3 w-full rounded-lg focus:ring-2 focus:ring-[#FF8A00] focus:border-[#FF8A00] placeholder-gray-500"
                 placeholder="Enter staff name"
               />
               {createStaffform.touched.name && createStaffform.errors.name && (
-                <p className="text-red-500 text-sm mt-1">{createStaffform.errors.name}</p>
+                <p className="text-red-400 text-sm mt-1">{createStaffform.errors.name}</p>
               )}
             </div>
 
             {/* ROLE */}
             <div>
-              <label className="block font-medium text-gray-700 mb-1">Role</label>
+              <label className="block font-medium text-gray-300 mb-1 text-sm">Role</label>
               <select
                 {...createStaffform.getFieldProps("role")}
-                className="border border-gray-300 p-3 w-full rounded-lg focus:ring-2 focus:ring-blue-400"
+                className="bg-[#121212] border border-[#2E2E2E] text-white p-3 w-full rounded-lg focus:ring-2 focus:ring-[#FF8A00] focus:border-[#FF8A00]"
               >
-                <option value="">Select role</option>
-                <option value="Sub-Admin">Sub-Admin</option>
-                <option value="Agent">Agent</option>
+                <option value="" className="bg-[#181818] text-gray-400">Select role</option>
+                <option value="Sub-Admin" className="bg-[#181818] text-white">Sub-Admin</option>
+                <option value="Agent" className="bg-[#181818] text-white">Agent</option>
               </select>
               {createStaffform.touched.role && createStaffform.errors.role && (
-                <p className="text-red-500 text-sm mt-1">{createStaffform.errors.role}</p>
+                <p className="text-red-400 text-sm mt-1">{createStaffform.errors.role}</p>
               )}
             </div>
 
             {/* EMAIL */}
             <div>
-              <label className="block font-medium text-gray-700 mb-1">Email</label>
+              <label className="block font-medium text-gray-300 mb-1 text-sm">Email</label>
               <input
                 type="email"
                 {...createStaffform.getFieldProps("email")}
-                className="border border-gray-300 p-3 w-full rounded-lg focus:ring-2 focus:ring-blue-400 placeholder-gray-400"
+                className="bg-[#121212] border border-[#2E2E2E] text-white p-3 w-full rounded-lg focus:ring-2 focus:ring-[#FF8A00] focus:border-[#FF8A00] placeholder-gray-500"
                 placeholder="Enter staff email"
               />
               {createStaffform.touched.email && createStaffform.errors.email && (
-                <p className="text-red-500 text-sm mt-1">{createStaffform.errors.email}</p>
+                <p className="text-red-400 text-sm mt-1">{createStaffform.errors.email}</p>
               )}
             </div>
 
             {/* MOBILE */}
             <div>
-              <label className="block font-medium text-gray-700 mb-1">Mobile Number</label>
+              <label className="block font-medium text-gray-300 mb-1 text-sm">Mobile Number</label>
               <PhoneInput
                 country={"in"}
                 value={createStaffform.values.mobile.replace("+", "")}
                 onChange={handlePhoneChange}
                 enableSearch
-                inputClass="!w-full !pl-17 !py-3 !border !border-gray-300 !rounded-lg placeholder-gray-400"
-                buttonClass="!border-gray-300 !bg-white"
+                inputClass="!w-full !pl-17 !py-3 !text-white !bg-[#121212] !border !border-[#2E2E2E] !rounded-lg focus:!ring-2 focus:!ring-[#FF8A00]"
+                buttonClass="!border-[#2E2E2E] !bg-[#181818]"
                 containerClass="!w-full"
+                dropdownClass="!text-white !bg-[#181818] !border-[#2E2E2E]"
                 placeholder="Enter phone number"
               />
 
               {createStaffform.touched.mobile && createStaffform.errors.mobile && (
-                <p className="text-red-500 text-sm mt-2">{createStaffform.errors.mobile}</p>
+                <p className="text-red-400 text-sm mt-2">{createStaffform.errors.mobile}</p>
               )}
             </div>
 
             <button
               type="submit"
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-semibold transition"
+              className="w-full bg-[#FF8A00] hover:bg-[#E67A00] text-black py-3 rounded-lg font-bold transition shadow-lg"
             >
               Register
             </button>
@@ -180,15 +181,15 @@ function Staffmodel() {
       <AnimatePresence>
         {showsuccess && (
           <motion.div
-            className="fixed inset-0 z-50 flex items-center justify-center"
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-0"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            <div className="absolute inset-0 bg-black opacity-30" />
+            <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
 
             <motion.div
-              className="bg-green-200 text-green-800 px-10 py-6 rounded-xl shadow-xl font-semibold text-center"
+              className="relative z-10 bg-[#181818] border border-[#FF8A00] text-[#FF8A00] px-10 py-6 rounded-2xl shadow-2xl font-bold text-center"
               initial={{ scale: 0.5 }}
               animate={{ scale: 1 }}
               exit={{ scale: 0.5 }}

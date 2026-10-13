@@ -122,7 +122,7 @@ function Icons() {
   }
 
   return (
-    <div className='relative flex items-center gap-2 sm:gap-4 text-black text-lg sm:text-xl bg-white rounded-2xl shadow-md p-2 sm:p-3'>
+    <div className='relative flex items-center gap-2 sm:gap-4 text-white text-lg sm:text-xl bg-[#141414] border border-[#262626] rounded-2xl shadow-lg p-2 sm:p-3'>
       <AnimatePresence>
         {!metadatauser && showdropdown && (
           <motion.div
@@ -134,17 +134,17 @@ function Icons() {
           >
             {fetchstaffs.isLoading && <Spinner />}
             <select
-              className={`w-full p-3 rounded-xl bg-white text-sm text-gray-800 font-medium border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 hover:bg-gray-50 transition-all duration-200 appearance-none bg-no-repeat bg-right bg-[length:12px_12px] bg-[url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23333333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E")]`}
+              className={`w-full p-3 rounded-xl bg-[#181818] text-sm text-white font-medium border border-[#2E2E2E] focus:outline-none focus:ring-2 focus:ring-[#FF8A00] focus:border-[#FF8A00] hover:bg-[#202020] transition-all duration-200 appearance-none`}
               onChange={(e) => handleimpersonate(e.target.value)}
             >
-              <option value="" className='p-3 text-gray-600 font-medium bg-white hover:bg-blue-50'>
+              <option value="" className='p-3 text-gray-400 font-medium bg-[#181818]'>
                 👥 Select staff
               </option>
               {fetchstaffs?.data?.map((staff) => (
                 <option
                   key={staff._id}
                   value={staff._id}
-                  className='p-3 text-gray-800 font-medium bg-white hover:bg-blue-50 border-t border-gray-100'
+                  className='p-3 text-white font-medium bg-[#181818] border-t border-[#262626]'
                 >
                   {staff.name} ({staff.role})
                 </option>
@@ -162,7 +162,7 @@ function Icons() {
                 onClick={stopimpersonate}
                 whileHover={{ scale: 1.1, rotate: -10 }}
                 transition={{ type: 'spring', stiffness: 300 }}
-                className="text-red-500 hover:text-red-700 transition"
+                className="text-red-500 hover:text-red-400 transition"
                 title="Stop impersonating"
               >
                 <ArrowUpLeft size={20} strokeWidth={3} />
@@ -170,18 +170,18 @@ function Icons() {
             </div>
           ) : (
             <>
-              <button onClick={handledropdown} className="hover:text-blue-600 transition">
+              <button onClick={handledropdown} className="text-gray-300 hover:text-[#FF8A00] transition">
                 <FaUsers />
               </button>
               <div className="relative">
                 <button
-                  ref={bellButtonRef} // Attach ref to bell button
+                  ref={bellButtonRef}
                   onClick={handlenotificationclick}
-                  className="relative hover:text-blue-600 transition"
+                  className="relative text-gray-300 hover:text-[#FF8A00] transition"
                 >
                   <Bell />
                   {unreadCount > 0 && (
-                    <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold px-1.5 py-0.5 rounded-full animate-pulse">
+                    <span className="absolute -top-2 -right-2 bg-[#FF8A00] text-black text-xs font-bold px-1.5 py-0.5 rounded-full shadow-[0_0_8px_#FF8A00] animate-pulse">
                       {unreadCount}
                     </span>
                   )}
@@ -194,7 +194,7 @@ function Icons() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -10 }}
                       transition={{ duration: 0.2 }}
-                      className="absolute right-0 mt-2 w-64 bg-white border border-gray-200 rounded-lg shadow-lg z-[999]"
+                      className="absolute right-0 mt-2 w-72 bg-[#141414] border border-[#2E2E2E] rounded-2xl shadow-2xl z-[999]"
                     >
                       <Notificationmodal />
                     </motion.div>
@@ -202,24 +202,24 @@ function Icons() {
                 </AnimatePresence>
               </div>
               <Link to='/settings'>
-                <button className="hover:text-blue-600 transition">
+                <button className="text-gray-300 hover:text-[#FF8A00] transition">
                   <Settings />
                 </button>
               </Link>
               <button
-                className="relative group w-10 h-10 flex items-center justify-center rounded-full bg-blue-100 hover:bg-blue-200 text-blue-600 hover:text-blue-700 shadow-md transition-all duration-200"
+                className="relative group w-10 h-10 flex items-center justify-center rounded-full bg-[#1C1C1C] hover:bg-[#262626] text-[#FF8A00] border border-[#FF8A00]/30 shadow-md transition-all duration-200"
                 onClick={() => dispatch(toggleStaffdetailmodal())}
               >
                 {userlogged.image ? (
                   <img
                     src={userlogged.image}
                     alt='Pro'
-                    className='w-full h-full rounded-full border-2 border-[#00B5A6] object-contain'
+                    className='w-full h-full rounded-full border-2 border-[#FF8A00] object-contain'
                   />
                 ) : (
                   <FaUser className="text-lg sm:text-xl" />
                 )}
-                <span className="absolute -bottom-10 left-1/2 -translate-x-1/2 bg-gray-800 text-white px-2 py-1 text-xs rounded-md shadow-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                <span className="absolute -bottom-10 left-1/2 -translate-x-1/2 bg-[#1F1F1F] text-white border border-[#333] px-2 py-1 text-xs rounded-md shadow-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
                   Profile
                 </span>
               </button>
@@ -230,13 +230,13 @@ function Icons() {
         <>
           <div className="relative">
             <button
-              ref={bellButtonRef} // Attach ref to bell button
+              ref={bellButtonRef}
               onClick={handlenotificationclick}
-              className="relative hover:text-blue-600 transition"
+              className="relative text-gray-300 hover:text-[#FF8A00] transition"
             >
               <Bell />
               {unreadCount > 0 && (
-                <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold px-1.5 py-0.5 rounded-full animate-pulse">
+                <span className="absolute -top-2 -right-2 bg-[#FF8A00] text-black text-xs font-bold px-1.5 py-0.5 rounded-full shadow-[0_0_8px_#FF8A00] animate-pulse">
                   {unreadCount}
                 </span>
               )}
@@ -249,7 +249,7 @@ function Icons() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
                   transition={{ duration: 0.2 }}
-                  className="absolute mr-10 right-0 mt-2 w-64 bg-white border border-gray-200 rounded-lg shadow-lg"
+                  className="absolute mr-10 right-0 mt-2 w-72 bg-[#141414] border border-[#2E2E2E] rounded-2xl shadow-2xl"
                 >
                   <Notificationmodal />
                 </motion.div>
@@ -257,19 +257,19 @@ function Icons() {
             </AnimatePresence>
           </div>
           <button
-            className="relative group w-10 h-10 flex items-center justify-center rounded-full bg-blue-100 hover:bg-blue-200 text-blue-600 hover:text-blue-700 shadow-md transition-all duration-200"
+            className="relative group w-10 h-10 flex items-center justify-center rounded-full bg-[#1C1C1C] hover:bg-[#262626] text-[#FF8A00] border border-[#FF8A00]/30 shadow-md transition-all duration-200"
             onClick={() => dispatch(toggleStaffdetailmodal())}
           >
             {userlogged.image ? (
               <img
                 src={userlogged.image}
                 alt='Pro'
-                className='w-full h-full rounded-full border-2 border-[#00B5A6] object-contain'
+                className='w-full h-full rounded-full border-2 border-[#FF8A00] object-contain'
               />
             ) : (
               <FaUser className="text-lg sm:text-xl" />
             )}
-            <span className="absolute -bottom-10 left-1/2 -translate-x-1/2 bg-gray-800 text-white px-2 py-1 text-xs rounded-md shadow-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+            <span className="absolute -bottom-10 left-1/2 -translate-x-1/2 bg-[#1F1F1F] text-white border border-[#333] px-2 py-1 text-xs rounded-md shadow-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
               Profile
             </span>
           </button>
@@ -287,10 +287,10 @@ function Icons() {
           >
             <motion.div
               initial={{ opacity: 0 }}
-              animate={{ opacity: 0.5 }}
+              animate={{ opacity: 0.7 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="absolute inset-0 bg-black"
+              className="absolute inset-0 bg-black/80 backdrop-blur-sm"
             />
             <div className="relative z-10 w-full max-w-md sm:max-w-lg">
               <Staffdetailsmodal />

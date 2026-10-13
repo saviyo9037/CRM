@@ -39,9 +39,9 @@ const EditPaymentModal = ({ editPayment, onClose, onUpdated }) => {
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black/40 z-50">
-      <div className="bg-white rounded-xl shadow-xl p-6 w-[400px] relative">
-        <h2 className="text-lg font-bold text-blue-600 mb-4">
+    <div className="fixed inset-0 flex items-center justify-center bg-black/80 backdrop-blur-sm z-50">
+      <div className="bg-[#141414] border border-[#262626] text-white rounded-2xl shadow-2xl p-6 w-[400px] relative">
+        <h2 className="text-lg font-bold text-[#FF8A00] mb-4">
           ✏️ Edit Transaction
         </h2>
 
@@ -51,7 +51,7 @@ const EditPaymentModal = ({ editPayment, onClose, onUpdated }) => {
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
             placeholder="Amount (₹)"
-            className="p-2 border rounded-lg"
+            className="p-2.5 bg-[#121212] border border-[#2E2E2E] text-white rounded-lg focus:ring-2 focus:ring-[#FF8A00] focus:border-[#FF8A00] focus:outline-none placeholder-gray-500"
             min="1"
             required
           />
@@ -60,14 +60,14 @@ const EditPaymentModal = ({ editPayment, onClose, onUpdated }) => {
             type="date"
             value={date}
             onChange={(e) => setDate(e.target.value)}
-            className="p-2 border rounded-lg"
+            className="p-2.5 bg-[#121212] border border-[#2E2E2E] text-white rounded-lg focus:ring-2 focus:ring-[#FF8A00] focus:border-[#FF8A00] focus:outline-none"
             required
           />
 
         <select
           value={paymentMode}
           onChange={(e) => setPaymentMode(e.target.value)}
-          className="p-3 border rounded-xl"
+          className="p-2.5 bg-[#121212] border border-[#2E2E2E] text-white rounded-lg focus:ring-2 focus:ring-[#FF8A00] focus:border-[#FF8A00] focus:outline-none"
           required
         >
           <option value="">Select Payment Mode</option>
@@ -78,9 +78,9 @@ const EditPaymentModal = ({ editPayment, onClose, onUpdated }) => {
         </select>
 
           {nextPaymentDate && (
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-gray-400">
               Next Payment Date:{" "}
-              <span className="font-semibold">
+              <span className="font-semibold text-[#FF8A00]">
                 {nextPaymentDate.toLocaleDateString()}
               </span>
             </p>
@@ -90,14 +90,14 @@ const EditPaymentModal = ({ editPayment, onClose, onUpdated }) => {
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 bg-gray-300 rounded-lg hover:bg-gray-400"
+              className="px-4 py-2 bg-[#262626] text-gray-300 hover:text-white rounded-lg hover:bg-[#333333] transition-colors"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={isPending}
-              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+              className="px-4 py-2 bg-[#FF8A00] hover:bg-[#E67A00] text-black font-bold rounded-lg transition-colors"
             >
               {isPending ? "Updating..." : "Update"}
             </button>

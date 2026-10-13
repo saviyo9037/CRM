@@ -307,7 +307,7 @@ export default function MonthlyPaymentChart({ startDate, endDate }) {
         },
       },
       datalabels: {
-        color: "#111",
+        color: "#FFFFFF",
         anchor: "end",
         align: "top",
         font: { size: 10, weight: "bold" },
@@ -316,6 +316,11 @@ export default function MonthlyPaymentChart({ startDate, endDate }) {
       tooltip: {
         mode: "index",
         intersect: false,
+        backgroundColor: "#1E1E1E",
+        borderColor: "#FF8A00",
+        borderWidth: 1,
+        titleColor: "#FF8A00",
+        bodyColor: "#FFFFFF",
         callbacks: {
           label: (context) => {
             const datasetLabel = context.dataset.label || "";
@@ -331,10 +336,10 @@ export default function MonthlyPaymentChart({ startDate, endDate }) {
         title: {
           display: true,
           text: "Month",
-          color: "#475569",
+          color: "#9CA3AF",
           font: { size: 14, weight: "bold" },
         },
-        ticks: { color: "#475569", font: { size: 12 } },
+        ticks: { color: "#9CA3AF", font: { size: 12 } },
         grid: { display: false },
       },
       y1: {
@@ -342,14 +347,14 @@ export default function MonthlyPaymentChart({ startDate, endDate }) {
         title: {
           display: true,
           text: "Total Paid (₹)",
-          color: "#2563eb",
+          color: "#FF8A00",
           font: { size: 13, weight: "bold" },
         },
         ticks: {
-          color: "#2563eb",
+          color: "#FF8A00",
           callback: (value) => `₹${formatCurrency(value)}`,
         },
-        grid: { color: "#e2e8f0" },
+        grid: { color: "rgba(255, 255, 255, 0.06)" },
         beginAtZero: true,
       },
       y2: {
@@ -371,13 +376,14 @@ export default function MonthlyPaymentChart({ startDate, endDate }) {
   };
 
   return (
-    <div className="bg-gradient-to-br from-white to-gray-50 rounded-3xl border border-gray-100 shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col overflow-hidden">
+    <div className="bg-[#141414] rounded-3xl border border-[#262626] shadow-xl hover:shadow-2xl transition-all duration-300 flex flex-col overflow-hidden">
       {/* Header */}
-      <div className="px-5 py-4 sm:px-6 sm:py-5 border-b border-gray-200 flex justify-between items-center bg-white/80 backdrop-blur-sm">
-        <h4 className="text-lg sm:text-xl font-semibold text-gray-800">
-          💰 Monthly Payment Insights
+      <div className="px-5 py-4 sm:px-6 sm:py-5 border-b border-[#262626] flex justify-between items-center bg-[#181818]">
+        <h4 className="text-lg sm:text-xl font-bold text-white flex items-center gap-2">
+          <span className="w-2.5 h-2.5 rounded-full bg-[#FF8A00]"></span>
+          Monthly Payment Insights
         </h4>
-        <span className="text-xs sm:text-sm text-gray-500">
+        <span className="text-xs sm:text-sm text-gray-400">
           {startDate && endDate
             ? `${startDate.toLocaleDateString()} → ${endDate.toLocaleDateString()}`
             : "All Time"}
@@ -392,7 +398,7 @@ export default function MonthlyPaymentChart({ startDate, endDate }) {
       </div>
 
       {/* Footer */}
-      <div className="bg-gray-50 text-gray-600 text-xs sm:text-sm py-2 text-center border-t border-gray-200">
+      <div className="bg-[#181818] text-gray-400 text-xs sm:text-sm py-2 text-center border-t border-[#262626]">
         Updated in real-time from payment records
       </div>
     </div>

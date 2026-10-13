@@ -234,13 +234,16 @@ allLeads.forEach((lead) => {
         scales: {
             y: {
                 beginAtZero: true,
+                grid: { color: 'rgba(255, 255, 255, 0.06)' },
                 ticks: {
                     stepSize: 1,
+                    color: '#9CA3AF',
                     font: { size: 12, family: "'Inter', sans-serif" },
                 },
             },
             x: {
-                ticks: { font: { size: 12, family: "'Inter', sans-serif" } },
+                grid: { color: 'rgba(255, 255, 255, 0.04)' },
+                ticks: { color: '#9CA3AF', font: { size: 12, family: "'Inter', sans-serif" } },
             },
         },
         plugins: {
@@ -248,20 +251,26 @@ allLeads.forEach((lead) => {
                 display: type !== 'staffs',
                 position: 'top',
                 labels: {
+                    color: '#FFFFFF',
                     font: { family: "'Inter', sans-serif", size: 13 },
                 },
             },
             tooltip: {
-                backgroundColor: '#1E6DB0',
-                titleFont: { size: 14, family: "'Inter', sans-serif" },
+                backgroundColor: '#1E1E1E',
+                borderColor: '#FF8A00',
+                borderWidth: 1,
+                titleColor: '#FF8A00',
+                bodyColor: '#FFFFFF',
+                titleFont: { size: 14, family: "'Inter', sans-serif", weight: 'bold' },
                 bodyFont: { size: 12, family: "'Inter', sans-serif" },
             },
         },
     };
 
     return (
-        <div className="p-2 sm:p-3 bg-white rounded-xl w-full shadow-md">
-            <h2 className="text-base sm:text-lg font-semibold mb-2 sm:mb-3 text-gray-800">
+        <div className="p-3 sm:p-5 bg-[#141414] border border-[#262626] rounded-2xl w-full shadow-xl">
+            <h2 className="text-base sm:text-lg font-bold mb-3 sm:mb-4 text-white flex items-center gap-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#FF8A00]"></span>
                 {type === 'source' ? 'Lead Sources Overview'
                     : type === 'staffs' ? 'Leads Closed by Staff'
                         : 'Monthly Leads Overview'}

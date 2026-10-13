@@ -203,39 +203,40 @@ export const Paymentprogresschart = () => {
   // Render
   return (
     <div className="p-4">
-      <h2 className="text-xl font-semibold text-gray-800 text-center mb-6">
+      <h2 className="text-xl font-bold text-white text-center mb-6 flex items-center justify-center gap-2">
+        <span className="w-2.5 h-2.5 rounded-full bg-[#FF8A00]"></span>
         Payment Progress Overview
       </h2>
 
-      <ul className="space-y-6 max-h-[500px] overflow-y-auto">
+      <ul className="space-y-4 max-h-[500px] overflow-y-auto pr-1">
         {paymentProgressData.map((entry, index) => (
           <motion.li
             key={index}
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.25, delay: index * 0.04 }}
-            className="bg-white p-4 rounded-xl shadow-md border border-gray-200"
+            className="bg-[#141414] p-4 rounded-xl shadow-lg border border-[#262626]"
           >
             {/* Header */}
             <div className="flex items-center justify-between mb-2">
-              <div className="flex items-center gap-2 text-gray-700 font-medium">
-                <HiOutlineUser className="text-gray-400" />
+              <div className="flex items-center gap-2 text-white font-semibold">
+                <HiOutlineUser className="text-[#FF8A00]" />
                 <span>{entry.name}</span>
               </div>
 
-              <div className="text-sm font-medium text-gray-600">
-                ₹{entry.paid.toLocaleString()} / ₹{entry.total.toLocaleString()}
+              <div className="text-sm font-bold text-[#FF8A00]">
+                ₹{entry.paid.toLocaleString()} / <span className="text-gray-400 font-normal">₹{entry.total.toLocaleString()}</span>
               </div>
             </div>
 
             {/* Next Payment */}
-            <div className="text-sm text-gray-500 mb-2">
-              Next Payment: {entry.nextPayment}
+            <div className="text-xs text-gray-400 mb-2.5">
+              Next Payment: <span className="text-gray-300 font-medium">{entry.nextPayment}</span>
             </div>
 
             {/* Progress Bar */}
             <div
-              className="w-full bg-gray-200 rounded-full h-4 overflow-hidden relative"
+              className="w-full bg-[#202020] border border-[#2A2A2A] rounded-full h-4 overflow-hidden relative"
               aria-valuenow={entry.percent}
               aria-valuemin={0}
               aria-valuemax={100}
@@ -246,7 +247,7 @@ export const Paymentprogresschart = () => {
                 transition={{ duration: 1.1, ease: "easeInOut" }}
                 className={`h-full bg-gradient-to-r ${entry.color} rounded-full`}
               />
-              <span className="absolute inset-0 flex items-center justify-center text-xs font-semibold text-white drop-shadow">
+              <span className="absolute inset-0 flex items-center justify-center text-xs font-bold text-white drop-shadow">
                 {entry.percent}%
               </span>
             </div>

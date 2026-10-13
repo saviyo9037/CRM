@@ -253,8 +253,8 @@ export default function YearlyReportChart({ startDate, endDate }) {
       {
         label: "Total Paid (₹)",
         data: yearlyTotals.map((y) => y.totalPaid),
-        borderColor: "#2563eb",
-        backgroundColor: "rgba(37, 99, 235, 0.5)",
+        borderColor: "#FF8A00",
+        backgroundColor: "rgba(255, 138, 0, 0.45)",
         borderWidth: 2,
         yAxisID: "y1",
         borderRadius: 8,
@@ -263,7 +263,7 @@ export default function YearlyReportChart({ startDate, endDate }) {
         label: "Total Amount (₹)",
         data: yearlyTotals.map((y) => y.totalAmount),
         borderColor: "#f59e0b",
-        backgroundColor: "rgba(245, 158, 11, 0.5)",
+        backgroundColor: "rgba(245, 158, 11, 0.45)",
         borderWidth: 2,
         yAxisID: "y2",
         borderRadius: 8,
@@ -279,15 +279,15 @@ export default function YearlyReportChart({ startDate, endDate }) {
         display: true,
         text: "Yearly Payment Performance (₹ in Crores)",
         font: { size: 18, weight: "bold", family: "'Inter', sans-serif" },
-        color: "#1e293b",
+        color: "#FFFFFF",
         padding: { bottom: 15 },
       },
       legend: {
         position: "bottom",
-        labels: { color: "#334155", font: { size: 13 } },
+        labels: { color: "#FFFFFF", font: { size: 13 } },
       },
       datalabels: {
-        color: "#111",
+        color: "#FFFFFF",
         anchor: "end",
         align: "top",
         font: { size: 11, weight: "bold" },
@@ -296,6 +296,11 @@ export default function YearlyReportChart({ startDate, endDate }) {
       tooltip: {
         mode: "index",
         intersect: false,
+        backgroundColor: "#1E1E1E",
+        borderColor: "#FF8A00",
+        borderWidth: 1,
+        titleColor: "#FF8A00",
+        bodyColor: "#FFFFFF",
         callbacks: {
           label: (context) => {
             const label = context.dataset.label || "";
@@ -311,10 +316,10 @@ export default function YearlyReportChart({ startDate, endDate }) {
         title: {
           display: true,
           text: "Year",
-          color: "#475569",
+          color: "#9CA3AF",
           font: { size: 14, weight: "bold" },
         },
-        ticks: { color: "#475569" },
+        ticks: { color: "#9CA3AF" },
         grid: { display: false },
       },
       y1: {
@@ -322,15 +327,15 @@ export default function YearlyReportChart({ startDate, endDate }) {
         title: {
           display: true,
           text: "Total Paid (₹ in Cr)",
-          color: "#2563eb",
+          color: "#FF8A00",
           font: { size: 13, weight: "bold" },
         },
         beginAtZero: true,
         ticks: {
-          color: "#2563eb",
+          color: "#FF8A00",
           callback: (value) => `₹${formatCurrency(value)}`,
         },
-        grid: { color: "#e5e7eb" },
+        grid: { color: "rgba(255, 255, 255, 0.06)" },
       },
       y2: {
         position: "right",
@@ -351,13 +356,14 @@ export default function YearlyReportChart({ startDate, endDate }) {
   };
 
   return (
-    <div className="bg-gradient-to-br from-white via-gray-50 to-gray-100 rounded-3xl border border-gray-200 shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col overflow-hidden">
+    <div className="bg-[#141414] rounded-3xl border border-[#262626] shadow-xl hover:shadow-2xl transition-all duration-300 flex flex-col overflow-hidden">
       {/* Header */}
-      <div className="px-6 py-4 border-b border-gray-200 bg-white/70 backdrop-blur-sm flex justify-between items-center">
-        <h3 className="text-lg sm:text-xl font-semibold text-gray-800">
-          📈 Yearly Payment Insights
+      <div className="px-6 py-4 border-b border-[#262626] bg-[#181818] flex justify-between items-center">
+        <h3 className="text-lg sm:text-xl font-bold text-white flex items-center gap-2">
+          <span className="w-2.5 h-2.5 rounded-full bg-[#FF8A00]"></span>
+          Yearly Payment Insights
         </h3>
-        <span className="text-sm text-gray-500">
+        <span className="text-sm text-gray-400">
           {startDate && endDate
             ? `${startDate.toLocaleDateString()} → ${endDate.toLocaleDateString()}`
             : "All Time"}
@@ -370,7 +376,7 @@ export default function YearlyReportChart({ startDate, endDate }) {
       </div>
 
       {/* Footer */}
-      <div className="bg-gray-50 text-gray-500 text-xs sm:text-sm py-2 text-center border-t border-gray-200">
+      <div className="bg-[#181818] text-gray-400 text-xs sm:text-sm py-2 text-center border-t border-[#262626]">
         Updated with latest transaction data
       </div>
     </div>

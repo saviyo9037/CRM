@@ -80,78 +80,78 @@ function Addtaskmodal() {
   const today = new Date().toISOString().split('T')[0]
 
   return (
-    <div className='fixed inset-0 flex items-center justify-center bg-black/50 z-50 overflow-y-auto'>
+    <div className='fixed inset-0 flex items-center justify-center bg-black/80 backdrop-blur-md z-50 overflow-y-auto p-4'>
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.9 }}
-        className='bg-white w-full max-w-4xl mx-4 my-8 rounded-2xl shadow-2xl flex flex-col lg:flex-row overflow-hidden'
+        className='bg-[#141414] border border-[#282828] text-white w-full max-w-4xl mx-4 my-8 rounded-2xl shadow-2xl flex flex-col lg:flex-row overflow-hidden'
       >
         {(loadingStaffs || mutation.isPending) && <Spinner />}
 
         {/* Left decorative panel */}
-        <div className='bg-gradient-to-br from-teal-500 to-blue-600 text-white p-10 flex flex-col items-center justify-center text-center'>
-          <FaTasks className='text-8xl mb-4' />
-          <h2 className='text-3xl font-bold'>New Task</h2>
-          <p className='mt-3 opacity-90'>Assign clear tasks and keep your team productive.</p>
+        <div className='bg-gradient-to-br from-[#FF8A00] to-[#E67A00] text-black p-10 flex flex-col items-center justify-center text-center'>
+          <FaTasks className='text-8xl mb-4 text-black drop-shadow-md' />
+          <h2 className='text-3xl font-extrabold'>New Task</h2>
+          <p className='mt-3 font-medium opacity-90'>Assign clear tasks and keep your team productive.</p>
         </div>
 
         {/* Form */}
-        <div className='p-8 lg:p-12 w-full'>
+        <div className='p-8 lg:p-12 w-full relative'>
           <button
             onClick={() => dispatch(toggleaddtasksmodal())}
-            className='absolute top-4 right-4 text-4xl text-gray-400 hover:text-red-600'
+            className='absolute top-4 right-4 text-3xl text-gray-400 hover:text-[#FF8A00] transition'
           >
             &times;
           </button>
 
-          <h3 className='text-2xl font-bold text-gray-800 mb-6'>Create Task</h3>
+          <h3 className='text-2xl font-bold text-white mb-6'>Create Task</h3>
 
           {mutation.isError && (
-            <div className='bg-red-100 text-red-700 p-4 rounded mb-6'>
+            <div className='bg-red-950/40 border border-red-900/50 text-red-400 p-4 rounded-xl mb-6'>
               {mutation.error?.response?.data?.message || 'Something went wrong'}
             </div>
           )}
 
-          <form onSubmit={formik.handleSubmit} className='space-y-6'>
+          <form onSubmit={formik.handleSubmit} className='space-y-5'>
 
             {/* Task Name */}
             <div>
+              <label className='block text-sm font-semibold text-gray-300 mb-1'>Task Name</label>
               <input
                 type='text'
-                placeholder='Task name'
+                placeholder='Enter task name'
                 {...formik.getFieldProps('name')}
-                className='w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'
+                className='w-full px-4 py-3 bg-[#181818] border border-[#2E2E2E] rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-[#FF8A00] focus:ring-1 focus:ring-[#FF8A00]'
               />
               {formik.touched.name && formik.errors.name && (
-                <p className='text-red-500 text-sm mt-1'>{formik.errors.name}</p>
+                <p className='text-red-400 text-sm mt-1'>{formik.errors.name}</p>
               )}
             </div>
 
-           
-
             {/* Assign To */}
             <div>
+              <label className='block text-sm font-semibold text-gray-300 mb-1'>Assign To</label>
               <select
                 {...formik.getFieldProps('assignedTo')}
-                className='w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'
+                className='w-full px-4 py-3 bg-[#181818] border border-[#2E2E2E] rounded-xl text-white focus:outline-none focus:border-[#FF8A00] focus:ring-1 focus:ring-[#FF8A00]'
               >
                 <option value=''>-- Select Staff --</option>
                 {assignableStaffs.map(staff => (
-                  <option key={staff._id} value={staff._id}>
+                  <option key={staff._id} value={staff._id} className="bg-[#181818] text-white">
                     {staff.name} ({staff.role})
                   </option>
                 ))}
               </select>
               {formik.touched.assignedTo && formik.errors.assignedTo && (
-                <p className='text-red-500 text-sm mt-1'>{formik.errors.assignedTo}</p>
+                <p className='text-red-400 text-sm mt-1'>{formik.errors.assignedTo}</p>
               )}
             </div>
 
-            {/* Deadline – FULLY FIXED */}
+            {/* Deadline */}
             <div>
-              <label className='block text-sm font-medium text-gray-700 mb-1'>
-                Deadline <span className='text-red-500'>*</span>
+              <label className='block text-sm font-semibold text-gray-300 mb-1'>
+                Deadline <span className='text-[#FF8A00]'>*</span>
               </label>
               <input
                 type='date'
@@ -161,30 +161,31 @@ function Addtaskmodal() {
                   const val = e.target.value
                   if (val.length <= 10) formik.setFieldValue('deadline', val)
                 }}
-                className='w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'
+                className='w-full px-4 py-3 bg-[#181818] border border-[#2E2E2E] rounded-xl text-white focus:outline-none focus:border-[#FF8A00] focus:ring-1 focus:ring-[#FF8A00]'
               />
               {formik.touched.deadline && formik.errors.deadline && (
-                <p className='text-red-500 text-sm mt-1'>{formik.errors.deadline}</p>
+                <p className='text-red-400 text-sm mt-1'>{formik.errors.deadline}</p>
               )}
             </div>
 
             {/* Description */}
             <div>
+              <label className='block text-sm font-semibold text-gray-300 mb-1'>Description</label>
               <textarea
                 placeholder='Task description...'
-                rows={4}
+                rows={3}
                 {...formik.getFieldProps('description')}
-                className='w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none'
+                className='w-full px-4 py-3 bg-[#181818] border border-[#2E2E2E] rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-[#FF8A00] focus:ring-1 focus:ring-[#FF8A00] resize-none'
               />
               {formik.touched.description && formik.errors.description && (
-                <p className='text-red-500 text-sm mt-1'>{formik.errors.description}</p>
+                <p className='text-red-400 text-sm mt-1'>{formik.errors.description}</p>
               )}
             </div>
 
             <button
               type='submit'
               disabled={mutation.isPending}
-              className='w-full bg-blue-600 hover:bg-blue-700 disabled:opacity-70 text-white font-bold py-4 rounded-lg transition'
+              className='w-full bg-gradient-to-r from-[#FF8A00] to-[#E67A00] hover:brightness-110 disabled:opacity-50 text-black font-extrabold py-3.5 rounded-xl transition shadow-[0_0_15px_rgba(255,138,0,0.3)]'
             >
               {mutation.isPending ? 'Assigning...' : 'Assign Task'}
             </button>

@@ -83,16 +83,14 @@ function Uploadcsvmodal() {
     };
 
     return (
-        // The outermost div should only handle positioning and allow the parent's backdrop to show.
-        // The background color, opacity, and blur are handled by the parent component.
-        <div className="fixed inset-0 flex items-center justify-center z-50">
-            <div className="bg-white w-[90%] max-w-md p-6 rounded-xl shadow-lg space-y-6">
-                <div className="flex justify-between items-center">
-                    <h2 className="text-xl font-semibold text-gray-800">New Uploads</h2>
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black/80 backdrop-blur-sm p-4">
+            <div className="bg-[#141414] border border-[#262626] w-full max-w-md p-6 rounded-2xl shadow-2xl space-y-6 text-white">
+                <div className="flex justify-between items-center pb-3 border-b border-[#262626]">
+                    <h2 className="text-xl font-bold text-white">Upload CSV Leads</h2>
                     <a
                         href={`${API_URL}/leads/csv-template`}
                         download
-                        className="text-sm bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-md transition"
+                        className="text-xs font-semibold bg-[#222222] hover:bg-[#2e2e2e] text-[#FF8A00] border border-[#FF8A00]/40 px-3 py-1.5 rounded-lg transition"
                     >
                         Download Template
                     </a>
@@ -100,24 +98,27 @@ function Uploadcsvmodal() {
 
                 {/* Error Message */}
                 {errorMessage && (
-                    <p className="text-red-600 text-sm text-center -mt-2">{errorMessage}</p>
+                    <div className="bg-red-500/10 border border-red-500/30 text-red-400 px-3 py-2 rounded-lg text-sm text-center">
+                        {errorMessage}
+                    </div>
                 )}
 
                 {/* Upload Box */}
                 <label
                     htmlFor="csv-upload"
-                    className="flex flex-col items-center justify-center border-2 border-dashed border-blue-500 p-6 rounded-lg cursor-pointer hover:bg-blue-50 transition"
+                    className="flex flex-col items-center justify-center border-2 border-dashed border-[#FF8A00]/50 hover:border-[#FF8A00] bg-[#181818] hover:bg-[#1d1d1d] p-7 rounded-xl cursor-pointer transition group"
                 >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="h-10 w-10 text-blue-500 mb-2"
+                        className="h-10 w-10 text-[#FF8A00] mb-2 group-hover:scale-110 transition-transform"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
                     >
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a1 1 0 001 1h14a1 1 0 001-1v-1M4 12l1.293-1.293a1 1 0 011.414 0L12 16l5.293-5.293a1 1 0 011.414 0L20 12m-8 4V4" />
                     </svg>
-                    <p className="text-blue-500 font-medium">Click to browse .csv file</p>
+                    <p className="text-[#FF8A00] font-medium text-sm">Click to browse .csv file</p>
+                    <p className="text-gray-500 text-xs mt-1">Maximum file size: 10MB</p>
                     <input
                         id="csv-upload"
                         type="file"
@@ -129,9 +130,9 @@ function Uploadcsvmodal() {
 
                 {/* File name */}
                 {csvFile && (
-                    <p className="text-center text-sm text-gray-600">
-                        Selected File: <span className="font-medium">{csvFile.name}</span>
-                    </p>
+                    <div className="bg-[#1a1a1a] border border-[#333333] px-3 py-2 rounded-lg text-center text-sm text-gray-300">
+                        Selected File: <span className="font-semibold text-[#FF8A00]">{csvFile.name}</span>
+                    </div>
                 )}
 
                 {/* Spinner */}
@@ -142,17 +143,17 @@ function Uploadcsvmodal() {
                 )}
 
                 {/* Buttons */}
-                <div className="flex justify-between">
+                <div className="flex justify-between gap-3 pt-2">
                     <button
                         onClick={handleSubmit}
-                        className="w-full mr-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition"
+                        className="flex-1 bg-[#FF8A00] hover:bg-[#E67A00] text-black font-bold px-4 py-2.5 rounded-xl transition shadow-lg shadow-[#FF8A00]/20 disabled:opacity-50"
                         disabled={uploadingcsv.isPending}
                     >
                         Submit
                     </button>
                     <button
                         onClick={() => dispatch(toggleUploadcsvmodal())}
-                        className="w-full ml-2 bg-gray-300 hover:bg-gray-400 text-black px-4 py-2 rounded-lg transition"
+                        className="flex-1 bg-[#222222] hover:bg-[#2a2a2a] text-white border border-[#333333] px-4 py-2.5 rounded-xl transition font-medium"
                     >
                         Cancel
                     </button>
@@ -163,25 +164,26 @@ function Uploadcsvmodal() {
             <AnimatePresence>
                 {showsuccess && (
                     <motion.div
-                        className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-0"
+                        className="fixed inset-0 z-50 flex items-center justify-center p-4"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                     >
-                        <motion.div className="absolute inset-0 bg-black opacity-30" />
+                        <motion.div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
                         <motion.div
-                            className="relative z-10 bg-green-200 text-green-800 px-6 sm:px-10 py-4 sm:py-6 rounded-xl shadow-xl text-sm sm:text-base font-semibold w-full max-w-xs sm:max-w-sm h-[150px] sm:h-[170px] flex flex-col items-center justify-center text-center"
-                            initial={{ scale: 0.5 }}
+                            className="relative z-10 bg-[#141414] border border-[#FF8A00]/50 text-white px-8 py-6 rounded-2xl shadow-2xl font-semibold w-full max-w-sm flex flex-col items-center justify-center text-center space-y-4"
+                            initial={{ scale: 0.8 }}
                             animate={{ scale: 1 }}
-                            exit={{ scale: 0.5 }}
+                            exit={{ scale: 0.8 }}
                             transition={{ type: 'spring', stiffness: 300, damping: 20 }}
                         >
-                            <p>
-                            ✅ Leads added successfully!
-                            </p>
+                            <div className="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center text-2xl">
+                                ✓
+                            </div>
+                            <p className="text-white text-base">Leads added successfully!</p>
                             <button
                                 onClick={handleDownload}
-                                className="mt-4 bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-md transition"
+                                className="bg-[#FF8A00] hover:bg-[#E67A00] text-black font-bold px-4 py-2 rounded-xl transition text-sm shadow-md"
                             >
                                 Download Uploaded Leads
                             </button>

@@ -294,9 +294,9 @@ const AreaChart = ({ startDate, endDate, leads: passedLeads }) => {
         {
           label: "Opened Leads",
           data: daysOfWeek.map((d) => totalLeadsCreated.map.open[d]),
-          borderColor: "#2563eb",
+          borderColor: "#FF8A00",
           backgroundColor: (ctx) =>
-            gradientFill(ctx, "rgba(37, 99, 235, 0.3)", "rgba(37, 99, 235, 0.05)"),
+            gradientFill(ctx, "rgba(255, 138, 0, 0.35)", "rgba(255, 138, 0, 0.02)"),
           tension: 0.35,
           fill: true,
           pointRadius: 3,
@@ -307,7 +307,7 @@ const AreaChart = ({ startDate, endDate, leads: passedLeads }) => {
           data: daysOfWeek.map((d) => totalLeadsCreated.map.closed[d]),
           borderColor: "#ef4444",
           backgroundColor: (ctx) =>
-            gradientFill(ctx, "rgba(239, 68, 68, 0.3)", "rgba(239, 68, 68, 0.05)"),
+            gradientFill(ctx, "rgba(239, 68, 68, 0.25)", "rgba(239, 68, 68, 0.02)"),
           tension: 0.35,
           fill: true,
           pointRadius: 3,
@@ -328,12 +328,16 @@ const AreaChart = ({ startDate, endDate, leads: passedLeads }) => {
         labels: {
           boxWidth: 15,
           padding: 15,
-          color: "#374151",
+          color: "#FFFFFF",
           font: { size: 13, family: "'Inter', sans-serif" },
         },
       },
       tooltip: {
-        backgroundColor: "#1f2937",
+        backgroundColor: "#181818",
+        borderColor: "#2E2E2E",
+        borderWidth: 1,
+        titleColor: "#FFFFFF",
+        bodyColor: "#E4E4E7",
         titleFont: { size: 13 },
         bodyFont: { size: 12 },
         cornerRadius: 8,
@@ -344,15 +348,15 @@ const AreaChart = ({ startDate, endDate, leads: passedLeads }) => {
       x: {
         grid: { display: false },
         ticks: {
-          color: "#6b7280",
+          color: "#A1A1AA",
           font: { size: 12 },
         },
       },
       y: {
         beginAtZero: true,
-        grid: { color: "#e5e7eb" },
+        grid: { color: "#222222" },
         ticks: {
-          color: "#6b7280",
+          color: "#A1A1AA",
           stepSize: 1,
           font: { size: 12 },
         },
@@ -362,19 +366,19 @@ const AreaChart = ({ startDate, endDate, leads: passedLeads }) => {
 
   if (isLoading)
     return (
-      <div className="flex justify-center items-center h-[320px] text-gray-500 text-sm">
+      <div className="flex justify-center items-center h-[320px] text-gray-400 text-sm">
         Loading Chart...
       </div>
     );
 
   return (
-    <div className="p-5 sm:p-6 bg-gradient-to-br from-white via-gray-50 to-gray-100 rounded-3xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
+    <div className="p-5 sm:p-6 bg-[#141414] rounded-2xl shadow-xl border border-[#242424] text-white">
       {/* Header */}
       <div className="flex items-center justify-between mb-3">
-        <h2 className="text-lg sm:text-xl font-semibold text-gray-800 flex items-center gap-2">
-          📈 Leads Overview
+        <h2 className="text-lg sm:text-xl font-bold text-white flex items-center gap-2">
+          <span className="text-[#FF8A00]">📈</span> Leads Overview
         </h2>
-        <p className="text-xs text-gray-500">Daily Open vs Closed Trends</p>
+        <p className="text-xs text-gray-400">Daily Open vs Closed Trends</p>
       </div>
 
       {/* Chart */}
@@ -384,21 +388,21 @@ const AreaChart = ({ startDate, endDate, leads: passedLeads }) => {
 
       {/* Summary Cards */}
       <div className="mt-6 grid grid-cols-3 gap-3 sm:gap-4">
-        <div className="bg-blue-50 hover:bg-blue-100 transition-all p-3 rounded-xl text-center shadow-sm border border-blue-100">
-          <p className="text-xs sm:text-sm font-medium text-blue-700">Open Leads</p>
-          <p className="text-lg sm:text-xl font-bold text-blue-800">
+        <div className="bg-[#181818] border border-[#FF8A00]/30 hover:border-[#FF8A00]/60 transition-all p-3 rounded-xl text-center shadow-md">
+          <p className="text-xs sm:text-sm font-medium text-[#FF8A00]">Open Leads</p>
+          <p className="text-lg sm:text-xl font-extrabold text-[#FF8A00]">
             {totalLeadsCreated.openTotal}
           </p>
         </div>
-        <div className="bg-red-50 hover:bg-red-100 transition-all p-3 rounded-xl text-center shadow-sm border border-red-100">
-          <p className="text-xs sm:text-sm font-medium text-red-700">Closed Leads</p>
-          <p className="text-lg sm:text-xl font-bold text-red-800">
+        <div className="bg-[#181818] border border-red-500/30 hover:border-red-500/60 transition-all p-3 rounded-xl text-center shadow-md">
+          <p className="text-xs sm:text-sm font-medium text-red-400">Closed Leads</p>
+          <p className="text-lg sm:text-xl font-extrabold text-red-400">
             {totalLeadsCreated.closedTotal}
           </p>
         </div>
-        <div className="bg-gray-50 hover:bg-gray-100 transition-all p-3 rounded-xl text-center shadow-sm border border-gray-200">
-          <p className="text-xs sm:text-sm font-medium text-gray-700">Total Leads</p>
-          <p className="text-lg sm:text-xl font-bold text-gray-800">
+        <div className="bg-[#181818] border border-[#2A2A2A] hover:border-[#383838] transition-all p-3 rounded-xl text-center shadow-md">
+          <p className="text-xs sm:text-sm font-medium text-gray-300">Total Leads</p>
+          <p className="text-lg sm:text-xl font-extrabold text-white">
             {totalLeadsCreated.total}
           </p>
         </div>
